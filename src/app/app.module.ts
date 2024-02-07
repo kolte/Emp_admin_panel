@@ -13,6 +13,7 @@ import { MapsComponent } from './views/admin/maps/maps.component';
 import { SettingsComponent } from './views/admin/settings/settings.component';
 import { TablesComponent } from './views/admin/tables/tables.component';
 import { EmployeeComponent } from './views/admin/employee/employee.component';
+import { EmpListComponent } from './views/admin/employee/emp-list/emp-list.component';
 
 // Auth views
 import { LoginComponent } from './views/auth/login/login.component';
@@ -44,6 +45,9 @@ import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pa
 import { NotificationDropdownComponent } from './components/dropdowns/notification-dropdown/notification-dropdown.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -55,6 +59,7 @@ import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user
     SettingsComponent,
     TablesComponent,
     EmployeeComponent,
+    EmpListComponent,
     LoginComponent,
     RegisterComponent,
     IndexComponent,
@@ -81,7 +86,7 @@ import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user
     SidebarComponent,
     UserDropdownComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule,BrowserAnimationsModule, AppRoutingModule,ReactiveFormsModule,  ToastrModule.forRoot()],
   providers: [],
   bootstrap: [AppComponent],
 })
