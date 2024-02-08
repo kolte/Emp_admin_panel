@@ -25,8 +25,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="username" />
+              <span class="text-red-700 error" *ngIf="submitted && myForm.username.errors?.required">Username is required</span>
           </div>
-          <span *ngIf="submitted && myForm.username.errors?.required">Username is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4" *ngIf="!editId">
@@ -37,8 +37,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="password" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.password.errors?.required">Password is required</span>
           </div>
-          <span *ngIf="submitted && myForm.password.errors?.required">Password is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -49,8 +49,8 @@
             <input type="email"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="email" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.email.errors?.required">Email is required</span>
           </div>
-          <span *ngIf="submitted && myForm.email.errors?.required">Email is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -61,8 +61,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="first_name" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.first_name.errors?.required">First Name is required</span>
           </div>
-          <span *ngIf="submitted && myForm.first_name.errors?.required">First Name is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -73,8 +73,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="last_name" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.last_name.errors?.required">Last Name is required</span>
           </div>
-          <span *ngIf="submitted && myForm.last_name.errors?.required">Last Name is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -85,8 +85,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               value="Jesse" formControlName="middle_name" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.middle_name.errors?.required">Middle Name is required</span>
           </div>
-          <span *ngIf="submitted && myForm.middle_name.errors?.required">Middle Name is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -97,8 +97,8 @@
             <input type="date"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="date_of_birth" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.date_of_birth.errors?.required">Date of birth is required</span>
           </div>
-          <span *ngIf="submitted && myForm.date_of_birth.errors?.required">Date of birth is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -113,7 +113,7 @@
               name="gender" value="1" formControlName="gender" />
             <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Female</label>
           </div>
-          <span *ngIf="submitted && myForm.gender.errors?.required">Date of birth is required</span>
+          <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.gender.errors?.required">Gender is required</span>
 
         </div>
         <div class="w-full lg:w-6/12 px-4">
@@ -124,8 +124,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="phone" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.phone.errors?.required">Phone Number is required</span>
           </div>
-          <span *ngIf="submitted && myForm.phone.errors?.required">Phone Number is required</span>
 
         </div>
       </div>
@@ -154,8 +154,8 @@
             <!-- <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" formControlName="job_id" /> -->
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.job_id.errors?.required">Job is required</span>
           </div>
-          <span *ngIf="submitted && myForm.job_id.errors?.required">Job is required</span>
 
         </div>
         
@@ -170,8 +170,8 @@
               <!-- <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option> -->
               <option *ngFor="let dept of departmentOption" [value]="dept.id">{{dept.department_name}}</option>
             </select>
+            <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.department_id.errors?.required">Department is required</span>
           </div>
-          <span *ngIf="submitted && myForm.department_id.errors?.required">Department is required</span>
 
         </div>
         <div class="w-full lg:w-12/12 px-4">
@@ -179,11 +179,15 @@
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
               Reporting
             </label>
-            <input type="text"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              formControlName="reporting_to" />
+            <select
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+            id="country" formControlName="reporting_to">
+            <!-- <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option> -->
+            <option *ngFor="let user of userList" [value]="user.id">{{user.username}}</option>
+          </select>
+           
+          <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.reporting_to.errors?.required">Reporting is required</span>
           </div>
-          <span *ngIf="submitted && myForm.reporting_to.errors?.required">Reporting is required</span>
 
         </div>
         <div class="w-full lg:w-12/12 px-4">
@@ -194,8 +198,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="salary_info" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.salary_info.errors?.required">Salary is required</span>
           </div>
-          <span *ngIf="submitted && myForm.salary_info.errors?.required">Salary is required</span>
 
         </div>
         <div class="w-full lg:w-12/12 px-4">
@@ -206,8 +210,8 @@
             <input type="date"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="hire_date"  />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.hire_date.errors?.required">Hire Date is required</span>
           </div>
-          <span *ngIf="submitted && myForm.hire_date.errors?.required">Hire Date is required</span>
 
         </div>
       </div>
@@ -226,8 +230,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="address_line1" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.address_line1.errors?.required">Address1 is required</span>
           </div>
-          <span *ngIf="submitted && myForm.address_line1.errors?.required">Address1 is required</span>
 
         </div>
         <div class="w-full lg:w-12/12 px-4">
@@ -238,8 +242,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="address_line2" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.address_line2.errors?.required">Address2 is required</span>
           </div>
-          <span *ngIf="submitted && myForm.address_line2.errors?.required">Address2 is required</span>
 
         </div>
         <div class="w-full lg:w-4/12 px-4">
@@ -250,8 +254,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="pin_code" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.pin_code.errors?.required">Pin Code is required</span>
           </div>
-          <span *ngIf="submitted && myForm.pin_code.errors?.required">Pin Code is required</span>
 
         </div>
         <div class="w-full lg:w-4/12 px-4">
@@ -262,8 +266,8 @@
             <input type="email"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="city" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.city.errors?.required">City is required</span>
           </div>
-          <span *ngIf="submitted && myForm.city.errors?.required">City is required</span>
 
         </div>
         <div class="w-full lg:w-4/12 px-4">
@@ -274,8 +278,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="state" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.state.errors?.required">State is required</span>
           </div>
-          <span *ngIf="submitted && myForm.state.errors?.required">State is required</span>
 
         </div>
         <div class="w-full lg:w-4/12 px-4">
@@ -286,8 +290,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="work_location" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.work_location.errors?.required">Work Location is required</span>
           </div>
-          <span *ngIf="submitted && myForm.work_location.errors?.required">Work Location is required</span>
 
         </div>
         <div class="w-full lg:w-4/12 px-4">
@@ -298,8 +302,8 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="emergency_contact" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.emergency_contact.errors?.required">Emergency Contact is required</span>
           </div>
-          <span *ngIf="submitted && myForm.emergency_contact.errors?.required">Emergency Contact is required</span>
 
         </div>
         <div class="w-full lg:w-4/12 px-4">
@@ -310,18 +314,18 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="bank_info" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.bank_info.errors?.required">Bank info Contact is required</span>
           </div>
-          <span *ngIf="submitted && myForm.bank_info.errors?.required">Bank info Contact is required</span>
 
         </div>
       </div>
       <div class="text-center mt-6">
-        <button
+        <!-- <button
           class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
           type="submit"
         >
           Submit
-        </button>
+        </button> -->
       </div>
     </form>
   </div>

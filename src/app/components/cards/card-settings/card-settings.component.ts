@@ -22,6 +22,7 @@ export class CardSettingsComponent implements OnInit {
   editId = null;
   departmentOption:any=[];
   jobOption:any=[];
+  userList:any=[];
 
   ngOnInit(): void {
     this.EmployeeForm = this.fb.group({
@@ -49,7 +50,8 @@ export class CardSettingsComponent implements OnInit {
       bank_info: ["", [Validators.required]],
     });
     this.departmentDetail();
-    this.jobDetail()
+    this.jobDetail();
+    this.userData();
     const id: string = this.route.snapshot.queryParamMap.get("id");
     if (id) {
       this.editId = id;
@@ -67,7 +69,6 @@ export class CardSettingsComponent implements OnInit {
       .then((response: any) => {
         if (response.data.success) {
           const Employeelist = response.data.data.find((_: any) => _.id == id);
-          console.log(Employeelist.hire_date);
           this.EmployeeForm.patchValue({
             username: Employeelist.username,
             password: Employeelist.password,
@@ -99,7 +100,9 @@ export class CardSettingsComponent implements OnInit {
         }
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
       });
   }
 
@@ -116,7 +119,9 @@ export class CardSettingsComponent implements OnInit {
           }
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status == 401) {
+            this.router.navigate(["/auth/login"]);
+          }
         });
   }
 
@@ -129,7 +134,24 @@ export class CardSettingsComponent implements OnInit {
           }
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status == 401) {
+            this.router.navigate(["/auth/login"]);
+          }
+        });
+  }
+
+  userData() {
+    this.service
+        .getUsers()
+        .then((response) => {
+          if (response.status == 200) {
+            this.userList=response.data.data;
+          }
+        })
+        .catch((error) => {
+          if (error.response.status == 401) {
+            this.router.navigate(["/auth/login"]);
+          }
         });
   }
 
@@ -151,7 +173,9 @@ export class CardSettingsComponent implements OnInit {
           }
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status == 401) {
+            this.router.navigate(["/auth/login"]);
+          }
         });
     } else {
       this.service
@@ -163,7 +187,9 @@ export class CardSettingsComponent implements OnInit {
           }
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status == 401) {
+            this.router.navigate(["/auth/login"]);
+          }
         });
     }
   }

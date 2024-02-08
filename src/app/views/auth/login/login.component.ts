@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.SignupForm = this.fb.group({
-      email: ["", [Validators.required, Validators.email]],
+      username: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]],
     });
   }
@@ -31,19 +31,16 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.SignupForm.valid) {
-      const data={
-        username: "givinidev@gmail.com",
-        password: "Testemp#123"
-      }
-      this.service.getRandomJoke(data)
+      this.service.getRandomJoke(this.SignupForm.value)
       .then((response:any) => {
         if(response.data.success){
           this.toastr.success('Login successfully done');
-          localStorage.setItem('token',response.data.token)
+          localStorage.setItem('token',response.data.token);
           this.router.navigate(['/admin/dashboard']);
         }
       })
       .catch(error => {
+        this.toastr.error(error.response.data.message);
         console.log(error);
       });
     }

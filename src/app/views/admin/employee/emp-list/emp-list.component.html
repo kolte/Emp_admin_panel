@@ -48,7 +48,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Email
+            Latest Screen Image
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -57,16 +57,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Phone Number
-          </th>
-          <th
-            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-            [ngClass]="
-              color === 'light'
-                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                : 'bg-red-800 text-red-300 border-red-700'
-            ">
-            hire_date
+            Working Time
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -81,7 +72,7 @@
         <tr *ngFor="let emp of Employeelist">
           <th
             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-            <!-- <img src="assets/img/team-3-800x800.jpg" class="h-12 w-12 bg-white rounded-full border" alt="..." /> -->
+            <img src="assets/img/team-3-800x800.jpg" class="h-12 w-12 bg-white rounded-full border" alt="..." />
             <span class="ml-3 font-bold" [ngClass]="color === 'light' ? 'text-blueGray-600' : 'text-white'">
               {{emp.first_name}} {{emp.last_name}}
             </span>
@@ -90,17 +81,34 @@
             {{DepartmentName(emp.department_id)}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-             {{emp.email}}
+            <i class="fas fa-circle text-orange-500 mr-2"></i> pending
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{emp.phone}}
+            <div class="flex">
+              <img src="assets/img/team-1-800x800.jpg" alt="..."
+                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
+              <img src="assets/img/team-2-800x800.jpg" alt="..."
+                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
+              <img src="assets/img/team-3-800x800.jpg" alt="..."
+                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
+              <img src="assets/img/team-4-470x470.png" alt="..."
+                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
+            </div>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{emp.hire_date | date:'dd/MM/yyyy'}}
+            <div class="flex items-center">
+              <span class="mr-2">60%</span>
+              <div class="relative w-full">
+                <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                  <div style="width: 60%"
+                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-            <!-- <app-table-dropdown></app-table-dropdown> -->
-            <button (click)="updateEmp(emp.id)">update</button>
+            <app-table-dropdown [updateId]="emp.id"></app-table-dropdown>
           </td>
         </tr>
         
