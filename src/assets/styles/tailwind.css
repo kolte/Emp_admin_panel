@@ -2073,6 +2073,10 @@ select {
   height: 70px;
 }
 
+.h-400-px {
+  height: 400px;
+}
+
 .h-500-px {
   height: 500px;
 }
@@ -4082,4 +4086,31 @@ select {
 #customCheckLogin
 {
   border: 1px solid #1e293b;
+}
+
+.fx-min-w-full {
+  min-width: 100%;
+}
+
+.fc-event-title-container
+{
+  text-align: center !important;
+}
+
+.horizontal-calendar {
+  width: 70%;
+}
+
+.vertical-calendar {
+  width: 30%;
+}
+
+.fc.fc-media-screen.fc-direction-ltr.fc-theme-standard.fc-liquid-hack
+{
+  height: 100%;
+}
+
+/* Add a border between punch in and punch out slots */
+.fc-vertical-skeleton tbody tr:nth-child(2) {
+  border-top: 2px solid black;
 }
