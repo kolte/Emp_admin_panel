@@ -1,82 +1,218 @@
-<div
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
->
+<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
   <div class="rounded-t bg-white mb-0 px-6 py-6">
     <div class="text-center flex justify-between">
       <h6 class="text-blueGray-700 text-xl font-bold">Add Employee</h6>
       <button
         class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
         type="button"
-      >
+        (click)="onSubmit()"
+        >
         Save
       </button>
     </div>
   </div>
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-    <form>
+    <form [formGroup]="EmployeeForm" (ngSubmit)="onSubmit()">
       <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
         User Information
       </h6>
       <div class="flex flex-wrap">
-        <div class="w-full lg:w-6/12 px-4">
+        <div class="w-full lg:w-6/12 px-4" *ngIf="!editId">
           <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
               Username
             </label>
-            <input
-              type="text"
+            <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="lucky.jesse"
-            />
+              formControlName="username" />
+              <span class="text-red-700 error" *ngIf="submitted && myForm.username.errors?.required">Username is required</span>
           </div>
+
+        </div>
+        <div class="w-full lg:w-6/12 px-4" *ngIf="!editId">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Password
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="password" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.password.errors?.required">Password is required</span>
+          </div>
+
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
               Email address
             </label>
-            <input
-              type="email"
+            <input type="email"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="jesse@example.com"
-            />
+              formControlName="email" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.email.errors?.required">Email is required</span>
           </div>
+
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
               First Name
             </label>
-            <input
-              type="text"
+            <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Lucky"
-            />
+              formControlName="first_name" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.first_name.errors?.required">First Name is required</span>
           </div>
+
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
               Last Name
             </label>
-            <input
-              type="text"
+            <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Jesse"
-            />
+              formControlName="last_name" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.last_name.errors?.required">Last Name is required</span>
           </div>
+
+        </div>
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Middle Name
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              value="Jesse" formControlName="middle_name" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.middle_name.errors?.required">Middle Name is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Date Of Birth
+            </label>
+            <input type="date"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="date_of_birth" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.date_of_birth.errors?.required">Date of birth is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Gender
+            </label>
+            <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
+              name="gender" value="0" formControlName="gender" />
+            <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Male</label>
+            <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
+              name="gender" value="1" formControlName="gender" />
+            <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Female</label>
+          </div>
+          <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.gender.errors?.required">Gender is required</span>
+
+        </div>
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Phone Number
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="phone" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.phone.errors?.required">Phone Number is required</span>
+          </div>
+
+        </div>
+      </div>
+
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+        Job Information
+      </h6>
+
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Job
+            </label>
+            <select
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              id="country" formControlName="job_id">
+              <!-- <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option> -->
+              <option *ngFor="let job of jobOption" [value]="job.id">{{job.role_name}}</option>
+              <!-- <option value="1">1</option>
+              <option value="2">2</option> -->
+            </select>
+
+            <!-- <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" formControlName="job_id" /> -->
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.job_id.errors?.required">Job is required</span>
+          </div>
+
+        </div>
+        
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Department
+            </label>
+            <select
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              id="country" formControlName="department_id">
+              <!-- <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option> -->
+              <option *ngFor="let dept of departmentOption" [value]="dept.id">{{dept.department_name}}</option>
+            </select>
+            <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.department_id.errors?.required">Department is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Reporting
+            </label>
+            <select
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+            id="country" formControlName="reporting_to">
+            <!-- <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option> -->
+            <option *ngFor="let user of userList" [value]="user.id">{{user.username}}</option>
+          </select>
+           
+          <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.reporting_to.errors?.required">Reporting is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Salary
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="salary_info" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.salary_info.errors?.required">Salary is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Hire Date
+            </label>
+            <input type="date"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="hire_date"  />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.hire_date.errors?.required">Hire Date is required</span>
+          </div>
+
         </div>
       </div>
 
@@ -88,91 +224,108 @@
       <div class="flex flex-wrap">
         <div class="w-full lg:w-12/12 px-4">
           <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              Address
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Address 1
             </label>
-            <input
-              type="text"
+            <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-            />
+              formControlName="address_line1" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.address_line1.errors?.required">Address1 is required</span>
           </div>
-        </div>
-        <div class="w-full lg:w-4/12 px-4">
-          <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              City
-            </label>
-            <input
-              type="email"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="New York"
-            />
-          </div>
-        </div>
-        <div class="w-full lg:w-4/12 px-4">
-          <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              Country
-            </label>
-            <input
-              type="text"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="United States"
-            />
-          </div>
-        </div>
-        <div class="w-full lg:w-4/12 px-4">
-          <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              Postal Code
-            </label>
-            <input
-              type="text"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Postal Code"
-            />
-          </div>
-        </div>
-      </div>
 
-      <hr class="mt-6 border-b-1 border-blueGray-300" />
-
-      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-        About Me
-      </h6>
-      <div class="flex flex-wrap">
+        </div>
         <div class="w-full lg:w-12/12 px-4">
           <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              About me
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Address 2
             </label>
-            <textarea
-              type="text"
+            <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              rows="4"
-            >
-                  A beautiful UI Kit and Admin for Angular & Tailwind CSS. It is Free
-                  and Open Source.
-                </textarea
-            >
+              formControlName="address_line2" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.address_line2.errors?.required">Address2 is required</span>
           </div>
+
         </div>
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Pin Code
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="pin_code" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.pin_code.errors?.required">Pin Code is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              City
+            </label>
+            <input type="email"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="city" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.city.errors?.required">City is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              State
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="state" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.state.errors?.required">State is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Work Location
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="work_location" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.work_location.errors?.required">Work Location is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Emergency Contact
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="emergency_contact" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.emergency_contact.errors?.required">Emergency Contact is required</span>
+          </div>
+
+        </div>
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Bank Info
+            </label>
+            <input type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="bank_info" />
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.bank_info.errors?.required">Bank info Contact is required</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="text-center mt-6">
+        <!-- <button
+          class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+          type="submit"
+        >
+          Submit
+        </button> -->
       </div>
     </form>
   </div>

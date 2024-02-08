@@ -6,7 +6,10 @@
     [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'">
     <a [routerLink]="['/userDashboard/employeeDetails', 1]"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
-      User Report
+      User Report</a>
+    <a class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+      (click)="updateEmp()">
+      Edit
     </a>
     <a href="#edit"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
