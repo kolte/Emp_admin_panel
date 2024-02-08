@@ -13,11 +13,12 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: "./login.component.html",
 })
 export class LoginComponent implements OnInit {
-  constructor(public fb: FormBuilder,public service:ServicesService,public router:Router,private toastr: ToastrService) {}
+  constructor(public fb: FormBuilder,public service:ServicesService,public router:Router,private toastr: ToastrService) { localStorage.clear();}
   SignupForm: FormGroup;
   submitted: boolean = false;
 
   ngOnInit(): void {
+   
     this.SignupForm = this.fb.group({
       username: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]],

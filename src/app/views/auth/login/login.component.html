@@ -35,7 +35,8 @@
                 placeholder="Email"
                 formControlName = "username"
               />
-              <span *ngIf = "submitted && myForm.username.errors?.required">Email is required</span>
+              <span  class="text-red-500 text-sm mb-5" *ngIf = "submitted && myForm.username.errors?.required">Email is required</span>
+              <span  class="text-red-500 text-sm mb-5" *ngIf = "submitted && myForm.username.errors?.email">Email is invalid</span>
             </div>
 
             <div class="relative w-full mb-3">
@@ -52,7 +53,8 @@
                 formControlName = "password"
               />
               <!-- {{SignupForm.get('password').errors['required']}} -->
-              <span *ngIf = "submitted && myForm.password.errors?.required">Password is required</span>
+
+              <span  class="text-red-500 text-sm mb-5" *ngIf = "submitted && myForm.password.errors?.required">Password is required</span>
             </div>
             <div>
               <label class="inline-flex items-center cursor-pointer">
