@@ -16,11 +16,8 @@ import { MapsComponent } from './views/admin/maps/maps.component';
 import { SettingsComponent } from './views/admin/settings/settings.component';
 import { TablesComponent } from './views/admin/tables/tables.component';
 import { EmployeeComponent } from './views/admin/employee/employee.component';
-<<<<<<< HEAD
 import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/employeeDetails.component';
-=======
 import { EmpListComponent } from './views/admin/employee/emp-list/emp-list.component';
->>>>>>> be3295261db58e860e65d31b3980926cb7e57ec1
 
 // Auth views
 import { LoginComponent } from './views/auth/login/login.component';
@@ -52,13 +49,10 @@ import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pa
 import { NotificationDropdownComponent } from './components/dropdowns/notification-dropdown/notification-dropdown.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
-<<<<<<< HEAD
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-=======
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
->>>>>>> be3295261db58e860e65d31b3980926cb7e57ec1
 
 @NgModule({
   declarations: [
@@ -71,11 +65,8 @@ import { ToastrModule } from 'ngx-toastr';
     SettingsComponent,
     TablesComponent,
     EmployeeComponent,
-<<<<<<< HEAD
     EmployeeDetailsComponent,
-=======
     EmpListComponent,
->>>>>>> be3295261db58e860e65d31b3980926cb7e57ec1
     LoginComponent,
     RegisterComponent,
     IndexComponent,
@@ -102,15 +93,10 @@ import { ToastrModule } from 'ngx-toastr';
     SidebarComponent,
     UserDropdownComponent,
   ],
-<<<<<<< HEAD
-  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule ],
+  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
   providers: [
     provideAnimationsAsync()
   ],
-=======
-  imports: [BrowserModule,BrowserAnimationsModule, AppRoutingModule,ReactiveFormsModule,  ToastrModule.forRoot()],
-  providers: [],
->>>>>>> be3295261db58e860e65d31b3980926cb7e57ec1
   bootstrap: [AppComponent],
 })
 export class AppModule {}
