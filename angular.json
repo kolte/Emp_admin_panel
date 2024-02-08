@@ -26,6 +26,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/tailwind.css"
@@ -85,6 +86,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -2,17 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 // Layouts
 import { AdminComponent } from './layouts/admin/admin.component';
+import { FullsortComponent } from './layouts/fullsort/fullsort.component';
 import { AuthComponent } from './layouts/auth/auth.component';
-
+import { FormsModule } from '@angular/forms';
 // Admin views
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { MapsComponent } from './views/admin/maps/maps.component';
 import { SettingsComponent } from './views/admin/settings/settings.component';
 import { TablesComponent } from './views/admin/tables/tables.component';
 import { EmployeeComponent } from './views/admin/employee/employee.component';
+import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/employeeDetails.component';
 
 // Auth views
 import { LoginComponent } from './views/auth/login/login.component';
@@ -44,17 +48,20 @@ import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pa
 import { NotificationDropdownComponent } from './components/dropdowns/notification-dropdown/notification-dropdown.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
+    FullsortComponent,
     AuthComponent,
     DashboardComponent,
     MapsComponent,
     SettingsComponent,
     TablesComponent,
     EmployeeComponent,
+    EmployeeDetailsComponent,
     LoginComponent,
     RegisterComponent,
     IndexComponent,
@@ -81,8 +88,10 @@ import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user
     SidebarComponent,
     UserDropdownComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule ],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

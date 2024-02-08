@@ -4,12 +4,14 @@ import { Routes, RouterModule } from "@angular/router";
 // layouts
 import { AdminComponent } from "./layouts/admin/admin.component";
 import { AuthComponent } from "./layouts/auth/auth.component";
+import { FullsortComponent } from './layouts/fullsort/fullsort.component';
 
 // admin views
 import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
 import { MapsComponent } from "./views/admin/maps/maps.component";
 import { SettingsComponent } from "./views/admin/settings/settings.component";
 import { EmployeeComponent } from "./views/admin/employee/employee.component";
+import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/employeeDetails.component';
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -31,7 +33,14 @@ const routes: Routes = [
       { path: "employee", component: EmployeeComponent },
       { path: "maps", component: MapsComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
-    ],
+    ]
+  },
+  {
+    path: "userDashboard",
+    component: FullsortComponent,
+    children: [// No children here
+      { path: "employeeDetails/:id", component: EmployeeDetailsComponent }, 
+    ]
   },
   // auth views
   {
