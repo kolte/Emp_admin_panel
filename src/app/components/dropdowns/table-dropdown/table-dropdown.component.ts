@@ -32,7 +32,6 @@ export class TableDropdownComponent implements AfterViewInit {
   }
 
   updateEmp(){
-    console.log('updateId',this.updateId)
     this.router.navigate(['/admin/settings'],{ 
       queryParams: {  
         id: this.updateId

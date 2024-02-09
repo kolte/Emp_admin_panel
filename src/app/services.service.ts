@@ -68,4 +68,23 @@ export class ServicesService {
     };
     return axios.get("http://localhost:3000/api/datafetch/users", options);
   }
+
+  getEmpAttendanceReport(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`http://localhost:3000/api/report?employeeId=${data}`, options);
+  }
+  getEmpPunchInReport(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`http://localhost:3000/api/report/punchin?employeeId=${data}`, options);
+  }
 }

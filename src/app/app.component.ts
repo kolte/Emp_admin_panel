@@ -10,7 +10,6 @@ export class AppComponent {
   constructor(public router:Router){}
   ngOnInit(): void {
     if(localStorage.getItem('token')){
-
       this.router.navigate(['admin/dashboard'])
     }
     else{

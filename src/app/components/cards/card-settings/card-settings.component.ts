@@ -20,9 +20,9 @@ export class CardSettingsComponent implements OnInit {
   EmployeeForm: FormGroup;
   submitted = false;
   editId = null;
-  departmentOption:any=[];
-  jobOption:any=[];
-  userList:any=[];
+  departmentOption: any = [];
+  jobOption: any = [];
+  userList: any = [];
 
   ngOnInit(): void {
     this.EmployeeForm = this.fb.group({
@@ -112,47 +112,47 @@ export class CardSettingsComponent implements OnInit {
 
   departmentDetail() {
     this.service
-        .getDepartment()
-        .then((response) => {
-          if (response.status == 200) {
-            this.departmentOption=response.data.data;
-          }
-        })
-        .catch((error) => {
-          if (error.response.status == 401) {
-            this.router.navigate(["/auth/login"]);
-          }
-        });
+      .getDepartment()
+      .then((response) => {
+        if (response.status == 200) {
+          this.departmentOption = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
   }
 
   jobDetail() {
     this.service
-        .getJob()
-        .then((response) => {
-          if (response.status == 200) {
-            this.jobOption=response.data.data;
-          }
-        })
-        .catch((error) => {
-          if (error.response.status == 401) {
-            this.router.navigate(["/auth/login"]);
-          }
-        });
+      .getJob()
+      .then((response) => {
+        if (response.status == 200) {
+          this.jobOption = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
   }
 
   userData() {
     this.service
-        .getUsers()
-        .then((response) => {
-          if (response.status == 200) {
-            this.userList=response.data.data;
-          }
-        })
-        .catch((error) => {
-          if (error.response.status == 401) {
-            this.router.navigate(["/auth/login"]);
-          }
-        });
+      .getUsers()
+      .then((response) => {
+        if (response.status == 200) {
+          this.userList = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
   }
 
   onSubmit() {
