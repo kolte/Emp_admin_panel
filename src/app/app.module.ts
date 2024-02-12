@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
 
 // Layouts
 import { AdminComponent } from './layouts/admin/admin.component';
@@ -93,7 +94,7 @@ import { ToastrModule } from 'ngx-toastr';
     SidebarComponent,
     UserDropdownComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
+  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot(), HttpClientModule  ],
   providers: [
     provideAnimationsAsync()
   ],
