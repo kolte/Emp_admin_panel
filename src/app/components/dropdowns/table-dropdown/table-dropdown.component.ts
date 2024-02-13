@@ -13,6 +13,7 @@ export class TableDropdownComponent implements AfterViewInit {
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
   constructor(public router:Router){}
+  
   ngAfterViewInit() {
     createPopper(
       this.btnDropdownRef.nativeElement,
@@ -22,6 +23,7 @@ export class TableDropdownComponent implements AfterViewInit {
       }
     );
   }
+
   toggleDropdown(event) {
     event.preventDefault();
     if (this.dropdownPopoverShow) {
