@@ -66,19 +66,19 @@ export class EmployeeDetailsComponent implements OnInit {
           click: this.currentDate.bind(this),
         },
       },
-      events: [
-        { title: "Today", date: new Date().toISOString().slice(0, 10) }, // Include only today's date
-        {
-          title: "Punch In",
-          start: new Date().toISOString().slice(0, 10) + "T" + punchInTime,
-          backgroundColor: "green",
-        },
-        {
-          title: "Punch Out",
-          start: new Date().toISOString().slice(0, 10) + "T" + punchOutTime,
-          backgroundColor: "red",
-        }
-      ],
+      // events: [
+      //   { title: "Today", date: new Date().toISOString().slice(0, 10) }, // Include only today's date
+      //   {
+      //     title: "Punch In",
+      //     start: new Date().toISOString().slice(0, 10) + "T" + punchInTime,
+      //     backgroundColor: "green",
+      //   },
+      //   {
+      //     title: "Punch Out",
+      //     start: new Date().toISOString().slice(0, 10) + "T" + punchOutTime,
+      //     backgroundColor: "red",
+      //   }
+      // ],
       themeSystem: "bootstrap",
       eventClick: this.handleEventClick.bind(this),
     };
@@ -147,6 +147,8 @@ export class EmployeeDetailsComponent implements OnInit {
       .then((response) => {
         if (response.status == 200) {
           this.employeePunchInData = response.data.data;
+          const currentDate = new Date();
+          this.setPunchData(currentDate);
         }
       })
       .catch((error) => {
