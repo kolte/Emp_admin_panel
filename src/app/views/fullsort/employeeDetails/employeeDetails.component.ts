@@ -104,10 +104,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
   handleEventClick(info: any) {
     const date = info.event.startStr;
-    const id = "123";
-
-    const url = `/profile?date=${date}&id=${id}`;
-
+    const url = `/profile?date=${date}&id=${this.id}`;
     this.router.navigateByUrl(url);
   }
 

@@ -87,4 +87,14 @@ export class ServicesService {
     };
     return axios.get(`http://localhost:3000/api/report/punchin?employeeId=${data}`, options);
   }
+  
+  getEmpScreenshoteReport(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`http://localhost:3000/api/report/screenshots?employeeId=${data.employeeId}&date=${data.date}`, options);
+  }
 }

@@ -21,7 +21,7 @@
           <hr class="mt-6 border-b-1 border-blueGray-300" />
         </div>
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form [formGroup]="SignupForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="SignupForm" (ngSubmit)="onSubmit()" autoComplete='off'>
             <div class="relative w-full mb-3">
               <label
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -30,10 +30,12 @@
                 Email
               </label>
               <input
-                type="email"
+                type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Email"
                 formControlName = "username"
+                name="email"
+                autocomplete="off"
               />
               <span  class="text-red-500 text-sm mb-5" *ngIf = "submitted && myForm.username.errors?.required">Email is required</span>
               <span  class="text-red-500 text-sm mb-5" *ngIf = "submitted && myForm.username.errors?.email">Email is invalid</span>
@@ -51,6 +53,7 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Password"
                 formControlName = "password"
+                autocomplete="off"
               />
               <!-- {{SignupForm.get('password').errors['required']}} -->
 
