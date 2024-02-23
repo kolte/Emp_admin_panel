@@ -19,6 +19,11 @@ export class ServicesService {
     };
     return axios.post("http://localhost:3000/api/employee", data, options);
   }
+
+  getIpCliente(){
+    return axios.get('http://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK')
+  }
+  
   updateEmployee(data, id) {
     let token = localStorage.getItem("token");
     const options = {
@@ -86,6 +91,16 @@ export class ServicesService {
       },
     };
     return axios.get(`http://localhost:3000/api/report/punchin?employeeId=${data}`, options);
+  }
+
+  getTimerDetail(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`http://localhost:3000/api/report/timereport?employeeId=${data.id}&&date=${data.date}`, options);
   }
   
   getEmpScreenshoteReport(data) {

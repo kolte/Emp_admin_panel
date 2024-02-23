@@ -72,7 +72,7 @@
                     <span
                       class="text-xl font-bold block uppercase tracking-wide text-red-600"
                     >
-                      22
+                      {{totalTime}}
                     </span>
                     <span class="text-sm text-blue-400">Total Working Hrs</span>
                   </div>
@@ -80,7 +80,7 @@
                     <span
                       class="text-xl font-bold block uppercase tracking-wide text-red-600"
                     >
-                      10
+                      {{clickEvent}}
                     </span>
                     <span class="text-sm text-blue-400">Total Actions</span>
                   </div>
@@ -91,7 +91,7 @@
               <h3
                 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
               >
-                Jenna Stones
+              {{employeeData.first_name}} {{employeeData.last_name}}
               </h3>
               <div
                 class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
@@ -99,15 +99,15 @@
                 <i
                   class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"
                 ></i>
-                Surat, Gujarat, India
+                {{employeeData.city}}
               </div>
               <div class="mb-2 text-blueGray-600 mt-2">
                 <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                Project Manager - Kolte-Technologies 
+               {{getJobdata(employeeData.job_id)}} - Kolte-Technologies 
               </div>
               <div class="mb-2 text-blueGray-600">
                 <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                PHP Department
+                {{getDetaprtmentdata(employeeData.department_id)}}
               </div>
             </div>
             <div class="mt-2 py-2 border-t border-blueGray-200 text-center">              

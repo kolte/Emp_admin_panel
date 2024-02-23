@@ -16,7 +16,13 @@ export class EmployeeDetailsComponent implements OnInit {
   verticalCalendarOptions: any;
   employeeAttendanceData: any = [];
   employeePunchInData: any = [];
+  totalTime=0;
+  clickEvent=0;
+  employeeData:any=[];
   id: string;
+  jobOption:any=[];
+  departmentOption:any=[];
+
   @ViewChild("fullcalendar") fullcalendar: FullCalendarComponent;
 
   constructor(
@@ -30,6 +36,10 @@ export class EmployeeDetailsComponent implements OnInit {
     // Define punch in and punch out times
     this.employeeAttendanceDetail(this.id);
     this.employeePunchInDetail(this.id);
+    this.getTimerDetail(this.id, new Date().toISOString().split("T")[0]);
+    this.getEmployeeData(this.id);
+    this.departmentDetail();
+    this.jobDetail();
 
     const punchInTime = "09:15";
     const punchOutTime = "12:30";
@@ -88,24 +98,50 @@ export class EmployeeDetailsComponent implements OnInit {
     const calendarApi = this.fullcalendar.getApi();
     calendarApi.next();
     this.setPunchData(this.fullcalendar.getApi().getDate());
+    this.getTimerDetail(
+      this.id,
+      moment(new Date(this.fullcalendar.getApi().getDate())).format(
+        "YYYY-MM-DD"
+      )
+    );
   }
 
   prevMonth(): void {
     const calendarApi = this.fullcalendar.getApi();
     calendarApi.prev();
     this.setPunchData(this.fullcalendar.getApi().getDate());
+    this.getTimerDetail(
+      this.id,
+      moment(new Date(this.fullcalendar.getApi().getDate())).format(
+        "YYYY-MM-DD"
+      )
+    );
   }
-  
+
   currentDate(): void {
     const calendarApi = this.fullcalendar.getApi();
     calendarApi.today();
     this.setPunchData(this.fullcalendar.getApi().getDate());
+    this.getTimerDetail(
+      this.id,
+      moment(new Date(this.fullcalendar.getApi().getDate())).format(
+        "YYYY-MM-DD"
+      )
+    );
   }
 
   handleEventClick(info: any) {
     const date = info.event.startStr;
     const url = `/profile?date=${date}&id=${this.id}`;
     this.router.navigateByUrl(url);
+    console.log('123')
+  }
+
+  handledateClick(arg: any) {
+    // const date = info.event.startStr;
+    // const url = `/profile?date=${date}&id=${this.id}`;
+    // this.router.navigateByUrl(url);
+    console.log('123456')
   }
 
   employeeAttendanceDetail(id) {
@@ -180,8 +216,80 @@ export class EmployeeDetailsComponent implements OnInit {
         backgroundColor: "red",
       };
 
-      setpunchData = [modifiedObj,modifiedsObj, ...setpunchData];
+      setpunchData = [modifiedObj, modifiedsObj, ...setpunchData];
     }
-    this.verticalCalendarOptions.events=setpunchData;
+    this.verticalCalendarOptions.events = setpunchData;
+  }
+
+  getTimerDetail(id, date) {
+    const data = {
+      id: id,
+      date: date,
+    };
+    this.service
+      .getTimerDetail(data)
+      .then((response) => {
+        if (response.status == 200) {
+          
+          this.totalTime=response.data.data[0].total_time ? response.data.data[0].total_time : 0;
+          this.clickEvent=response.data.data[0].mouclick ? response.data.data[0].mouclick : 0;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  getEmployeeData(id) {
+    this.service
+      .getEmployeeList()
+      .then((response: any) => {
+        if (response.data.success) {
+          this.employeeData = response.data.data.find((_: any) => _.id == id);
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  departmentDetail() {
+    this.service
+      .getDepartment()
+      .then((response) => {
+        if (response.status == 200) {
+          this.departmentOption = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  jobDetail() {
+    this.service
+      .getJob()
+      .then((response) => {
+        if (response.status == 200) {
+          this.jobOption = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+  getJobdata(id){
+    return this.jobOption.find((_:any)=>_.id == id).role_name;
+  }
+  getDetaprtmentdata(id){
+    return this.departmentOption.find((_:any)=>_.id == id).department_name;
   }
 }

@@ -50,7 +50,7 @@ import { NotificationDropdownComponent } from './components/dropdowns/notificati
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms'; 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
 

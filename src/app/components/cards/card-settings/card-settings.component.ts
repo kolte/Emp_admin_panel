@@ -16,7 +16,9 @@ export class CardSettingsComponent implements OnInit {
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.getIp();
+  }
   EmployeeForm: FormGroup;
   submitted = false;
   editId = null;
@@ -155,7 +157,24 @@ export class CardSettingsComponent implements OnInit {
       });
   }
 
+  getIp(){
+    this.service
+        .getIpCliente()
+        .then((response) => {
+          if (response.status == 200) {
+            this.toastr.success(response.data.message);
+            this.router.navigate(["/admin/employee"]);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status == 401) {
+            this.router.navigate(["/auth/login"]);
+          }
+        });
+  }
+
   onSubmit() {
+    
     this.submitted = true;
     if (this.EmployeeForm.invalid) return;
     const data = this.EmployeeForm.value;
