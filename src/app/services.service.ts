@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import axios from "axios";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -7,8 +8,10 @@ import axios from "axios";
 export class ServicesService {
   constructor() {}
 
+  endpoint: string = environment.apiURL || "";
+
   getRandomJoke(data) {
-    return axios.post("http://localhost:3000/api/login", data);
+    return axios.post(`${this.endpoint}login`, data);
   }
   addEmployee(data) {
     let token = localStorage.getItem("token");
@@ -17,7 +20,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.post("http://localhost:3000/api/employee", data, options);
+    return axios.post(`${this.endpoint}employee`, data, options);
   }
 
   getIpCliente(){
@@ -31,7 +34,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.put(`http://localhost:3000/api/employee/${id}`, data, options);
+    return axios.put(`${this.endpoint}employee/${id}`, data, options);
   }
 
   getEmployeeList() {
@@ -41,7 +44,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get("http://localhost:3000/api/employeeList", options);
+    return axios.get(`${this.endpoint}employeeList`,options);
   }
 
   getDepartment() {
@@ -51,7 +54,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get("http://localhost:3000/api/datafetch/departments", options);
+    return axios.get(`${this.endpoint}datafetch/departments`, options);
   }
   
   getJob() {
@@ -61,7 +64,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get("http://localhost:3000/api/datafetch/jobs", options);
+    return axios.get(`${this.endpoint}datafetch/jobs`, options);
   }
 
   getUsers() {
@@ -71,7 +74,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get("http://localhost:3000/api/datafetch/users", options);
+    return axios.get(`${this.endpoint}datafetch/users`, options);
   }
 
   getEmpAttendanceReport(data) {
@@ -81,7 +84,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`http://localhost:3000/api/report?employeeId=${data}`, options);
+    return axios.get(`${this.endpoint}report?employeeId=${data}`, options);
   }
   getEmpPunchInReport(data) {
     let token = localStorage.getItem("token");
@@ -90,7 +93,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`http://localhost:3000/api/report/punchin?employeeId=${data}`, options);
+    return axios.get(`${this.endpoint}report/punchin?employeeId=${data}`, options);
   }
 
   getTimerDetail(data) {
@@ -100,7 +103,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`http://localhost:3000/api/report/timereport?employeeId=${data.id}&&date=${data.date}`, options);
+    return axios.get(`${this.endpoint}report/timereport?employeeId=${data.id}&&date=${data.date}`, options);
   }
   
   getEmpScreenshoteReport(data) {
@@ -110,6 +113,6 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`http://localhost:3000/api/report/screenshots?employeeId=${data.employeeId}&date=${data.date}`, options);
+    return axios.get(`${this.endpoint}report/screenshots?employeeId=${data.employeeId}&date=${data.date}`, options);
   }
 }
