@@ -287,9 +287,9 @@ export class EmployeeDetailsComponent implements OnInit {
       });
   }
   getJobdata(id){
-    return this.jobOption.find((_:any)=>_.id == id).role_name;
+    return this.jobOption.find((_:any)=>_.id == id)?.role_name;
   }
   getDetaprtmentdata(id){
-    return this.departmentOption.find((_:any)=>_.id == id).department_name;
+    return this.departmentOption.find((_:any)=>_.id == id)?.department_name;
   }
 }

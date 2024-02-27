@@ -162,8 +162,9 @@ export class CardSettingsComponent implements OnInit {
         .getIpCliente()
         .then((response) => {
           if (response.status == 200) {
-            this.toastr.success(response.data.message);
-            this.router.navigate(["/admin/employee"]);
+            console.log(response.data)
+            // this.toastr.success(response.data.message);
+            // this.router.navigate(["/admin/employee"]);
           }
         })
         .catch((error) => {
