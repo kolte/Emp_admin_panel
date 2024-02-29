@@ -25,7 +25,7 @@
             <input type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="username" />
-              <span class="text-red-700 error" *ngIf="submitted && myForm.username.errors?.required">Username is required</span>
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.username.errors?.required">Username is required</span>
           </div>
 
         </div>
@@ -38,6 +38,7 @@
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="password" />
               <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.password.errors?.required">Password is required</span>
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.password.errors?.minlength">Atleast 6 length is required</span>
           </div>
 
         </div>
@@ -50,6 +51,7 @@
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="email" />
               <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.email.errors?.required">Email is required</span>
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.email.errors?.email">Invalid Email</span>
           </div>
 
         </div>
@@ -95,6 +97,7 @@
               Date Of Birth
             </label>
             <input type="date"
+            [max]="birhmindate"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="date_of_birth" />
               <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.date_of_birth.errors?.required">Date of birth is required</span>
@@ -208,6 +211,7 @@
               Hire Date
             </label>
             <input type="date"
+            [max]="maxdate"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               formControlName="hire_date"  />
               <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.hire_date.errors?.required">Hire Date is required</span>

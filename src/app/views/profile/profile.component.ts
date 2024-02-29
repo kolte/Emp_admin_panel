@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     let id=this.route.snapshot.queryParamMap.get("id");
     let date=this.route.snapshot.queryParamMap.get("date");
-    console.log(id,date)
     this.employeePunchInDetail(id,date)
   }
 

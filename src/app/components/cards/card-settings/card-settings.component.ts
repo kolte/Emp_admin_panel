@@ -25,18 +25,21 @@ export class CardSettingsComponent implements OnInit {
   departmentOption: any = [];
   jobOption: any = [];
   userList: any = [];
-
+  birhmindate = moment(new Date().setFullYear(new Date().getFullYear() - 18)).format("YYYY-MM-DD");
+  maxdate = moment(new Date()).format("YYYY-MM-DD");
+  
   ngOnInit(): void {
+    
     this.EmployeeForm = this.fb.group({
       username: ["", [Validators.required]],
-      password: ["", [Validators.required]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
       email: ["", [Validators.required, Validators.email]],
       first_name: ["", [Validators.required]],
       last_name: ["", [Validators.required]],
       middle_name: ["", [Validators.required]],
-      date_of_birth: ["", [Validators.required]],
+      date_of_birth: ["",[Validators.required]],
       gender: ["", [Validators.required]],
-      phone: ["", [Validators.required]],
+      phone: ["", [Validators.required,Validators.minLength(6)]],
       job_id: ["", [Validators.required]],
       department_id: ["", [Validators.required]],
       reporting_to: ["", [Validators.required]],
@@ -55,6 +58,7 @@ export class CardSettingsComponent implements OnInit {
     this.jobDetail();
     this.userData();
     const id: string = this.route.snapshot.queryParamMap.get("id");
+
     if (id) {
       this.editId = id;
       this.getEmployeeData(id);
@@ -157,25 +161,24 @@ export class CardSettingsComponent implements OnInit {
       });
   }
 
-  getIp(){
+  getIp() {
     this.service
-        .getIpCliente()
-        .then((response) => {
-          if (response.status == 200) {
-            console.log(response.data)
-            // this.toastr.success(response.data.message);
-            // this.router.navigate(["/admin/employee"]);
-          }
-        })
-        .catch((error) => {
-          if (error.response.status == 401) {
-            this.router.navigate(["/auth/login"]);
-          }
-        });
+      .getIpCliente()
+      .then((response) => {
+        if (response.status == 200) {
+          console.log(response.data);
+          // this.toastr.success(response.data.message);
+          // this.router.navigate(["/admin/employee"]);
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
   }
 
   onSubmit() {
-    
     this.submitted = true;
     if (this.EmployeeForm.invalid) return;
     const data = this.EmployeeForm.value;
