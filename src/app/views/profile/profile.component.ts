@@ -27,7 +27,9 @@ export class ProfileComponent implements OnInit {
       .then((response) => {
         console.log('response.status========>',response.status)
         if (response.status == 200) {
+          console.log('response.status========>',response.data.data)
           let screenShote=response.data.data;
+
           for (let i=0;i<screenShote.length;i++){
             screenShote[i].active_screen=this.activeScreen(screenShote[i].active_screen);
           }

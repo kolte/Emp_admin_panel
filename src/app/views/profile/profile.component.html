@@ -22,7 +22,7 @@
         <div class="flex ">
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4" *ngFor="let ssdata of screenShoteData">
             <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-              <img src="assets/img/team-3-800x800.jpg" class="h-95-px w-16 bg-white  border" alt="..." />
+              <img src="{{ssdata.screenshot_url}}" class="h-95-px w-16 bg-white  border" alt="..." />
               <span class="text-sm  tracking-wide text-blueGray-600">Mouce Click : <span
                   class="text-sm font-bold ">{{ssdata.mouse_click}}</span></span>
               <span class="text-sm  tracking-wide text-blueGray-600">Keyboard Click : <span
