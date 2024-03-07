@@ -18,6 +18,8 @@ import { TablesComponent } from './views/admin/tables/tables.component';
 import { EmployeeComponent } from './views/admin/employee/employee.component';
 import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/employeeDetails.component';
 import { EmpListComponent } from './views/admin/employee/emp-list/emp-list.component';
+import { ProjectComponent } from './views/admin/project/project.component';
+import { ProjectListComponent } from './views/admin/project/project-list/project-list.component';
 
 // Auth views
 import { LoginComponent } from './views/auth/login/login.component';
@@ -65,6 +67,8 @@ import { ToastrModule } from 'ngx-toastr';
     SettingsComponent,
     TablesComponent,
     EmployeeComponent,
+    ProjectComponent,
+    ProjectListComponent,
     EmployeeDetailsComponent,
     EmpListComponent,
     LoginComponent,
