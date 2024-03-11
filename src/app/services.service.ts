@@ -115,4 +115,14 @@ export class ServicesService {
     };
     return axios.get(`${this.endpoint}report/screenshots?employeeId=${data.employeeId}&date=${data.date}`, options);
   }
+
+  getProjectList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}projects`,options);
+  }
 }

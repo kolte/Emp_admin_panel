@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit, Input, Inject } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServicesService } from "src/app/services.service";
 import { Router } from "@angular/router";
 import {
@@ -50,7 +51,7 @@ export class ProjectListComponent implements OnInit {
 
   getProjectdata() {
     this.service
-      .getEmployeeList()
+      .getProjectList()
       .then((response: any) => {
         if (response.data.success) {
           this.Projectlist = response.data.data;
@@ -93,6 +94,8 @@ export class ProjectListComponent implements OnInit {
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule
   ],
 })
