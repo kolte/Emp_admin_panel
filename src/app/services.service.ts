@@ -123,6 +123,27 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`${this.endpoint}projects`,options);
+    return axios.get(`${this.endpoint}project`,options);
   }
+
+  getProjectManager() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}datafetch/departments`, options);
+  }
+
+  addProject(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}project`, options,data);
+  }
+
 }

@@ -30,7 +30,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Employee Name
+            Project Name
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -39,7 +39,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Department
+            Project Description
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -48,7 +48,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Latest Screen Image
+            Project Manager
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -57,7 +57,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Working Time
+            Status
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -72,41 +72,22 @@
         <tr *ngFor="let emp of Projectlist">
           <th
             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-            <img src="assets/img/team-3-800x800.jpg" class="h-12 w-12 bg-white rounded-full border" alt="..." />
+            <!-- <img src="assets/img/team-3-800x800.jpg" class="h-12 w-12 bg-white rounded-full border" alt="..." /> -->
             <span class="ml-3 font-bold" [ngClass]="color === 'light' ? 'text-blueGray-600' : 'text-white'">
-              {{emp.first_name}} {{emp.last_name}}
+              {{emp.project_name}}
             </span>
           </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{DepartmentName(emp.department_id)}}
+            {{emp.project_description}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <div class="flex">
-              <img *ngIf="emp.screenshot_a"  [src]="emp.screenshot_a" alt="..."
-              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
-              <img *ngIf="emp.screenshot_b" src="emp.screenshot_b" alt="..."
-              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-              <img *ngIf="emp.screenshot_c" src="emp.screenshot_c" alt="..."
-              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-              <img *ngIf="emp.screenshot_d" src="emp.screenshot_d" alt="..."
-              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-            </div>
+            {{managerName(emp.project_manager_id).first_name}} {{managerName(emp.project_manager_id).last_name}}
+            
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-circle text-orange-500 mr-2"></i> pending
+            {{emp.status}}
           </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <div class="flex items-center">
-              <span class="mr-2">60%</span>
-              <div class="relative w-full">
-                <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                  <div style="width: 60%"
-                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
+          
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
             <app-table-dropdown [updateId]="emp.id"></app-table-dropdown>
           </td>

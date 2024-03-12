@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit, Input, Inject } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ServicesService } from "src/app/services.service";
 import { Router } from "@angular/router";
 import {
@@ -11,13 +11,12 @@ import {
   MatDialogContent,
   MatDialogActions,
   MatDialogClose,
-} from '@angular/material/dialog';
+} from "@angular/material/dialog";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-
 
 @Component({
   selector: "app-project-list",
-  templateUrl: "./project-list.component.html"
+  templateUrl: "./project-list.component.html",
 })
 export class ProjectListComponent implements OnInit {
   @Input()
@@ -29,22 +28,26 @@ export class ProjectListComponent implements OnInit {
   }
   private _color = "light";
   Projectlist: any = [];
-  departmentOption: any = [];
+  managerOption: any = [];
 
-  constructor(public service: ServicesService, public router: Router,public dialog: MatDialog) {}
+  constructor(
+    public service: ServicesService,
+    public router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getProjectdata();
-    this.departmentDetail();
+    this.projectManagerDetail();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: {name:' this.name', animal: 'this.animal'},
+      data: { name: " this.name", animal: "this.animal" },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed", result);
       // this.animal = result;
     });
   }
@@ -54,7 +57,8 @@ export class ProjectListComponent implements OnInit {
       .getProjectList()
       .then((response: any) => {
         if (response.data.success) {
-          this.Projectlist = response.data.data;
+          this.Projectlist = response.data.projects;
+          console.log(this.Projectlist);
         }
       })
       .catch((error) => {
@@ -64,16 +68,16 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
-  DepartmentName(id) {
-    return this.departmentOption.find((_: any) => _.id == id)?.department_name;
+  managerName(id) {
+     return this.managerOption.find((_: any) => _.id == id);
   }
 
-  departmentDetail() {
+  projectManagerDetail() {
     this.service
-      .getDepartment()
+      .getEmployeeList()
       .then((response) => {
         if (response.status == 200) {
-          this.departmentOption = response.data.data;
+          this.managerOption = response.data.data;
         }
       })
       .catch((error) => {
@@ -84,11 +88,10 @@ export class ProjectListComponent implements OnInit {
   }
 }
 
-
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './dialog-overview-example-dialog.html',
-  standalone:true,
+  selector: "dialog-overview-example-dialog",
+  templateUrl: "./dialog-overview-example-dialog.html",
+  standalone: true,
   imports: [
     MatDialogTitle,
     MatDialogContent,
@@ -96,28 +99,29 @@ export class ProjectListComponent implements OnInit {
     MatDialogClose,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
   ],
 })
 export class DialogOverviewExampleDialog {
   EmployeeForm: FormGroup;
   submitted = false;
+  employeeData:any=[];
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public service: ServicesService,
   ) {}
 
-
   ngOnInit(): void {
-    
+    this.getEmployeeData();
     this.EmployeeForm = this.fb.group({
       project_name: ["", [Validators.required]],
       project_description: ["", [Validators.required, Validators.minLength(6)]],
       manager_id: ["", [Validators.required, Validators.email]],
       start_date: ["", [Validators.required]],
       end_date: ["", [Validators.required]],
-      status: ["", [Validators.required]]
+      status: ["", [Validators.required]],
     });
   }
 
@@ -129,7 +133,38 @@ export class DialogOverviewExampleDialog {
     this.dialogRef.close();
   }
 
+  getEmployeeData() {
+    this.service
+      .getEmployeeList()
+      .then((response: any) => {
+        if (response.data.success) {
+          this.employeeData = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          // this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  
+
   onSubmit() {
     this.submitted = true;
+    console.log(this.EmployeeForm.value)
+      this.service
+        .addProject(this.EmployeeForm.value)
+        .then((response) => {
+          if (response.status == 200) {
+            console.log('data',response)
+          }
+        })
+        .catch((error) => {
+          if (error.response.status == 401) {
+            // this.router.navigate(["/auth/login"]);
+          }
+        });
+    
   }
 }
