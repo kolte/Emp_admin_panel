@@ -133,20 +133,42 @@
             [routerLink]="['/admin/project']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
-            #adminTables="routerLinkActive"
+            #adminProject="routerLinkActive"
             [ngClass]="
-              adminTables.isActive
+            adminProject.isActive
                 ? 'text-red-600 hover:text-red-700'
                 : 'text-blueGray-700 hover:text-blueGray-500'
             "
           >
             <i
-              class="fas fa-users mr-2 text-sm"
+              class="fas fa-folder mr-2 text-sm"
               [ngClass]="
-                adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
+              adminProject.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
             Project
+          </a>
+        </li>
+
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/task']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #adminTask="routerLinkActive"
+            [ngClass]="
+            adminTask.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
+          >
+            <i
+              class="fas fa-tasks mr-2 text-sm"
+              [ngClass]="
+              adminTask.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Task
           </a>
         </li>
 

@@ -20,6 +20,8 @@ import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/emplo
 import { EmpListComponent } from './views/admin/employee/emp-list/emp-list.component';
 import { ProjectComponent } from './views/admin/project/project.component';
 import { ProjectListComponent } from './views/admin/project/project-list/project-list.component';
+import { TaskComponent } from './views/admin/task/task.component';
+import { TaskListComponent } from './views/admin/task/task-list/task-list.component';
 
 // Auth views
 import { LoginComponent } from './views/auth/login/login.component';
@@ -55,6 +57,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {ReactiveFormsModule} from '@angular/forms'; 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
+import { DecimalFormatPipe } from './decimal-format.pipe'; 
 
 @NgModule({
   declarations: [
@@ -69,6 +72,8 @@ import { ToastrModule } from 'ngx-toastr';
     EmployeeComponent,
     ProjectComponent,
     ProjectListComponent,
+    TaskComponent,
+    TaskListComponent,
     EmployeeDetailsComponent,
     EmpListComponent,
     LoginComponent,
@@ -96,6 +101,7 @@ import { ToastrModule } from 'ngx-toastr';
     NotificationDropdownComponent,
     SidebarComponent,
     UserDropdownComponent,
+    DecimalFormatPipe 
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
   providers: [

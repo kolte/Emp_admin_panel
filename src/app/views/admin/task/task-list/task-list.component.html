@@ -4,14 +4,14 @@
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-700' : 'text-white'">
-          Employees Tables
+          Task Tables
         </h3>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-        <a [routerLink]="['/admin/settings']" class="">
+        <a  class="">
           <button
             class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
+            type="button" (click)="openDialog()">
             ADD
           </button>
         </a>
@@ -30,7 +30,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Employee Name
+            Task ID
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -39,7 +39,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Department
+            Project Name
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -48,7 +48,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Latest Screen Image
+            Task Name
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -57,7 +57,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Working Time
+            Task Description
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -69,7 +69,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let emp of Employeelist">
+        <tr *ngFor="let emp of Projectlist">
           <th
             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
             <img src="assets/img/team-3-800x800.jpg" class="h-12 w-12 bg-white rounded-full border" alt="..." />
@@ -82,14 +82,14 @@
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <div class="flex">
-              <img *ngIf="emp.screenshot_a && emp.screenshot_a.trim() !== ''" [src]="emp.screenshot_a" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
-              <img *ngIf="emp.screenshot_b && emp.screenshot_b.trim() !== ''" [src]="emp.screenshot_b" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-              <img *ngIf="emp.screenshot_c && emp.screenshot_c.trim() !== ''" [src]="emp.screenshot_c" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-              <img *ngIf="emp.screenshot_d && emp.screenshot_d.trim() !== ''" [src]="emp.screenshot_d" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
+              <img *ngIf="emp.screenshot_a"  [src]="emp.screenshot_a" alt="..."
+              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
+              <img *ngIf="emp.screenshot_b" src="emp.screenshot_b" alt="..."
+              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
+              <img *ngIf="emp.screenshot_c" src="emp.screenshot_c" alt="..."
+              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
+              <img *ngIf="emp.screenshot_d" src="emp.screenshot_d" alt="..."
+              class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
             </div>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -108,11 +108,13 @@
             </div>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-            <app-table-dropdown [updateId]="emp.id"></app-table-dropdown>
+            <!-- <app-table-dropdown [updateId]="emp.id"></app-table-dropdown> -->
           </td>
         </tr>
-
+        
       </tbody>
     </table>
   </div>
 </div>
+
+

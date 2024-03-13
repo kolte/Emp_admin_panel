@@ -1,0 +1,23 @@
+/* Styles for the card container */
+.card-container {
+    padding: 20px;
+    /* Inner padding */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+}
+
+.margin-left-10 {
+    margin-left: 10%;
+}
+
+.h-500-px {
+    height: 200px;
+}
+
+#blackOverlay {
+    position: absolute;
+    color: #fff;
+    float: right;
+    text-align: right;
+    padding-right: 30px;
+}
