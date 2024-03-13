@@ -22,6 +22,7 @@ import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { ProjectComponent } from "./views/admin/project/project.component";
+import { TaskComponent } from "./views/admin/task/task.component";
 
 const routes: Routes = [
   // admin views
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: "settings", component: SettingsComponent },
       { path: "employee", component: EmployeeComponent },
       { path: "project", component: ProjectComponent },
+      { path: "task", component: TaskComponent },
       { path: "maps", component: MapsComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ]

@@ -5,9 +5,11 @@ import { ServicesService } from "src/app/services.service";
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
   screenShoteData:any=[];
+  isHovered: boolean = false;
   constructor(private service: ServicesService,private router:Router,private route: ActivatedRoute) {}
 
   ngOnInit(): void {

@@ -7,9 +7,9 @@
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
           <app-card-stats
             statSubtitle="TOTAL WORKING (Monthly)"
-            statTitle="350,897"
-            statArrow="up"
-            statPercent="3.48"
+            [statTitle]="totalMonthHours | decimalFormat"
+            [statArrow]="comparemonth"
+            [statPercent]="totalCompareMonthNumber"
             statPercentColor="text-emerald-500"
             statDescripiron="Since last month"
             statIconName="far fa-chart-bar"
@@ -19,9 +19,9 @@
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
           <app-card-stats
             statSubtitle="TOTAL WORKING (Today)"
-            statTitle="2,356"
-            statArrow="down"
-            statPercent="3.48"
+            [statTitle]="totalWorkingHours | decimalFormat"
+            [statArrow]="compareweek"
+            [statPercent]="totalCompareWeekNumber"
             statPercentColor="text-red-500"
             statDescripiron="Since last week"
             statIconName="fas fa-chart-pie"
