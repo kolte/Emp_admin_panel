@@ -52,7 +52,7 @@
 
               <select
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              id="country" formControlName="manager_id">
+              id="country" formControlName="project_manager_id">
               <option *ngFor="let emp of employeeData" [value]="emp.id">{{emp.first_name}}  {{emp.last_name}}</option>
               
             </select>
@@ -60,7 +60,7 @@
               <!-- <input type="email"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 formControlName="manager_id" /> -->
-                <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.manager_id.errors?.required">Manager  is required</span>
+                <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.project_manager_id.errors?.required">Manager  is required</span>
              </div>
   
           </div>
@@ -95,11 +95,14 @@
                 status
               </label>
               <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
-                name="status" value="0" formControlName="status" />
+                name="status" value="active" formControlName="status" />
               <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Active</label>
               <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
-                name="status" value="1" formControlName="status" />
-              <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Deactive</label>
+                name="status" value="completed" formControlName="status" />
+              <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Complete</label>
+              <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
+                name="status" value="archived" formControlName="status" />
+              <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Archive</label>
             </div>
             <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.status.errors?.required">Gender is required</span>
   

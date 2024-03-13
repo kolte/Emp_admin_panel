@@ -143,7 +143,7 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.post(`${this.endpoint}project`, options,data);
+    return axios.post(`${this.endpoint}project`, data,options);
   }
 
 }
