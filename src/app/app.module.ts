@@ -58,6 +58,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
 import { DecimalFormatPipe } from './decimal-format.pipe'; 
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -101,12 +103,12 @@ import { DecimalFormatPipe } from './decimal-format.pipe';
     NotificationDropdownComponent,
     SidebarComponent,
     UserDropdownComponent,
-    DecimalFormatPipe 
+    DecimalFormatPipe
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
+  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot(),MatDialogModule ],
   providers: [
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

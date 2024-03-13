@@ -146,4 +146,24 @@ export class ServicesService {
     return axios.post(`${this.endpoint}project`, data,options);
   }
 
+  editProjectData(id,data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.put(`${this.endpoint}project/${id}`,data,options);
+  }
+
+  deleteProjectData(id) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.delete(`${this.endpoint}project/${id}`,options);
+  }
+
 }

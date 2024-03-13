@@ -2,7 +2,10 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit, Input, Inject, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ServicesService } from "src/app/services.service";
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Router } from "@angular/router";
+import moment from "moment";
+
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -22,9 +25,9 @@ import { createPopper } from "@popperjs/core";
 })
 export class ProjectListComponent implements OnInit,AfterViewInit {
   dropdownPopoverShow = false;
-  @ViewChild("popoverDropdownRef", { static: false })
+  @ViewChild("popoverDropdownRef", { static: false })  popoverDropdownRef: ElementRef;
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
-  popoverDropdownRef: ElementRef;
+
   @Input()
   get color(): string {
     return this._color;
@@ -39,7 +42,8 @@ export class ProjectListComponent implements OnInit,AfterViewInit {
   constructor(
     public service: ServicesService,
     public router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +63,7 @@ export class ProjectListComponent implements OnInit,AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: { id: "" },
+      data: null,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -78,10 +82,41 @@ export class ProjectListComponent implements OnInit,AfterViewInit {
   }
 
   updateEmp(id){
+    console.log(id)
     this.dialog.open(DialogOverviewExampleDialog, {
       data: id,
     });
 
+  }
+
+  deleteEmp(id){
+    Swal.fire({
+      title: 'Are you sure want to remove all the Task of this Project?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.deleteProject(id)
+      } 
+    })
+  }
+
+  deleteProject(id){
+    this.service
+      .deleteProjectData(id)
+      .then((response: any) => {
+        if (response.data.success) {
+          this.toastr.success(response.data.message);
+          this.getProjectdata();
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
   }
 
   getProjectdata() {
@@ -156,7 +191,32 @@ export class DialogOverviewExampleDialog {
       end_date: ["", [Validators.required]],
       status: ["", [Validators.required]],
     });
-    // console.log('dtata==========>',this.data)
+    if(this.data){
+      this.fillEmployeeData(this.data)
+    }
+  }
+
+  fillEmployeeData(id){
+    this.service
+    .getProjectList()
+    .then((response: any) => {  
+      if (response.data.success) {
+        const projectList = response.data.projects.find((_: any) => _.project_id == id);
+        this.EmployeeForm.patchValue({
+          project_name: projectList.project_name,
+          project_description: projectList.project_description,
+          project_manager_id: projectList.project_manager_id,
+          start_date: moment(new Date(projectList.start_date)).format("YYYY-MM-DD"),
+          end_date: moment(new Date(projectList.end_date)).format("YYYY-MM-DD"),
+          status: projectList.status
+        });
+      }
+    })
+    .catch((error) => {
+      if (error.response.status == 401) {
+        // this.router.navigate(["/auth/login"]);
+      }
+    });
   }
 
   get myForm() {
@@ -182,18 +242,15 @@ export class DialogOverviewExampleDialog {
       });
   }
 
-  
-
   onSubmit() {
     this.submitted = true;
-    console.log(this.EmployeeForm.valid)
-    if(this.EmployeeForm.valid){
-   
     this.EmployeeForm.value.project_manager_id = Number(this.EmployeeForm.value.project_manager_id);
-      this.service
-        .addProject(this.EmployeeForm.value)
+    if(this.EmployeeForm.valid){
+      if(this.data){
+        this.service
+        .editProjectData(this.data,this.EmployeeForm.value)
         .then((response) => {
-          if (response.status== 201) {
+          if (response.status== 200) {
             this.onNoClick();
             this.toastr.success(response.data.message);
           }
@@ -203,6 +260,22 @@ export class DialogOverviewExampleDialog {
             // this.router.navigate(["/auth/login"]);
           }
         });
+      }
+      else{
+        this.service
+          .addProject(this.EmployeeForm.value)
+          .then((response) => {
+            if (response.status== 201) {
+              this.onNoClick();
+              this.toastr.success(response.data.message);
+            }
+          })
+          .catch((error) => {
+            if (error.response.status == 401) {
+              // this.router.navigate(["/auth/login"]);
+            }
+          });
+      }
         
       }
   }
