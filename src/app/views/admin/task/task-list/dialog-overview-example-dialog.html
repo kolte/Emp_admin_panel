@@ -3,7 +3,7 @@
   <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
     <div class="rounded-t bg-white mb-0 px-6 py-6">
       <div class="text-center flex justify-between">
-        <h6 class="text-blueGray-700 text-xl font-bold">Add Project Detail</h6>
+        <h6 class="text-blueGray-700 text-xl font-bold">Add Task Detail</h6>
         <button
           class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
           type="button" (click)="onSubmit()">
@@ -27,7 +27,7 @@
                 id="country" formControlName="project_id">
                 <option *ngFor="let pro of Projectlist" [value]="pro.project_id">{{pro.project_name}}</option>
               </select>
-              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.project_id.errors?.required">Project List is
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.project_id.errors?.required">Project Name is
                 required</span>
             </div>
 
@@ -53,7 +53,7 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 formControlName="task_description" />
               <span class="text-red-500 text-sm mb-5"
-                *ngIf="submitted && myForm.task_description.errors?.required">Manager is required</span>
+                *ngIf="submitted && myForm.task_description.errors?.required">Task Description is required</span>
             </div>
 
           </div>
@@ -132,7 +132,7 @@
               <input type="date"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 formControlName="due_date" />
-              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.due_date.errors?.required">Start Date
+              <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.due_date.errors?.required">Due Date
                 is required</span>
             </div>
           </div>
