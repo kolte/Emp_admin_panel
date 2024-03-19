@@ -5,10 +5,10 @@ import { AddServicesService } from "src/app/addservices.service";
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: "app-table-dropdown",
-  templateUrl: "./table-dropdown.component.html",
+  selector: "app-leave-dropdown",
+  templateUrl: "./leave-dropdown.component.html",
 })
-export class TableDropdownComponent implements AfterViewInit {
+export class LeaveDropdownComponent implements AfterViewInit {
   dropdownPopoverShow = false;
   @Input() updateId:any;
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;

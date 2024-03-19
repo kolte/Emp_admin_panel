@@ -17,12 +17,13 @@
 
   <div class="relative md:pt-32 pb-32 pt-12">
     <div class="px-4 md:px-10 mx-auto w-full">
-      <a [routerLink]="['/admin/dashboard']"
+      <a [routerLink]="['/userDashboard/employeeDetails/', id]"
       class="flex items-center bg-blue-500 text-black font-bold py-2 px-4 rounded" routerLinkActive
       #adminDashboard="routerLinkActive">
-      <i class="fas fa-arrow-left mr-2 text-lg"></i>
-      <b>Back</b>
-    </a>
+     <i class="fas fa-arrow-left mr-2 text-lg"></i>
+     <b>Back</b>
+   </a>
+   
       <div class="flex flex-wrap justify-center">
         <!-- Card stats -->
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-4" *ngFor="let ssdata of screenShoteData">
