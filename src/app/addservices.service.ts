@@ -5,7 +5,7 @@ import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root",
 })
-export class ServicesService {
+export class AddServicesService {
   constructor() {}
 
   endpoint: string = environment.apiURL || "";
@@ -70,6 +70,68 @@ export class ServicesService {
       timeout: 5000,
     };
   
-    return axios.delete(`http://localhost:3000/api/employee/${id}`, options);;
+    return axios.delete(`${this.endpoint}employee/${id}`, options);;
   }
+
+  getEmployeePicData(id: string): Promise<any> {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return Promise.reject("Token not found. User is not authenticated.");
+    }
+  
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  
+    return axios.get(`${this.endpoint}employee/profilePic/${id}`, options);
+  }
+
+  uploadProfilePic(id: number, file: File): Promise<any> {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return Promise.reject("Token not found. User is not authenticated.");
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result.toString().split(',')[1]; // Extracting base64 string from data URL
+        const data = {
+          profile_picture: base64String
+        };
+
+        const options = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+        };
+
+        axios.post(`${this.endpoint}employee/profile-picture/${id}`, data, options)
+          .then(response => {
+            resolve(response.data);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      };
+      reader.onerror = error => {
+        reject(error);
+      };
+    });
+  }
+
+  getLeaveList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}leave/leave-dates`,options);
+  }
+  
 }

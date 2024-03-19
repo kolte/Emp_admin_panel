@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ServicesService } from "src/app/addservices.service";
+import { AddServicesService } from "src/app/addservices.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -13,7 +13,7 @@ export class HeaderStatsComponent implements OnInit {
   comparemonth: string;
   totalCompareWeekNumber: number = 0;
   compareweek: string;
-  constructor(public service: ServicesService, public router: Router) {}
+  constructor(public service: AddServicesService, public router: Router) {}
 
   ngOnInit(): void {
     this.getReportTodaydata();

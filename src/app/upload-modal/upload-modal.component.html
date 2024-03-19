@@ -1,0 +1,9 @@
+<!-- upload-modal.component.html -->
+<h2 mat-dialog-title class="modal-title">Upload Image</h2>
+<mat-dialog-content class="modal-content">
+  <input type="file" (change)="onFileSelected($event)" class="file-input" />
+</mat-dialog-content>
+<mat-dialog-actions class="modal-actions">
+  <button mat-button color="primary" (click)="closeDialog()">Cancel</button>
+  <button mat-button color="primary" [disabled]="!selectedFile" (click)="upload()">Upload</button>
+</mat-dialog-actions>

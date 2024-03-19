@@ -22,6 +22,8 @@ import { ProjectComponent } from './views/admin/project/project.component';
 import { ProjectListComponent } from './views/admin/project/project-list/project-list.component';
 import { TaskComponent } from './views/admin/task/task.component';
 import { TaskListComponent } from './views/admin/task/task-list/task-list.component';
+import { LeaveComponent } from './views/admin/leave/leave.component';
+import { LeaveListComponent } from './views/admin/leave/leave-list/leave-list.component';
 
 // Auth views
 import { LoginComponent } from './views/auth/login/login.component';
@@ -50,6 +52,7 @@ import { MapExampleComponent } from './components/maps/map-example/map-example.c
 import { IndexDropdownComponent } from './components/dropdowns/index-dropdown/index-dropdown.component';
 import { TableDropdownComponent } from './components/dropdowns/table-dropdown/table-dropdown.component';
 import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pages-dropdown.component';
+import { LeaveDropdownComponent } from './components/dropdowns/leave-dropdown/leave-dropdown.component';
 import { NotificationDropdownComponent } from './components/dropdowns/notification-dropdown/notification-dropdown.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
@@ -58,6 +61,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
 import { DecimalFormatPipe } from './decimal-format.pipe'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -72,6 +78,9 @@ import { DecimalFormatPipe } from './decimal-format.pipe';
     EmployeeComponent,
     ProjectComponent,
     ProjectListComponent,
+    LeaveComponent,
+    LeaveListComponent,
+    LeaveDropdownComponent,
     TaskComponent,
     TaskListComponent,
     EmployeeDetailsComponent,
@@ -101,10 +110,11 @@ import { DecimalFormatPipe } from './decimal-format.pipe';
     NotificationDropdownComponent,
     SidebarComponent,
     UserDropdownComponent,
-    DecimalFormatPipe 
+    DecimalFormatPipe
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
+  imports: [MatDialogModule, BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
   providers: [
+    DatePipe ,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent],
