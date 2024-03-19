@@ -117,6 +117,6 @@ import { DatePipe } from '@angular/common';
     DatePipe ,
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

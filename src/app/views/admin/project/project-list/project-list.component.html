@@ -89,7 +89,27 @@
           </td>
           
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-            <app-table-dropdown [updateId]="emp.id"></app-table-dropdown>
+            <!-- <app-table-dropdown [updateId]="emp.id"></app-table-dropdown> -->
+
+            <a class="text-blueGray-500 block py-1 px-3" href="#pablo" (click)="toggleDropdown($event)" #btnDropdownRef>
+              <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <div class="min-w-48 z-50" #popoverDropdownRef>
+              <div class="bg-white text-base float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
+                [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'">
+                
+                <a class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+                  (click)="updateEmp(emp.project_id)">
+                  Edit
+                </a>
+                <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
+                <a 
+                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" (click)="deleteEmp(emp.project_id)">
+                  Delete
+                </a>
+              </div>
+            </div>
+
           </td>
         </tr>
         

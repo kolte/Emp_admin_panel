@@ -143,7 +143,47 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.post(`${this.endpoint}project`, options,data);
+    return axios.post(`${this.endpoint}project`, data,options);
+  }
+
+  editProjectData(id,data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.put(`${this.endpoint}project/${id}`,data,options);
+  }
+
+  deleteProjectData(id) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.delete(`${this.endpoint}project/${id}`,options);
+  }
+
+  getTaskList(){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}task`,options);
+  }
+
+  addTaskData(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}task`, data,options);
   }
 
 }
