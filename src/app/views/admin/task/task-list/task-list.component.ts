@@ -14,6 +14,7 @@ import {
 } from "@angular/material/dialog";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import moment from "moment";
 
 @Component({
   selector: "app-task-list",
@@ -35,25 +36,28 @@ export class TaskListComponent implements OnInit {
   constructor(
     public service: ServicesService,
     public router: Router,
-    public dialog: MatDialog,
-    private toastr: ToastrService
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.empDetail();
     this.getProjectdata();
     this.getTaskdata();
+
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: { name: " this.name", animal: "this.animal" },
+    const dialogRef = this.dialog.open(DialogTaskeDialog, {
+      data:null,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed", result);
-      // this.animal = result;
+      this.getTaskdata();
     });
+  }
+
+  doSomething(data){
+    this.getTaskdata()
   }
 
   getTaskdata() {
@@ -87,7 +91,9 @@ export class TaskListComponent implements OnInit {
   }
 
   ProjectName(id) {
-    console.log(this.projectList.find((_: any) => _.project_id == id)?.project_name);
+    console.log(
+      this.projectList.find((_: any) => _.project_id == id)?.project_name
+    );
     return this.projectList.find((_: any) => _.project_id == id)?.project_name;
   }
 
@@ -121,20 +127,21 @@ export class TaskListComponent implements OnInit {
     CommonModule,
   ],
 })
-export class DialogOverviewExampleDialog {
+export class DialogTaskeDialog {
   EmployeeForm: FormGroup;
   submitted = false;
   empData: any = [];
   Projectlist: any = [];
 
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<DialogTaskeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder,
     public service: ServicesService,
     public router: Router,
     private toastr: ToastrService
   ) {}
+
 
   ngOnInit(): void {
     this.empDetail();
@@ -149,6 +156,37 @@ export class DialogOverviewExampleDialog {
       status: ["", [Validators.required]],
       due_date: ["", [Validators.required]],
     });
+    console.log(this.data)
+    if (this.data) {
+      this.fillTaskData(this.data);
+    }
+  }
+
+  fillTaskData(id) {
+    this.service
+      .getTaskList()
+      .then((response: any) => {
+        if (response.data.success) {
+          const Tasklist = response.data.tasks.find(
+            (_: any) => _.task_id == id
+          );
+          this.EmployeeForm.patchValue({
+            project_id: Tasklist.project_id,
+            task_name: Tasklist.task_name,
+            task_description: Tasklist.task_description,
+            assignee_id: Tasklist.assignee_id,
+            reporter_id: Tasklist.reporter_id,
+            priority: Tasklist.priority,
+            status: Tasklist.status,
+            due_date: moment(new Date(Tasklist.due_date)).format("YYYY-MM-DD"),
+          });
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          // this.router.navigate(["/auth/login"]);
+        }
+      });
   }
 
   get myForm() {
@@ -157,6 +195,7 @@ export class DialogOverviewExampleDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
+    
   }
 
   empDetail() {
@@ -200,20 +239,43 @@ export class DialogOverviewExampleDialog {
     this.EmployeeForm.value.reporter_id = Number(
       this.EmployeeForm.value.reporter_id
     );
+
     if (this.EmployeeForm.valid) {
-      this.service
-        .addTaskData(this.EmployeeForm.value)
-        .then((response) => {
-          if (response.status == 201) {
+      if (this.data) {
+        this.service
+          .editTaskData(this.EmployeeForm.value,this.data)
+          .then((response) => {
+            if (response.status == 200) {
+              this.onNoClick();
+              this.toastr.success(response.data.message);
+              
+            }
+          })
+          .catch((error) => {
             this.onNoClick();
-            this.toastr.success(response.data.message);
-          }
-        })
-        .catch((error) => {
-          if (error.response.status == 401) {
-            // this.router.navigate(["/auth/login"]);
-          }
-        });
+            if (error.response.status == 401) {
+              this.router.navigate(["/auth/login"]);
+            }
+            else{
+              this.toastr.info(error.response.data.message);
+            }
+          });
+      } else {
+        this.service
+          .addTaskData(this.EmployeeForm.value)
+          .then((response) => {
+            if (response.status == 201) {
+              this.onNoClick();
+              this.toastr.success(response.data.message);
+            }
+          })
+          .catch((error) => {
+            this.onNoClick();
+            if (error.response.status == 401) {
+              this.router.navigate(["/auth/login"]);
+            }
+          });
+      }
     }
   }
 }

@@ -49,9 +49,18 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Task Description
               </label>
-              <input type="text"
+              <!-- <input type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                formControlName="task_description" />
+                formControlName="task_description" /> -->
+
+                <textarea
+                  rows="2"
+                  cols="80"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Type a message..."
+                  formControlName="task_description"
+                ></textarea>
+
               <span class="text-red-500 text-sm mb-5"
                 *ngIf="submitted && myForm.task_description.errors?.required">Task Description is required</span>
             </div>
@@ -94,13 +103,13 @@
                 Priority
               </label>
               <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
-                name="status" value="0" formControlName="priority" />
+                name="status" value="high" formControlName="priority" />
               <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Heigh</label>
               <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
-                name="status" value="1" formControlName="priority" />
+                name="status" value="medium" formControlName="priority" />
               <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Medium</label>
               <input type="radio" class="ml-2 text-blueGray-600 bg-white rounded text-smfocus:outline-none focus:ring"
-                name="status" value="1" formControlName="priority" />
+                name="status" value="low" formControlName="priority" />
               <label class="ml-2 uppercase text-blueGray-600 text-xs font-bold mb-2">Low</label>
             </div>
             <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.priority.errors?.required">Priority is
@@ -116,7 +125,9 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 id="country" formControlName="status">
                 <option value="open">Open</option>
-                <option value="complete">Complete</option>
+                <option value="in progress">In progress</option>
+                <option value="resolved">Resolved</option>
+                <option value="closed">Closed</option>
                 <!-- <option *ngFor="let dept of departmentOption" [value]="dept.id">{{dept.department_name}}</option> -->
               </select>
               <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.status.errors?.required">Status is

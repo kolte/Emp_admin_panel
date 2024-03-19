@@ -67,27 +67,16 @@ export class ProjectListComponent implements OnInit,AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed", result);
+      this.getProjectdata();
       // this.animal = result;
     });
   }
 
-  toggleDropdown(event) {
-    event.preventDefault();
-    if (this.dropdownPopoverShow) {
-      this.dropdownPopoverShow = false;
-    } else {
-      this.dropdownPopoverShow = true;
-    }
+ 
+  doSomething(data){
+    this.getProjectdata();
   }
-
-  updateEmp(id){
-    console.log(id)
-    this.dialog.open(DialogOverviewExampleDialog, {
-      data: id,
-    });
-
-  }
+ 
 
   deleteEmp(id){
     Swal.fire({

@@ -99,7 +99,7 @@
             </div>
           </td> -->
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-            <!-- <app-table-dropdown [updateId]="emp.id"></app-table-dropdown> -->
+            <app-page-dropdown [updateId]="emp.task_id" [Type]="'task'" (bookTitleCreated)="doSomething($event)"></app-page-dropdown>
           </td>
         </tr>
         
