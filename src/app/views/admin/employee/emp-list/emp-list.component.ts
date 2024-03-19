@@ -58,4 +58,24 @@ export class EmpListComponent implements OnInit {
         }
       });
   }
+
+  getImageUrl(profilePicture: string): string {
+    const base64Prefix = 'data:image/';
+    let imageType = '';
+
+    // Check the image type
+    if (profilePicture.startsWith('/9j/') || profilePicture.startsWith('/9j/')) {
+      imageType = 'jpeg';
+    } else if (profilePicture.startsWith('iVBORw0KGgoAAAANSUhEUgAA')) {
+      imageType = 'png';
+    } else if (profilePicture.startsWith('R0lGODlh')) {
+      imageType = 'gif';
+    } else {
+      // Default to JPEG if the format is unknown
+      imageType = 'jpeg';
+    }
+
+    // Return the complete image URL
+    return `${base64Prefix}${imageType};base64,${profilePicture}`;
+  }
 }

@@ -4,7 +4,10 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { FullCalendarComponent } from "@fullcalendar/angular";
 import { ServicesService } from "src/app/services.service";
+import { AddServicesService } from "src/app/addservices.service";
 import moment from "moment";
+import { MatDialog } from '@angular/material/dialog';
+import { UploadModalComponent } from 'src/app/upload-modal/upload-modal.component';
 
 @Component({
   selector: "app-employeeDetails",
@@ -16,30 +19,34 @@ export class EmployeeDetailsComponent implements OnInit {
   verticalCalendarOptions: any;
   employeeAttendanceData: any = [];
   employeePunchInData: any = [];
-  totalTime=0;
-  clickEvent=0;
-  employeeData:any=[];
+  totalTime = 0;
+  clickEvent = 0;
+  employeeData: any = [];
   id: string;
-  jobOption:any=[];
-  departmentOption:any=[];
+  jobOption: any = [];
+  departmentOption: any = [];
 
   @ViewChild("fullcalendar") fullcalendar: FullCalendarComponent;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ServicesService
-  ) {}
+    private service: ServicesService,
+    private addservice: AddServicesService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
     // Define punch in and punch out times
+    this.getEmployeeDataImage(this.id);
     this.employeeAttendanceDetail(this.id);
     this.employeePunchInDetail(this.id);
     this.getTimerDetail(this.id, new Date().toISOString().split("T")[0]);
     this.getEmployeeData(this.id);
     this.departmentDetail();
     this.jobDetail();
+    
 
     const punchInTime = "09:15";
     const punchOutTime = "12:30";
@@ -144,6 +151,13 @@ export class EmployeeDetailsComponent implements OnInit {
     console.log('123456')
   }
 
+  handleRedirectClick(employeeId: number): void {
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in 'YYYY-MM-DD' format
+    const url = `/profile?date=${currentDate}&id=${employeeId}`;
+    this.router.navigateByUrl(url);
+    console.log('123');
+  }
+
   employeeAttendanceDetail(id) {
     this.service
       .getEmpAttendanceReport(id)
@@ -230,9 +244,9 @@ export class EmployeeDetailsComponent implements OnInit {
       .getTimerDetail(data)
       .then((response) => {
         if (response.status == 200) {
-          
-          this.totalTime=response.data.data[0].total_time ? response.data.data[0].total_time : 0;
-          this.clickEvent=response.data.data[0].mouclick ? response.data.data[0].mouclick : 0;
+
+          this.totalTime = response.data.data[0].total_time ? response.data.data[0].total_time : 0;
+          this.clickEvent = response.data.data[0].mouclick ? response.data.data[0].mouclick : 0;
         }
       })
       .catch((error) => {
@@ -286,10 +300,62 @@ export class EmployeeDetailsComponent implements OnInit {
         }
       });
   }
-  getJobdata(id){
-    return this.jobOption.find((_:any)=>_.id == id)?.role_name;
+  getJobdata(id) {
+    return this.jobOption.find((_: any) => _.id == id)?.role_name;
   }
-  getDetaprtmentdata(id){
-    return this.departmentOption.find((_:any)=>_.id == id)?.department_name;
+  getDetaprtmentdata(id) {
+    return this.departmentOption.find((_: any) => _.id == id)?.department_name;
   }
+
+  getEmployeeDataImage(id: string): void {
+    this.addservice
+      .getEmployeePicData(id)
+      .then((response: any) => {
+        if (response.data.success) {
+          this.employeeData = response.data;
+          // Optionally, you can check if the profile picture exists and decode it
+          if (this.employeeData.profilePicture) {
+            this.employeeData.profilePicture = atob(this.employeeData.profilePicture);
+          }
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  getImageUrl(profilePicture: string): string {
+    const base64Prefix = 'data:image/';
+    let imageType = '';
+
+    // Check the image type
+    if (profilePicture.startsWith('/9j/') || profilePicture.startsWith('/9j/')) {
+      imageType = 'jpeg';
+    } else if (profilePicture.startsWith('iVBORw0KGgoAAAANSUhEUgAA')) {
+      imageType = 'png';
+    } else if (profilePicture.startsWith('R0lGODlh')) {
+      imageType = 'gif';
+    } else {
+      // Default to JPEG if the format is unknown
+      imageType = 'jpeg';
+    }
+
+    // Return the complete image URL
+    return `${base64Prefix}${imageType};base64,${profilePicture}`;
+  }
+
+  openUploadModal(employeeId: number) {
+    const dialogRef = this.dialog.open(UploadModalComponent, {
+      width: '400px',
+      data: { employeeId: employeeId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
 }
