@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit, Input, Inject, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ServicesService } from "src/app/services.service";
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import Swal from 'sweetalert2';
 import { Router } from "@angular/router";
 import moment from "moment";
 

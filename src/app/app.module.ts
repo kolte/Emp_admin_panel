@@ -33,6 +33,7 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { IndexComponent } from './views/index/index.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { TaskreportComponent } from './views/taskreport/taskreport.component';
 
 // Components for views and layouts
 import { AdminNavbarComponent } from './components/navbars/admin-navbar/admin-navbar.component';
@@ -54,6 +55,7 @@ import { TableDropdownComponent } from './components/dropdowns/table-dropdown/ta
 import { PageDropdownComponent } from './components/dropdowns/page-dropdown/page-dropdown.component';
 import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pages-dropdown.component';
 import { LeaveDropdownComponent } from './components/dropdowns/leave-dropdown/leave-dropdown.component';
+import { TaskDropdownComponent } from './components/dropdowns/task-dropdown/task-dropdown.component';
 import { NotificationDropdownComponent } from './components/dropdowns/notification-dropdown/notification-dropdown.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
@@ -84,6 +86,8 @@ import { DatePipe } from '@angular/common';
     LeaveDropdownComponent,
     TaskComponent,
     TaskListComponent,
+    TaskDropdownComponent,
+    TaskreportComponent,
     EmployeeDetailsComponent,
     EmpListComponent,
     LoginComponent,

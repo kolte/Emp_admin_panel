@@ -21,6 +21,7 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { TaskreportComponent } from "./views/taskreport/taskreport.component";
 import { ProjectComponent } from "./views/admin/project/project.component";
 import { TaskComponent } from "./views/admin/task/task.component";
 import { LeaveComponent } from './views/admin/leave/leave.component';
@@ -60,6 +61,7 @@ const routes: Routes = [
   },
   // no layout views
   { path: "profile", component: ProfileComponent },
+  { path: "taskreport", component: TaskreportComponent },
   { path: "landing", component: LandingComponent },
   {
     path: "", component: AuthComponent, children: [
