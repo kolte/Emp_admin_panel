@@ -1,0 +1,191 @@
+<app-auth-navbar></app-auth-navbar>
+<main class="profile-page">
+  <section class="relative block h-500-px">
+    <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
+        background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');
+      ">
+      <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black">TASK REPORT</span>
+    </div>
+    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+      style="transform: translateZ(0)">
+      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+        <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </section>
+  <div class="relative pb-32">
+    <div class="px-4 md:px-10 mx-auto w-full">
+      <a [routerLink]="['/admin/task/']" class="flex items-center bg-blue-500 text-black font-bold py-2 px-4 rounded"
+        routerLinkActive #adminDashboard="routerLinkActive">
+        <i class="fas fa-arrow-left mr-2 text-lg"></i>
+        <b>Back</b>
+      </a>
+      <div class="flex flex-wrap justify-center">
+        <!-- Card stats -->
+        <div class="relative" style="width:100%">
+          <div class="card-container">
+            <div class="mt-2 py-2 border-t border-blueGray-200 text-center">
+              <div class="flex flex-wrap justify-center">
+                <div class="w-full  px-4">
+                  <div class="mb-4 text-lg leading-relaxed text-blueGray-700 flex justify-between">
+                    <div class="horizontal-calendar w-80 p-4">
+                      <div class="jumbotron">
+                        <h3 class="text-center">Task ID: KT001</h3>
+                        <form class="container pt-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="tracks">Project Name</label>
+                                <select class="form-control" id="tracks"></select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="environments">Task Name</label>
+                                <select class="form-control" id="environments"></select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="tracks">Assign To</label>
+                                <select class="form-control" id="tracks"></select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="environments">Reporting To</label>
+                                <select class="form-control" id="environments"></select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="tracks">Priority</label>
+                                <div class="col d-flex">
+                                  <div class="form-check mr-1">
+                                    <input type="radio" id="priority-high" name="priority" value="0" formcontrolname="priority" class="form-check-input">
+                                    <label class="form-check-label" for="priority-high">High</label>
+                                  </div>
+                                  <div class="form-check mr-1">
+                                    <input type="radio" id="priority-medium" name="priority" value="1" formcontrolname="priority" class="form-check-input">
+                                    <label class="form-check-label" for="priority-medium">Medium</label>
+                                  </div>
+                                  <div class="form-check mr-1">
+                                    <input type="radio" id="priority-low" name="priority" value="2" formcontrolname="priority" class="form-check-input">
+                                    <label class="form-check-label" for="priority-low">Low</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="environments">Status</label>
+                                <select class="form-control" id="environments"></select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="environments">Dur Date</label>
+                                <input type="date" formcontrolname="due_date" class="form-control px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ng-pristine ng-invalid ng-touched" ng-reflect-name="due_date">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="taskDescription">Task Description</label>
+                            <textarea class="form-control" id="taskDescription" rows="5" placeholder="Enter task description..."></textarea>
+                          </div> 
+                          <a class="btn btn-success" href="#" id="generateComments">
+                            <i class="fa fa-plus fa-lg"></i> Save</a>  
+                        </form>
+                        <form  class="container pt-12">                       
+                          <div class="form-group" id="moreScripts">
+                            <label for="dbChanges">Task Files</label>
+                          </div>
+                          <div class="form-group">
+                            <a class="btn btn-success" href="#" id="addScripts">
+                              <i class="fa fa-plus fa-lg"></i> Add Attachments</a>
+                          </div>
+                        </form>
+                        <div class="container pt-2">
+                          <div class="form-group">
+                            <label for="comment">All Attachments:</label>
+                            <div id="comment"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="vertical-calendar w-20 p-4">
+                      <div class="jumbotron">
+                        <h3 class="text-center">Task Comments</h3>
+                        <form class="container  pt-12">                         
+                          <div class="form-group">
+                            <label for="configChanges">Enter the comments for
+                              release notes purpose</label>
+                            <textarea class="form-control" rows="5" id="configChanges"></textarea>
+                          </div>
+                          <a class="btn btn-success" href="#" id="generateComments">
+                            <i class="fa fa-plus fa-lg"></i> Add Comments</a>
+                        </form>
+                        <div class="container pt-12">
+                          <div class="form-group">
+                            <div class="comments-container">
+                              <h1>All Comments:</h1>
+                          
+                              <ul id="comments-list" class="comments-list">
+                                <li>
+                                  <div class="comment-main-level">
+                                    <div class="comment-box">
+                                      <div class="comment-head">
+                                        <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+                                        <span>hace 20 minutos</span>
+                                      </div>
+                                      <div class="comment-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>
+                          
+                                <li>
+                                  <div class="comment-main-level">
+                                    <div class="comment-box">
+                                      <div class="comment-head">
+                                        <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+                                        <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+                                        <span>hace 10 minutos</span>
+                                      </div>
+                                      <div class="comment-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>
