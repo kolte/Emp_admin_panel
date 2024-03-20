@@ -185,5 +185,24 @@ export class ServicesService {
     };
     return axios.post(`${this.endpoint}task`, data,options);
   }
+  
+  editTaskData(data,id) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.put(`${this.endpoint}task/${id}`, data,options);
+  }
+  deleteTaskData(id) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.delete(`${this.endpoint}task/${id}`,options);
+  }
 
 }

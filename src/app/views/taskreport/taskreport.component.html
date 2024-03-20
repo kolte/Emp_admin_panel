@@ -67,15 +67,15 @@
                                 <label for="tracks">Priority</label>
                                 <div class="col d-flex">
                                   <div class="form-check mr-1">
-                                    <input type="radio" id="priority-high" name="priority" value="0" formcontrolname="priority" class="form-check-input">
+                                    <input type="radio" id="priority-high" name="priority" value="0" formcontrolname="priority" class="form-check-input" disabled>
                                     <label class="form-check-label" for="priority-high">High</label>
                                   </div>
                                   <div class="form-check mr-1">
-                                    <input type="radio" id="priority-medium" name="priority" value="1" formcontrolname="priority" class="form-check-input">
+                                    <input type="radio" id="priority-medium" name="priority" value="1" formcontrolname="priority" class="form-check-input" disabled>
                                     <label class="form-check-label" for="priority-medium">Medium</label>
                                   </div>
                                   <div class="form-check mr-1">
-                                    <input type="radio" id="priority-low" name="priority" value="2" formcontrolname="priority" class="form-check-input">
+                                    <input type="radio" id="priority-low" name="priority" value="2" formcontrolname="priority" class="form-check-input" disabled>
                                     <label class="form-check-label" for="priority-low">Low</label>
                                   </div>
                                 </div>
@@ -90,16 +90,14 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="environments">Dur Date</label>
-                                <input type="date" formcontrolname="due_date" class="form-control px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ng-pristine ng-invalid ng-touched" ng-reflect-name="due_date">
+                                <input type="date" formcontrolname="due_date" class="form-control px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ng-pristine ng-invalid ng-touched" ng-reflect-name="due_date" disabled>
                               </div>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="taskDescription">Task Description</label>
-                            <textarea class="form-control" id="taskDescription" rows="5" placeholder="Enter task description..."></textarea>
+                            <textarea class="form-control" id="taskDescription" rows="5" placeholder="Enter task description..." disabled></textarea>
                           </div> 
-                          <a class="btn btn-success" href="#" id="generateComments">
-                            <i class="fa fa-plus fa-lg"></i> Save</a>  
                         </form>
                         <form  class="container pt-12">                       
                           <div class="form-group" id="moreScripts">

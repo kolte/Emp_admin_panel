@@ -52,6 +52,7 @@ import { IndexNavbarComponent } from './components/navbars/index-navbar/index-na
 import { MapExampleComponent } from './components/maps/map-example/map-example.component';
 import { IndexDropdownComponent } from './components/dropdowns/index-dropdown/index-dropdown.component';
 import { TableDropdownComponent } from './components/dropdowns/table-dropdown/table-dropdown.component';
+import { PageDropdownComponent } from './components/dropdowns/page-dropdown/page-dropdown.component';
 import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pages-dropdown.component';
 import { LeaveDropdownComponent } from './components/dropdowns/leave-dropdown/leave-dropdown.component';
 import { TaskDropdownComponent } from './components/dropdowns/task-dropdown/task-dropdown.component';
@@ -110,6 +111,7 @@ import { DatePipe } from '@angular/common';
     MapExampleComponent,
     IndexDropdownComponent,
     TableDropdownComponent,
+    PageDropdownComponent,
     PagesDropdownComponent,
     NotificationDropdownComponent,
     SidebarComponent,
