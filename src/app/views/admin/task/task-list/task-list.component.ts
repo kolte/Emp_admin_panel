@@ -156,7 +156,6 @@ export class DialogTaskeDialog {
       status: ["", [Validators.required]],
       due_date: ["", [Validators.required]],
     });
-    console.log(this.data)
     if (this.data) {
       this.fillTaskData(this.data);
     }
@@ -195,7 +194,6 @@ export class DialogTaskeDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
-    
   }
 
   empDetail() {

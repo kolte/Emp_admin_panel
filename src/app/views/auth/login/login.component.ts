@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         if(response.data.success){
           this.toastr.success('Login successfully done');
           localStorage.setItem('token',response.data.token);
+          localStorage.setItem('empId',response.data.empID);
           this.router.navigate(['/admin/dashboard']);
         }
       })
