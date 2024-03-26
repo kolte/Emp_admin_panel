@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // Layouts
 import { AdminComponent } from './layouts/admin/admin.component';
@@ -118,7 +119,7 @@ import { DatePipe } from '@angular/common';
     UserDropdownComponent,
     DecimalFormatPipe
   ],
-  imports: [MatDialogModule, BrowserModule, AppRoutingModule, RouterModule,FormsModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,  ToastrModule.forRoot() ],
+  imports: [BrowserModule, FormsModule, MatDialogModule, AppRoutingModule, RouterModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,MatTabsModule,  ToastrModule.forRoot() ],
   providers: [
     DatePipe ,
     provideAnimationsAsync()
