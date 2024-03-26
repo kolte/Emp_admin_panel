@@ -124,9 +124,7 @@ export class PageDropdownComponent implements AfterViewInit {
 
   handleRedirectClick(employeeId: number): void {
     const currentDate = new Date().toISOString().split('T')[0]; // Get current date in 'YYYY-MM-DD' format
-    const url = `/taskreport?id=${employeeId}`;
-    this.router.navigateByUrl(url);
-    console.log('123');
+    this.router.navigate(['/taskreport'],{ queryParams: { id: employeeId} })
   }
   
   

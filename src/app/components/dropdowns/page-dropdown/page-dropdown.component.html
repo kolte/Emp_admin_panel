@@ -7,7 +7,7 @@
     <!-- <a [routerLink]="['/userDashboard/employeeDetails', updateId]"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
       User Report</a> -->
-    <a (click)="handleRedirectClick(updateId)"
+    <a (click)="handleRedirectClick(updateId)" *ngIf="Type=='task'"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
       Task report
     </a>
