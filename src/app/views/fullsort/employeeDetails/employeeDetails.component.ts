@@ -166,16 +166,34 @@ export class EmployeeDetailsComponent implements OnInit {
           this.employeeAttendanceData = response.data.data;
           const arr = [];
           for (var i = 0; i < this.employeeAttendanceData.length; i++) {
+            let status = '';
+            let color = '';
+            if (this.employeeAttendanceData[i].present == 0 && this.employeeAttendanceData[i].leave_approved == 0) {
+              status = 'Leave Applied';
+              color = 'orange';
+            } else if (this.employeeAttendanceData[i].present == 1 && this.employeeAttendanceData[i].leave_approved == 0) {
+              status = 'Present';
+              color = 'green';
+            } else if (this.employeeAttendanceData[i].present == 0 && this.employeeAttendanceData[i].leave_approved == 1) {
+              status = 'Leave Approved';
+              color = 'blue';
+            } else if (this.employeeAttendanceData[i].present == 0 && this.employeeAttendanceData[i].leave_approved == 2) {
+              status = 'Leave Rejected';
+              color = 'red';
+            } else if (this.employeeAttendanceData[i].present == 1 && this.employeeAttendanceData[i].leave_approved == 2) {
+              status = 'Present (LR)';
+              color = 'green';
+            } else {
+              // Handle any other cases
+              status = 'Absent';
+              color = 'red';
+            }
             arr.push({
-              title:
-                this.employeeAttendanceData[i].present == 0
-                  ? "Absent"
-                  : "Present",
+              title:status,
               date: moment(
                 new Date(this.employeeAttendanceData[i].attendance_date)
               ).format("YYYY-MM-DD"),
-              backgroundColor:
-                this.employeeAttendanceData[i].present == 0 ? "red" : "green",
+              backgroundColor:color,
             });
           }
           this.horizontalCalendarOptions.events = arr;
