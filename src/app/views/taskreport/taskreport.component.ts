@@ -21,6 +21,7 @@ export class TaskreportComponent implements OnInit {
   projectList: any = [];
   commentData: any = [];
   user_id: number = 0;
+  edit_id:null;
 
   constructor(
     private service: ServicesService,
@@ -163,6 +164,32 @@ export class TaskreportComponent implements OnInit {
     return JSON.parse(data);
   }
 
+  edit(id,comment){
+    this.edit_id = id;
+    this.commentForm.patchValue({
+      comment_text: comment});
+    
+  }
+
+  delete(id){
+    const confirmation = confirm('Are you sure you want to delete this Task?');
+    if (confirmation) {
+      this.service
+      .DeleteComment(id)
+      .then((response) => {
+        if (response.status == 200) {
+          this.getComment(this.id);
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+    }
+  }
+
+
   addComment() {
     if (this.commentForm.valid) {
       const data = {
@@ -170,13 +197,13 @@ export class TaskreportComponent implements OnInit {
         user_id: localStorage.getItem("empId"),
         comment_text: this.commentForm.value.comment_text,
       };
-      this.service
-        .addCommentList(data)
+      if(this.edit_id){
+        this.service
+        .EditComment(this.edit_id,data)
         .then((response) => {
-          if (response.status == 201) {
+          if (response.status == 200) {
+            this.getComment(this.id);
             this.toastr.success(response.data.message);
-            this.getComment(this.id)
-            this.commentForm.reset();
           }
         })
         .catch((error) => {
@@ -184,6 +211,24 @@ export class TaskreportComponent implements OnInit {
             this.router.navigate(["/auth/login"]);
           }
         });
+        this.edit_id=null;
+        this.commentForm.reset();
+      }else{
+        this.service
+          .addCommentList(data)
+          .then((response) => {
+            if (response.status == 201) {
+              this.toastr.success(response.data.message);
+              this.getComment(this.id)
+              this.commentForm.reset();
+            }
+          })
+          .catch((error) => {
+            if (error.response.status == 401) {
+              this.router.navigate(["/auth/login"]);
+            }
+          });
+      }
     }
   }
 }

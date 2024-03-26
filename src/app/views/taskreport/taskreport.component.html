@@ -37,7 +37,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="tracks">Project Name</label>
-                                <select class="form-control" id="country" formControlName="project_id" disabled>
+                                <select class="form-control disabled" id="country" formControlName="project_id" disabled>
                                   <option *ngFor="let pro of projectList" [value]="pro.project_id">{{pro.project_name}}
                                   </option>
                                 </select>
@@ -46,7 +46,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="environments">Task Name</label>
-                                <input type="text" class="form-control" formControlName="task_name" disabled />
+                                <input type="text" class="form-control disabled" formControlName="task_name" disabled />
                               </div>
                             </div>
                           </div>
@@ -54,7 +54,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="tracks">Assign To</label>
-                                <select class="form-control" id="country" formControlName="assignee_id" disabled>
+                                <select class="form-control disabled" id="country" formControlName="assignee_id" disabled>
                                   <option *ngFor="let emp of empData" [value]="emp.id">
                                     {{emp.first_name}}{{emp.middle_name}}</option>
                                 </select>
@@ -63,7 +63,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="environments">Reporting To</label>
-                                <select class="form-control" id="country" formControlName="reporter_id" disabled>
+                                <select class="form-control disabled" id="country" formControlName="reporter_id" disabled>
                                   <option *ngFor="let emp of empData" [value]="emp.id">
                                     {{emp.first_name}}{{emp.middle_name}}</option>
                                 </select>
@@ -76,18 +76,18 @@
                                 <label for="tracks">Priority</label>
                                 <div class="col d-flex">
                                   <div class="form-check mr-1">
-                                    <input type="radio" id="priority-high" name="priority" value="0"
-                                      formcontrolname="priority" class="form-check-input" disabled>
+                                    <input type="radio" id="priority-high" name="priority" value="high"
+                                      formControlName="priority" class="form-check-input" disabled>
                                     <label class="form-check-label" for="priority-high">High</label>
                                   </div>
                                   <div class="form-check mr-1">
-                                    <input type="radio" id="priority-medium" name="priority" value="1"
-                                      formcontrolname="priority" class="form-check-input" disabled>
+                                    <input type="radio" id="priority-medium" name="priority" value="medium"
+                                      formControlName="priority" class="form-check-input" disabled>
                                     <label class="form-check-label" for="priority-medium">Medium</label>
                                   </div>
                                   <div class="form-check mr-1">
-                                    <input type="radio" id="priority-low" name="priority" value="2"
-                                      formcontrolname="priority" class="form-check-input" disabled>
+                                    <input type="radio" id="priority-low" name="priority" value="low"
+                                      formControlName="priority" class="form-check-input" disabled>
                                     <label class="form-check-label" for="priority-low">Low</label>
                                   </div>
                                 </div>
@@ -109,14 +109,14 @@
                               <div class="form-group">
                                 <label for="environments">Due Date</label>
                                 <input type="date" formControlName="due_date" disabled
-                                  class="form-control px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ng-pristine ng-invalid ng-touched"
+                                  class="form-control disabled px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ng-pristine ng-invalid ng-touched"
                                   ng-reflect-name="due_date" disabled>
                               </div>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="taskDescription">Task Description</label>
-                            <textarea class="form-control" formControlName="task_description" disabled id="taskDescription" rows="5"
+                            <textarea class="form-control disabled" formControlName="task_description" disabled id="taskDescription" rows="5"
                               placeholder="Enter task description..." disabled></textarea>
                           </div>
                         </form>
@@ -147,7 +147,7 @@
                             <textarea class="form-control" rows="5" id="configChanges" formControlName="comment_text"></textarea>
                           </div>
                           <a class="btn btn-success" id="generateComments" (click)="addComment()">
-                            <i class="fa fa-plus fa-lg"></i> Add Comments</a>
+                            <i class="fa fa-plus fa-lg"></i> {{edit_id ? 'Update Comments' : 'Add Comments'}}</a>
                         </form>
                         <div class="container pt-12">
                           <div class="form-group">
@@ -159,11 +159,19 @@
                                   <div class="comment-main-level">
                                     <div class="comment-box">
                                       <div class="comment-head">
-                                        <div class="comment-avatar"><img
-                                          [src]="'data:image/jpeg;base64,'+getEmpDetail(comment.user_id).profile_picture"
+                                        <!-- <button class="edit" (click)="edit(comment.comment_id,comment.comment_text )">Edit</button>
+                                          <button class="delete" (click)="delete(comment.comment_id)">Delete</button> -->
+                                          
+                                          
+                                          <div class="comment-avatar">
+                                            <img [src]="'data:image/jpeg;base64,'+ getEmpDetail(comment.user_id).profile_picture"
                                             alt=""></div>
-                                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{getEmpDetail(comment.user_id).first_name}}  {{getEmpDetail(comment.user_id).last_name}} </a></h6>
-                                        <span>hace 20 minutos</span>
+                                            <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{getEmpDetail(comment.user_id).first_name}}  {{getEmpDetail(comment.user_id).last_name}} </a></h6>
+                                            <span>hace 20 minutos</span>
+                                            <div class="action_div">
+                                              <i class="fa fa-trash fa-sm " (click)="delete(comment.comment_id)"></i>
+                                              <i class="fa fa-pencil  fa-sm" (click)="edit(comment.comment_id,comment.comment_text )" ></i>
+                                            </div>  
                                       </div>
                                       <div class="comment-content">
                                         {{comment.comment_text}}
