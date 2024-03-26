@@ -1,0 +1,81 @@
+/* Styles for the tabs */
+.mat-tab-group {
+    width: 100%;
+}
+
+.mat-tab-header {
+    background-color: #f0f0f0;
+    /* Set background color */
+    border-bottom: 1px solid #ccc;
+    /* Add border at bottom */
+    border-radius: 5px;
+    /* Add border radius for rounded corners */
+    overflow: hidden;
+    /* Hide overflow to prevent tab buttons from extending beyond container */
+}
+
+.mat-tab-label {
+    padding: 10px 20px;
+    /* Adjust padding for button-like appearance */
+    margin-right: 5px;
+    /* Add margin between tab buttons */
+    background-color: #ccc;
+    /* Set background color of inactive tab buttons */
+    border: 1px solid transparent;
+    /* Add border for button-like appearance */
+    border-radius: 5px;
+    /* Add border radius for rounded corners */
+    cursor: pointer;
+    /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, border-color 0.3s;
+    /* Add transition for smooth hover effect */
+}
+
+.mat-tab-label:hover {
+    background-color: #ddd;
+    /* Change background color on hover */
+}
+
+.mat-tab-label-active {
+    background-color: #000 !important;
+    /* Set background color of active tab button */
+    color: #fff;
+    /* Set text color of active tab button */
+}
+
+.mat-tab-body-wrapper {
+    border: 1px solid #ccc;
+    /* Add border around tab content */
+    border-top: none;
+    /* Remove top border to align with tab borders */
+    border-radius: 0 0 5px 5px;
+    /* Add border radius for rounded corners at bottom */
+    padding: 10px;
+    /* Add padding */
+}
+
+.mat-mdc-tab .mdc-tab--active {
+    background: #000;
+    color: #fff !important;
+}
+
+.mat-tab label {
+    color: #fff;
+}
+
+#mat-tab-label-0-0.mdc-tab--active {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab {
+    flex-grow: 1;
+    background: #000;
+}
+
+.custom-tab-group {
+    background-color: #f0f0f0;
+    /* Set background color of tab header */
+    border-radius: 5px;
+    /* Add border radius for rounded corners */
+}

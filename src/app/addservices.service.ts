@@ -133,5 +133,44 @@ export class AddServicesService {
     };
     return axios.get(`${this.endpoint}leave/leave-dates`,options);
   }
+
+  getApprovedLeaveList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}leave/approved-leave-dates`,options);
+  }
+
+  getDeniedLeaveList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}leave/denied-leave-dates`,options);
+  }
+
+  updateLeaveDetails(leaveData: { id: number, leave_remark: string, leave_approved_status: number }): Promise<any> {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return Promise.reject("Token not found. User is not authenticated.");
+    }
+  
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    };
+  
+    return axios.put(`${this.endpoint}leave/update-leave/`, leaveData, options)
+      .then(response => response.data)
+      .catch(error => Promise.reject(error));
+  }
+  
   
 }

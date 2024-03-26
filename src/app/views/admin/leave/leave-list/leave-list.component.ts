@@ -19,6 +19,7 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 @Component({
   selector: "app-leave-list",
   templateUrl: "./leave-list.component.html",
+  styleUrls: ['./leave-list.component.css']
 })
 export class LeaveListComponent implements OnInit {
   @Input()
@@ -30,6 +31,8 @@ export class LeaveListComponent implements OnInit {
   }
   private _color = "light";
   Leavelist: any = [];
+  ApprovedLeavelist: any = [];
+  DeniedLeavelist: any = [];
   managerOption: any = [];
 
   constructor(
@@ -38,10 +41,12 @@ export class LeaveListComponent implements OnInit {
     public router: Router,
     public dialog: MatDialog,
     private datePipe: DatePipe
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getLeavedata();
+    this.getApprovedLeavedata();
+    this.getDeniedLeavedata();
   }
 
   getLeavedata() {
@@ -60,11 +65,41 @@ export class LeaveListComponent implements OnInit {
       });
   }
 
+  getApprovedLeavedata() {
+    this.addservice
+      .getApprovedLeaveList()
+      .then((response: any) => {
+        if (response.data.success) {
+          this.ApprovedLeavelist = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  getDeniedLeavedata() {
+    this.addservice
+      .getDeniedLeaveList()
+      .then((response: any) => {
+        if (response.data.success) {
+          this.DeniedLeavelist = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
 
   formatDate(date: string): string {
     // Convert the date string to a JavaScript Date object
     const parsedDate = new Date(date);
-    
+
     // Apply the desired date format using DatePipe
     const formattedDate = this.datePipe.transform(parsedDate, 'dd/MM/yyyy');
 

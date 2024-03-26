@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { createPopper } from "@popperjs/core";
 import { AddServicesService } from "src/app/addservices.service";
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { LeaveModalComponent } from 'src/app/leave-modal/leave-modal.component';
 
 @Component({
   selector: "app-leave-dropdown",
@@ -14,7 +16,7 @@ export class LeaveDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
-  constructor(public service: AddServicesService,public router:Router,private toastr: ToastrService){}
+  constructor(public service: AddServicesService,public router:Router,private toastr: ToastrService,public dialog: MatDialog){}
   
   ngAfterViewInit() {
     createPopper(
@@ -78,5 +80,14 @@ export class LeaveDropdownComponent implements AfterViewInit {
     }, 2000);
   }
   
+  openUploadModal(updateId: number) {
+    const dialogRef = this.dialog.open(LeaveModalComponent, {
+      width: '400px',
+      data: { updateId: updateId }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
   
 }
