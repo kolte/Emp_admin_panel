@@ -1,9 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Pipe } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ServicesService } from "src/app/services.service";
 import moment from "moment";
 import { ToastrService } from "ngx-toastr";
+
+
+// @Pipe({
+//   name: 'timeAgo',
+// }) 
 
 @Component({
   selector: "app-taskreport",

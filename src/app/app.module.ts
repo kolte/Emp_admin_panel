@@ -67,6 +67,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DecimalFormatPipe } from './decimal-format.pipe'; 
 import { MatDialogModule } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
+import { TimeAgoPipe } from './customePipe/time-ago.pipe';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { DatePipe } from '@angular/common';
     NotificationDropdownComponent,
     SidebarComponent,
     UserDropdownComponent,
-    DecimalFormatPipe
+    DecimalFormatPipe,
+    TimeAgoPipe
   ],
   imports: [BrowserModule, FormsModule, MatDialogModule, AppRoutingModule, RouterModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,MatTabsModule,  ToastrModule.forRoot() ],
   providers: [

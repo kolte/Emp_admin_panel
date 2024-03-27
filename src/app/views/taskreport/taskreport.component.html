@@ -167,7 +167,7 @@
                                             <img [src]="'data:image/jpeg;base64,'+ getEmpDetail(comment.user_id).profile_picture"
                                             alt=""></div>
                                             <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{getEmpDetail(comment.user_id).first_name}}  {{getEmpDetail(comment.user_id).last_name}} </a></h6>
-                                            <span>hace 20 minutos</span>
+                                            <span>{{comment.created_at | timeAgo}}</span>
                                             <div class="action_div">
                                               <i class="fa fa-trash fa-sm " (click)="delete(comment.comment_id)"></i>
                                               <i class="fa fa-pencil  fa-sm" (click)="edit(comment.comment_id,comment.comment_text )" ></i>
