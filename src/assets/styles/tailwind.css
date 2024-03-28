@@ -4285,3 +4285,7 @@ select {
   border-radius: 5px;
   /* Add border radius for rounded corners */
 }
+
+.text-sm.text-blueGray-300 {
+  width: 14px;
+}
