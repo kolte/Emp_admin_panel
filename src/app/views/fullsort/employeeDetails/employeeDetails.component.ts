@@ -166,8 +166,8 @@ export class EmployeeDetailsComponent implements OnInit {
           this.employeeAttendanceData = response.data.data;
           const arr = [];
           for (var i = 0; i < this.employeeAttendanceData.length; i++) {
-            let status = '';
-            let color = '';
+            let status = 'Absent';
+            let color = 'red';
             if (this.employeeAttendanceData[i].present == 0 && this.employeeAttendanceData[i].leave_approved == 0) {
               status = 'Leave Applied';
               color = 'orange';
