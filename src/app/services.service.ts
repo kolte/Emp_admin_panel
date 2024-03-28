@@ -214,7 +214,7 @@ export class ServicesService {
     };
     return axios.get(`${this.endpoint}comment/${taskId}`,options);
   }
-
+  
   addCommentList(data){
     let token = localStorage.getItem("token");
     const options = {
@@ -225,4 +225,23 @@ export class ServicesService {
     return axios.post(`${this.endpoint}comment`,data,options);
   }
 
+  EditComment(commentId,data){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.put(`${this.endpoint}comment/${commentId}`,data,options);
+  }
+
+  DeleteComment(taskId){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.delete(`${this.endpoint}comment/${taskId}`,options);
+  }
 }

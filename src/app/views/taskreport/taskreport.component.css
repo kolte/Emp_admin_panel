@@ -215,6 +215,16 @@ th {
     padding: 0
 }
 
+.action_div{
+    position: absolute;
+    top: 40px;
+    right:5px;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
 
