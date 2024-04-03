@@ -53,7 +53,7 @@
                     ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                     : 'bg-red-800 text-red-300 border-red-700'
                 ">
-                Approver Remark
+                Leave Reason
               </th>
               <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -62,7 +62,7 @@
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                   : 'bg-red-800 text-red-300 border-red-700'
               ">
-              Leave Reason
+              Approver Remark
               </th>
               <th
                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -105,7 +105,7 @@
                 <!-- Template for denied leave -->
                 <ng-template #denied>
                   <!-- Check if leave is denied -->
-                  <ng-container *ngIf="Leavelist.leave_approved === 0; else dropdown">
+                  <ng-container *ngIf="Leavelist.leave_approved === 1; else dropdown">
                     <span class="text-red-500">Leave Denied</span>
                   </ng-container>
                   
