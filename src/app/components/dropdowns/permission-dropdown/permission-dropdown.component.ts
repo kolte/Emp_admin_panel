@@ -6,14 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { DialogTaskeDialog } from "src/app/views/admin/task/task-list/task-list.component";
 import { DialogOverviewExampleDialog } from "src/app/views/admin/project/project-list/project-list.component";
 import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
+  MatDialog
 } from "@angular/material/dialog";
+import { DialogmoduleDialog } from "src/app/views/admin/modules/modules-list/modules-list.component";
 
 @Component({
   selector: "app-permission-dropdown",
@@ -27,7 +22,7 @@ export class PermissionDropdownComponent implements AfterViewInit {
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
   @Output() bookTitleCreated = new EventEmitter<any>();
-  constructor(public service: AddServicesService,public router:Router,private toastr: ToastrService,public dialog: MatDialog){}
+  constructor(public service: AddServicesService,public router:Router,private toastr: ToastrService,public dialog: MatDialog,public addservice: AddServicesService){}
   
   ngAfterViewInit() {
     createPopper(
@@ -56,44 +51,42 @@ export class PermissionDropdownComponent implements AfterViewInit {
 
   updateEmp(){
     console.log(this.Type)
-    if(this.Type=="task"){
-      let dialogRef =this.dialog.open(DialogTaskeDialog, {
+    
+     if(this.Type=="module"){
+      let dialogRef = this.dialog.open(DialogmoduleDialog, {
         data: this.updateId,
       });
+
       dialogRef.afterClosed().subscribe((result) => {
         this.bookTitleCreated.emit(true);
       // this.animal = result;
     });
     }
-    else if(this.Type=="project"){
-      this.dialog.open(DialogOverviewExampleDialog, {
-        data: this.updateId,
-      });
-    }
   }
 
-  deleteTaskData(updateId: number) {
-    const confirmation = confirm('Are you sure you want to delete this employee?');
-    if (confirmation) {
-      this.service.deleteEmployee(updateId)
-        .then((response: any) => {   
-          console.log(response);    
-          if (response && response.data && response.data.success) {
-            // Handle success response here
-            console.log('Employee deleted successfully.');
-            this.handleSuccessfulDeletion();
-          } else {
-            // Handle failure response here
-            console.error('Failed to delete employee.');
-            // Optionally, you can display an error message to the user
-          }
-        })
-        .catch((error) => {
-          // Handle error here
-          console.error('An error occurred while deleting the employee:', error);
-          // Optionally, you can display an error message to the user
-        });
+  deleteModule(id){
+    this.addservice
+      .deleteModuleData(id)
+      .then((response: any) => {
+        if (response.data.success) {
+          this.toastr.success(response.data.message);
+          this.bookTitleCreated.emit(true);
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+  deleteTaskData(updateId) {
+    if(this.Type=="module"){
+      const confirmation = confirm('Are you sure you want to delete this module?');
+      if (confirmation) {
+        this.deleteModule(updateId)
+      }
     }
+    
   }
 
   handleSuccessfulDeletion(): void {
