@@ -183,4 +183,33 @@ export class AddServicesService {
   }
   
   
+  addModule(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}module`, data,options);
+  }
+  editModule(id,data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.put(`${this.endpoint}module/${id}`, data,options);
+  }
+
+  deleteModuleData(id) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.delete(`${this.endpoint}module/${id}`,options);
+  }
+  
 }

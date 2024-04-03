@@ -50,7 +50,6 @@ export class ModulesListComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.getModuledata();
-    this.projectManagerDetail();
   }
 
   ngAfterViewInit() {
@@ -64,7 +63,7 @@ export class ModulesListComponent implements OnInit,AfterViewInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    const dialogRef = this.dialog.open(DialogmoduleDialog, {
       data: null,
     });
 
@@ -80,23 +79,10 @@ export class ModulesListComponent implements OnInit,AfterViewInit {
   }
  
 
-  deleteEmp(id){
-    Swal.fire({
-      title: 'Are you sure want to remove all the Task of this Project?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.deleteProject(id)
-      } 
-    })
-  }
 
-  deleteProject(id){
-    this.service
-      .deleteProjectData(id)
+  deleteModule(id){
+    this.addservice
+      .deleteModuleData(id)
       .then((response: any) => {
         if (response.data.success) {
           this.toastr.success(response.data.message);
@@ -116,7 +102,6 @@ export class ModulesListComponent implements OnInit,AfterViewInit {
       .then((response: any) => {
         if (response.data.success) {
           this.Modulelist = response.data.data;
-          console.log(this.Modulelist);
         }
       })
       .catch((error) => {
@@ -130,20 +115,7 @@ export class ModulesListComponent implements OnInit,AfterViewInit {
      return this.managerOption.find((_: any) => _.id == id);
   }
 
-  projectManagerDetail() {
-    this.service
-      .getEmployeeList()
-      .then((response) => {
-        if (response.status == 200) {
-          this.managerOption = response.data.data;
-        }
-      })
-      .catch((error) => {
-        if (error.response.status == 401) {
-          this.router.navigate(["/auth/login"]);
-        }
-      });
-  }
+ 
 }
 
 @Component({
@@ -160,12 +132,12 @@ export class ModulesListComponent implements OnInit,AfterViewInit {
     CommonModule,
   ],
 })
-export class DialogOverviewExampleDialog {
-  EmployeeForm: FormGroup;
+export class DialogmoduleDialog {
+  ModuleForm: FormGroup;
   submitted = false;
   employeeData:any=[];
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<DialogmoduleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder,
     private toastr: ToastrService,
@@ -174,14 +146,10 @@ export class DialogOverviewExampleDialog {
   ) {}
 
   ngOnInit(): void {
-    this.getEmployeeData();
-    this.EmployeeForm = this.fb.group({
-      project_name: ["", [Validators.required]],
-      project_description: ["", [Validators.required]],
-      project_manager_id: ["", [Validators.required]],
-      start_date: ["", [Validators.required]],
-      end_date: ["", [Validators.required]],
-      status: ["", [Validators.required]],
+    this.ModuleForm = this.fb.group({
+      module_name: ["", [Validators.required]],
+      module_code: ["", [Validators.required]],
+      description: ["", [Validators.required]]
     });
     if(this.data){
       this.fillEmployeeData(this.data)
@@ -189,18 +157,15 @@ export class DialogOverviewExampleDialog {
   }
 
   fillEmployeeData(id){
-    this.service
-    .getProjectList()
+    this.addservice
+    .getModuleList()
     .then((response: any) => {  
       if (response.data.success) {
-        const projectList = response.data.projects.find((_: any) => _.project_id == id);
-        this.EmployeeForm.patchValue({
-          project_name: projectList.project_name,
-          project_description: projectList.project_description,
-          project_manager_id: projectList.project_manager_id,
-          start_date: moment(new Date(projectList.start_date)).format("YYYY-MM-DD"),
-          end_date: moment(new Date(projectList.end_date)).format("YYYY-MM-DD"),
-          status: projectList.status
+        const moduleList = response.data.data.find((_: any) => _.id == id);
+        this.ModuleForm.patchValue({
+          module_name: moduleList.module_name,
+          module_code: moduleList.module_code,
+          description: moduleList.description
         });
       }
     })
@@ -212,35 +177,20 @@ export class DialogOverviewExampleDialog {
   }
 
   get myForm() {
-    return this.EmployeeForm.controls;
+    return this.ModuleForm.controls;
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  getEmployeeData() {
-    this.addservice
-      .getModuleList()
-      .then((response: any) => {
-        if (response.data.success) {
-          this.employeeData = response.data.data;
-        }
-      })
-      .catch((error) => {
-        if (error.response.status == 401) {
-          // this.router.navigate(["/auth/login"]);
-        }
-      });
-  }
 
   onSubmit() {
     this.submitted = true;
-    this.EmployeeForm.value.project_manager_id = Number(this.EmployeeForm.value.project_manager_id);
-    if(this.EmployeeForm.valid){
+    if(this.ModuleForm.valid){
       if(this.data){
-        this.service
-        .editProjectData(this.data,this.EmployeeForm.value)
+        this.addservice
+        .editModule(this.data,this.ModuleForm.value)
         .then((response) => {
           if (response.status== 200) {
             this.onNoClick();
@@ -254,8 +204,8 @@ export class DialogOverviewExampleDialog {
         });
       }
       else{
-        this.service
-          .addProject(this.EmployeeForm.value)
+        this.addservice
+          .addModule(this.ModuleForm.value)
           .then((response) => {
             if (response.status== 201) {
               this.onNoClick();
