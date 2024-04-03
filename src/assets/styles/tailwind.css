@@ -4289,3 +4289,15 @@ select {
 .text-sm.text-blueGray-300 {
   width: 14px;
 }
+
+.comment-box {
+  min-width: 90%;
+}
+
+.comment-content {
+  text-align: justify;
+  padding: 15px !important;
+}
+form.container.pt-12.ng-untouched.ng-pristine.ng-valid {
+  text-align: center;
+}

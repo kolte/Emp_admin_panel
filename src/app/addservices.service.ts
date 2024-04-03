@@ -171,6 +171,16 @@ export class AddServicesService {
       .then(response => response.data)
       .catch(error => Promise.reject(error));
   }
+
+  getModuleList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}module`,options);
+  }
   
   
 }
