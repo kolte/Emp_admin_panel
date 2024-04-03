@@ -23,6 +23,7 @@ export class TaskreportComponent implements OnInit {
   commentForm: FormGroup;
   Tasklist: any = [];
   empData: any = [];
+  jobData:any = [];
   projectList: any = [];
   commentData: any = [];
   user_id: number = 0;
@@ -40,6 +41,7 @@ export class TaskreportComponent implements OnInit {
     this.empDetail();
     this.getProjectdata();
     this.id = this.route.snapshot.queryParamMap.get("id"); // Fetching ID from query parameters
+    this.jobDetail();
     this.getTaskdata(this.id);
     this.getComment(this.id);
     // const date = this.route.snapshot.queryParamMap.get("date");
@@ -120,6 +122,21 @@ export class TaskreportComponent implements OnInit {
       });
   }
 
+  jobDetail() {
+    this.service
+      .getJob()
+      .then((response) => {
+        if (response.status == 200) {
+          this.jobData = response.data.data;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
   getTaskdata(id) {
     this.service
       .getTaskList()
@@ -164,6 +181,9 @@ export class TaskreportComponent implements OnInit {
 
   getEmpDetail(id) {
     return this.empData.find((_) => _.id == id);
+  }
+  getjobDetail(id) {
+    return this.jobData.find((_) => _.id == id).role_name;
   }
   activeScreen(data) {
     return JSON.parse(data);
