@@ -198,7 +198,38 @@
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
-
+      <div class="w-6/12">
+        <a
+          [routerLink]="['/']"
+          class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+        >
+          Settings
+        </a>
+      </div>
+      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/modules']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #routerModules="routerLinkActive"
+            [ngClass]="
+            routerModules.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
+          >
+            <i
+              class="fas fa-exclamation-circle  mr-2 text-sm"
+              [ngClass]="
+              routerModules.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Modules
+          </a>
+        </li>
+      </ul>
+      <hr class="my-4 md:min-w-full" />
       <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li class="items-center">
           <a

@@ -21,6 +21,10 @@ import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/emplo
 import { EmpListComponent } from './views/admin/employee/emp-list/emp-list.component';
 import { ProjectComponent } from './views/admin/project/project.component';
 import { ProjectListComponent } from './views/admin/project/project-list/project-list.component';
+import { ModulesComponent } from './views/admin/modules/modules.component';
+import { ModulesListComponent } from './views/admin/modules/modules-list/modules-list.component';
+import { PermissionComponent } from './views/admin/permission/permission.component';
+import { PermissionListComponent } from './views/admin/permission/permission-list/permission-list.component';
 import { TaskComponent } from './views/admin/task/task.component';
 import { TaskListComponent } from './views/admin/task/task-list/task-list.component';
 import { LeaveComponent } from './views/admin/leave/leave.component';
@@ -54,6 +58,7 @@ import { MapExampleComponent } from './components/maps/map-example/map-example.c
 import { IndexDropdownComponent } from './components/dropdowns/index-dropdown/index-dropdown.component';
 import { TableDropdownComponent } from './components/dropdowns/table-dropdown/table-dropdown.component';
 import { PageDropdownComponent } from './components/dropdowns/page-dropdown/page-dropdown.component';
+import { PermissionDropdownComponent } from './components/dropdowns/permission-dropdown/permission-dropdown.component';
 import { PagesDropdownComponent } from './components/dropdowns/pages-dropdown/pages-dropdown.component';
 import { LeaveDropdownComponent } from './components/dropdowns/leave-dropdown/leave-dropdown.component';
 import { TaskDropdownComponent } from './components/dropdowns/task-dropdown/task-dropdown.component';
@@ -83,6 +88,10 @@ import { TimeAgoPipe } from './customePipe/time-ago.pipe';
     EmployeeComponent,
     ProjectComponent,
     ProjectListComponent,
+    ModulesComponent,
+    ModulesListComponent,
+    PermissionComponent,
+    PermissionListComponent,
     LeaveComponent,
     LeaveListComponent,
     LeaveDropdownComponent,
@@ -115,6 +124,7 @@ import { TimeAgoPipe } from './customePipe/time-ago.pipe';
     TableDropdownComponent,
     PageDropdownComponent,
     PagesDropdownComponent,
+    PermissionDropdownComponent,
     NotificationDropdownComponent,
     SidebarComponent,
     UserDropdownComponent,

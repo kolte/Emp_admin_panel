@@ -25,6 +25,8 @@ import { TaskreportComponent } from "./views/taskreport/taskreport.component";
 import { ProjectComponent } from "./views/admin/project/project.component";
 import { TaskComponent } from "./views/admin/task/task.component";
 import { LeaveComponent } from './views/admin/leave/leave.component';
+import { ModulesComponent } from './views/admin/modules/modules.component';
+import { PermissionComponent } from './views/admin/permission/permission.component';
 
 const routes: Routes = [
   // admin views
@@ -36,6 +38,7 @@ const routes: Routes = [
       { path: "settings", component: SettingsComponent },
       { path: "employee", component: EmployeeComponent },
       { path: "project", component: ProjectComponent },
+      { path: "modules", component: ModulesComponent },      
       { path: "leave", component: LeaveComponent },
       { path: "task", component: TaskComponent },
       { path: "maps", component: MapsComponent },
@@ -62,6 +65,7 @@ const routes: Routes = [
   // no layout views
   { path: "profile", component: ProfileComponent },
   { path: "taskreport", component: TaskreportComponent },
+  { path: "permission", component: PermissionComponent },
   { path: "landing", component: LandingComponent },
   {
     path: "", component: AuthComponent, children: [
