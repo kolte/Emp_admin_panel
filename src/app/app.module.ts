@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {HashLocationStrategy,LocationStrategy} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatTabsModule } from '@angular/material/tabs';
-
 // Layouts
 import { AdminComponent } from './layouts/admin/admin.component';
 import { FullsortComponent } from './layouts/fullsort/fullsort.component';
@@ -133,8 +133,9 @@ import { TimeAgoPipe } from './customePipe/time-ago.pipe';
   ],
   imports: [BrowserModule, FormsModule, MatDialogModule, AppRoutingModule, RouterModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,MatTabsModule,  ToastrModule.forRoot() ],
   providers: [
+    {provide:LocationStrategy,useClass:HashLocationStrategy},
     DatePipe ,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })
