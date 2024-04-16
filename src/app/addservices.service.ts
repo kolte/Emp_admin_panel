@@ -131,7 +131,14 @@ export class AddServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`${this.endpoint}leave/leave-dates`,options);
+
+    if(localStorage.getItem("role") == "admin"){
+      return axios.get(`${this.endpoint}leave/leave-dates`,options);
+    }
+    else{
+      let data = localStorage.getItem("empId");
+      return axios.get(`${this.endpoint}leave/leave-dates?employeeList?employeeId=${data}`,options);
+    }
   }
 
   getApprovedLeaveList() {
