@@ -148,7 +148,13 @@ export class AddServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`${this.endpoint}leave/approved-leave-dates`,options);
+    if(localStorage.getItem("role") == "admin"){
+      axios.get(`${this.endpoint}leave/approved-leave-dates`,options);
+    }
+    else{
+      let data = localStorage.getItem("empId");
+      return axios.get(`${this.endpoint}leave/approved-leave-dates?employeeList?employeeId=${data}`,options);
+    }
   }
 
   getDeniedLeaveList() {
@@ -158,7 +164,13 @@ export class AddServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`${this.endpoint}leave/denied-leave-dates`,options);
+    if(localStorage.getItem("role") == "admin"){
+      axios.get(`${this.endpoint}leave/denied-leave-dates`,options);
+    }
+    else{
+      let data = localStorage.getItem("empId");
+      return axios.get(`${this.endpoint}leave/denied-leave-dates?employeeList?employeeId=${data}`,options);
+    }
   }
 
   updateLeaveDetails(leaveData: { id: number, leave_remark: string, leave_approved_status: number }): Promise<any> {
