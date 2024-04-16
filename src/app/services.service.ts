@@ -7,7 +7,6 @@ import { environment } from "src/environments/environment";
 })
 export class ServicesService {
   constructor() {}
-
   endpoint: string = environment.apiURL || "";
 
   getRandomJoke(data) {
@@ -44,7 +43,13 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`${this.endpoint}employeeList`,options);
+    if(localStorage.getItem("role") == "admin"){
+      return axios.get(`${this.endpoint}employeeList`,options);
+    }
+    else{
+      let data = localStorage.getItem("empId");
+      return axios.get(`${this.endpoint}employeeList?employeeId=${data}`,options);
+    }
   }
 
   getDepartment() {
