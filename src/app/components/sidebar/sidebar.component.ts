@@ -6,9 +6,14 @@
 })
 export class SidebarComponent implements OnInit {
   collapseShow = "hidden";
+  role=localStorage.getItem("role");
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.role)
+  }
+  
   toggleCollapseShow(classes) {
     this.collapseShow = classes;
   }
