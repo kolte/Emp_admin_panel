@@ -34,7 +34,8 @@ export class LeaveListComponent implements OnInit {
   ApprovedLeavelist: any = [];
   DeniedLeavelist: any = [];
   managerOption: any = [];
-
+  role=localStorage.getItem('role');
+  
   constructor(
     public service: ServicesService,
     public addservice: AddServicesService,

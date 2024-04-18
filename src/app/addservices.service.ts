@@ -149,7 +149,7 @@ export class AddServicesService {
       },
     };
     if(localStorage.getItem("role") == "admin"){
-      axios.get(`${this.endpoint}leave/approved-leave-dates`,options);
+      return axios.get(`${this.endpoint}leave/approved-leave-dates`,options);
     }
     else{
       let data = localStorage.getItem("empId");
@@ -165,7 +165,7 @@ export class AddServicesService {
       },
     };
     if(localStorage.getItem("role") == "admin"){
-      axios.get(`${this.endpoint}leave/denied-leave-dates`,options);
+      return axios.get(`${this.endpoint}leave/denied-leave-dates`,options);
     }
     else{
       let data = localStorage.getItem("empId");

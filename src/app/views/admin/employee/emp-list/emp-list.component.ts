@@ -17,6 +17,7 @@ export class EmpListComponent implements OnInit {
   private _color = "light";
   Employeelist: any = [];
   departmentOption: any = [];
+  role=localStorage.getItem('role');
 
   constructor(public service: ServicesService, public router: Router) {}
 
