@@ -111,8 +111,8 @@
                   </ng-container>
                   
                   <!-- Dropdown for pending leave -->
-                  <ng-template #dropdown>
-                    <app-leave-dropdown [updateId]="Leavelist.attendance_id"></app-leave-dropdown>
+                  <ng-template #dropdown >
+                    <app-leave-dropdown *ngIf="role=='admin'" [updateId]="Leavelist.attendance_id"></app-leave-dropdown>
                   </ng-template>
                 </ng-template>
               </td>

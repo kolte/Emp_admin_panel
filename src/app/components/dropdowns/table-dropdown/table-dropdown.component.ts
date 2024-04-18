@@ -14,6 +14,7 @@ export class TableDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
+  role=localStorage.getItem("role");
   constructor(public service: AddServicesService,public router:Router,private toastr: ToastrService){}
   
   ngAfterViewInit() {

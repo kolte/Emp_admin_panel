@@ -11,8 +11,8 @@
       (click)="updateEmp()">
       Edit
     </a>
-    <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-    <a class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" (click)="deleteEmployeeData(updateId)">
+    <div  *ngIf='role=="admin"' class="h-0 my-2 border border-solid border-blueGray-100"></div>
+    <a  *ngIf='role=="admin"' class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" (click)="deleteEmployeeData(updateId)">
       Delete
     </a>
   </div>
