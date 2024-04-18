@@ -11,7 +11,7 @@
       <img
         alt="..."
         class="w-full rounded-full align-middle border-none shadow-lg"
-        src="assets/img/team-1-800x800.jpg"
+        [src]="employeeData.profile_picture ? getImageUrl(employeeData.profile_picture) : 'assets/img/team-2-800x800.jpg'"
       />
     </span>
   </div>
@@ -25,32 +25,13 @@
       href="#pablo"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
     >
-      Action
+      Reset password
     </a>
     <a
       [routerLink]="['/auth/login']"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
     >
       Logout
-    </a>
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-    >
-      Another action
-    </a>
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-    >
-      Something else here
-    </a>
-    <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-    >
-      Seprated link
-    </a>
+    </a>    
   </div>
 </div>
