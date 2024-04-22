@@ -151,7 +151,7 @@ export class CardSettingsComponent implements OnInit {
 
   userData() {
     this.service
-      .getUsers()
+      .getEmployeeDts()
       .then((response) => {
         if (response.status == 200) {
           this.userList = response.data.data;
