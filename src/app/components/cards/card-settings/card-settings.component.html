@@ -189,7 +189,7 @@
             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
             id="country" formControlName="reporting_to">
             <!-- <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option> -->
-            <option *ngFor="let user of userList" [value]="user.id">{{user.username}}</option>
+            <option *ngFor="let user of userList" [value]="user.id">{{user.first_name}}</option>
           </select>
            
           <span class="text-red-500 text-sm mb-5" *ngIf="submitted && myForm.reporting_to.errors?.required">Reporting is required</span>

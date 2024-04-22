@@ -82,6 +82,16 @@ export class ServicesService {
     return axios.get(`${this.endpoint}datafetch/users`, options);
   }
 
+  getEmployeeDts() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}datafetch/employee-details`, options);
+  }
+
   getEmpAttendanceReport(data) {
     let token = localStorage.getItem("token");
     const options = {
