@@ -24,15 +24,15 @@
           </th>
           <th
             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Rate
+          </th>
+          <th
+            class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
             Total HRS Completed
           </th>
           <th
             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            Total Actions
-          </th>
-          <th
-            class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            Rate
+            Status
           </th>
         </tr>
       </thead>
@@ -42,15 +42,29 @@
             {{emp.first_name}} {{emp.last_name}}
           </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{emp.formatted_total_time}}
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            340
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="{{ emp.attendance_status === 'Absent' ? 'fas fa-arrow-down text-red-500' : 'fas fa-arrow-up text-emerald-500' }} mr-4"></i>
+            <i
+              class="{{ emp.attendance_status === 'Absent' ? 'fas fa-arrow-down text-red-500' : 'fas fa-arrow-up text-emerald-500' }} mr-4"></i>
             {{ emp.attendance_status }}
-          </td>          
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            <ng-container *ngIf="emp.formatted_total_time; else totalUpTime">
+              {{ emp.formatted_total_time }}
+            </ng-container>
+            <ng-template #totalUpTime>
+              {{ emp.formatted_total_up_time }}
+            </ng-template>
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            <div class="flex items-center">
+              <div class="relative w-full">
+                <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                  <div style="width: 100%"
+                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center {{ emp.attendance_status === 'Absent' ? 'bg-red-500' : 'bg-orange-500' }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
