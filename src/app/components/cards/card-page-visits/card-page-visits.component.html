@@ -32,6 +32,10 @@
           </th>
           <th
             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Total Break
+          </th>
+          <th
+            class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
             Status
           </th>
         </tr>
@@ -47,17 +51,10 @@
             {{ emp.attendance_status }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <ng-container *ngIf="emp.total_punch_out === null; else totalPunchOut">
-              <ng-container *ngIf="emp.formatted_total_time; else totalUpTime">
-                {{ emp.formatted_total_time }}
-              </ng-container>
-              <ng-template #totalUpTime>
-                {{ emp.formatted_total_up_time }}
-              </ng-template>
-            </ng-container>
-            <ng-template #totalPunchOut>
-              {{ emp.formatted_total_up_time }}
-            </ng-template>
+            {{ emp.formatted_totaltime }}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{ emp.formatted_total_break_time }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <div class="flex items-center">
