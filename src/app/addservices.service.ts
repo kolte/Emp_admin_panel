@@ -230,5 +230,16 @@ export class AddServicesService {
     };
     return axios.delete(`${this.endpoint}module/${id}`,options);
   }
+
+  getAttendanceDashboardList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}employeeList/attendance/count`,options);
+
+  }
   
 }
