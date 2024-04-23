@@ -41,17 +41,11 @@
           ></app-card-stats>
         </div>
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="PERFORMANCE"
-            statTitle="49,65%"
-            statArrow="up"
-            statPercent="12"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="fas fa-percent"
-            statIconColor="bg-emerald-500"
-          ></app-card-stats>
+          <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+            <canvas #pieChart></canvas>
+          </div>
         </div>
+        
       </div>
     </div>
   </div>
