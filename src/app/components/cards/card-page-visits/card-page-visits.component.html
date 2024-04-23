@@ -47,10 +47,15 @@
             {{ emp.attendance_status }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <ng-container *ngIf="emp.formatted_total_time; else totalUpTime">
-              {{ emp.formatted_total_time }}
+            <ng-container *ngIf="emp.total_punch_out === null; else totalPunchOut">
+              <ng-container *ngIf="emp.formatted_total_time; else totalUpTime">
+                {{ emp.formatted_total_time }}
+              </ng-container>
+              <ng-template #totalUpTime>
+                {{ emp.formatted_total_up_time }}
+              </ng-template>
             </ng-container>
-            <ng-template #totalUpTime>
+            <ng-template #totalPunchOut>
               {{ emp.formatted_total_up_time }}
             </ng-template>
           </td>
@@ -59,7 +64,7 @@
               <div class="relative w-full">
                 <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
                   <div style="width: 100%"
-                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center {{ emp.attendance_status === 'Absent' ? 'bg-red-500' : 'bg-orange-500' }}">
+                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center {{ emp.attendance_status === 'Absent' ? 'bg-red-500' : 'bg-emerald-500' }}">
                   </div>
                 </div>
               </div>
