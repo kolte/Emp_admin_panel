@@ -51,8 +51,13 @@
             {{ emp.attendance_status }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{ emp.formatted_totaltime }}
-          </td>
+            <ng-container *ngIf="emp.formatted_totaltime; else showUpTime">
+              {{ emp.formatted_totaltime }}
+            </ng-container>
+            <ng-template #showUpTime>
+              {{ emp.formatted_total_up_time }}
+            </ng-template>
+          </td>          
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{ emp.formatted_total_break_time }}
           </td>
