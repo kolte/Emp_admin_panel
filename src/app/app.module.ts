@@ -38,6 +38,7 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { IndexComponent } from './views/index/index.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { ReportComponent } from './views/report/report.component';
 import { TaskreportComponent } from './views/taskreport/taskreport.component';
 
 // Components for views and layouts
@@ -106,6 +107,7 @@ import { TimeAgoPipe } from './customePipe/time-ago.pipe';
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    ReportComponent,
     AdminNavbarComponent,
     AuthNavbarComponent,
     CardPageVisitsComponent,

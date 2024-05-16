@@ -12,12 +12,18 @@ export class ProfileComponent implements OnInit {
   isHovered: boolean = false;
   id: string; // Variable to hold the ID value
 
-  constructor(private service: ServicesService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private service: ServicesService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get("id"); // Fetching ID from query parameters
     const date = this.route.snapshot.queryParamMap.get("date");
     this.employeePunchInDetail(this.id, date);
+    const closeButton = document.getElementById('closeButton');
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            this.closeZoomedImage();
+        });
+    }
   }
 
   employeePunchInDetail(id: string, date: string) {
@@ -50,5 +56,26 @@ export class ProfileComponent implements OnInit {
   activeScreen(data) {
     return JSON.parse(data);
   }
+
+  closeZoomedImage() {
+    const zoomedImageContainer = document.getElementById('zoomedImageContainer');
+    if (zoomedImageContainer) {
+        zoomedImageContainer.classList.remove('active'); // Hide the zoomed image container
+    }
+}
+
+  zoomImage(imageSrc) {
+    const zoomedImageContainer = document.getElementById('zoomedImageContainer');
+
+    if (zoomedImageContainer) {
+        const zoomedImage = zoomedImageContainer.querySelector('img');
+        if (zoomedImage) {
+            zoomedImage.src = imageSrc;
+        }
+
+        zoomedImageContainer.classList.add('active'); // Show the zoomed image container
+    }
+}
+
 
 }
