@@ -241,5 +241,16 @@ export class AddServicesService {
     return axios.get(`${this.endpoint}employeeList/attendance/count`,options);
 
   }
+
+  getMonthlyReport(data){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}monthlyReport`, data,options);
+  }
+  
   
 }

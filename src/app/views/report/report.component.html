@@ -1,0 +1,63 @@
+<app-auth-navbar></app-auth-navbar>
+<main class="report-page">
+  <section class="relative block h-500-px">
+    <!-- Background Image -->
+    <div class="absolute top-0 w-full h-full bg-center bg-cover"
+      style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');">
+      <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black">USER REPORT</span>
+    </div>
+    <!-- Overlay -->
+    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+      style="transform: translateZ(0)">
+      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+        <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </section>
+
+  <div class="relative pb-32 pt-12">
+    <!-- Filter Box for Changing Month -->
+ <!-- Filter Box for Changing Month -->
+<div class="flex justify-center items-center mb-4">
+  <label for="monthFilter" class="mr-2">Select Month:</label>
+  <select id="monthFilter" class="border border-gray-300 rounded px-2 py-1" (change)="onMonthChange($event.target.value)">
+    <option *ngFor="let month of months" [value]="month.value" [selected]="isCurrentMonth(month.value)">{{ month.label }}</option>
+  </select>
+</div>
+
+    <div class="px-4 md:px-10  md:pt-32 mx-auto w-full">
+      <div class="flex flex-wrap justify-center">
+        <!-- Calendar UI -->
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-4" *ngFor="let data of dates">
+          <div class="calendar-list rounded-lg bg-white shadow-md p-4">
+            <h2 class="text-lg font-bold mb-4 text-center">{{ data.date }}</h2>
+            <ul class="grid grid-cols-7 gap-2">
+              <li (click)="onDateSelect(data.date)" [class.selected]="data.date === selectedDate"
+                class="text-center py-4 rounded cursor-pointer hover:bg-gray-100 border border-gray-200">
+                <div class="text-xs text-blueGray-500 mb-2">{{ data.date }}</div>
+                <div class="flex justify-between padding-all">
+                  <div>Total Employees: <span class="font-bold">{{data.total}}</span></div>
+                  <div>Total Present: <span class="font-bold">{{data.present}}</span></div>
+                </div>
+                <div class="flex justify-between padding-all">
+                  <div>Total Absent: <span class="font-bold">{{data.absent}}</span></div>
+                  <div>Total Leave Approved: <span class="font-bold">{{data.leave}}</span></div>
+                </div>
+                <div class="text-sm">Total Working Time: <span class="font-bold">x</span></div>
+                <div class="flex justify-center">
+                  <div class="w-full lg:w-16/12 xl:w-12/12 px-4">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                      <canvas id="pieChart-{{ data.date }}"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

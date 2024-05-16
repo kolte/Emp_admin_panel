@@ -21,6 +21,7 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { ReportComponent } from './views/report/report.component';
 import { TaskreportComponent } from "./views/taskreport/taskreport.component";
 import { ProjectComponent } from "./views/admin/project/project.component";
 import { TaskComponent } from "./views/admin/task/task.component";
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: "leave", component: LeaveComponent },
       { path: "task", component: TaskComponent },
       { path: "maps", component: MapsComponent },
+      { path: "report", component: ReportComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ]
   },
@@ -63,7 +65,7 @@ const routes: Routes = [
     ],
   },
   // no layout views
-  { path: "profile", component: ProfileComponent },
+  { path: "profile", component: ProfileComponent },  
   { path: "taskreport", component: TaskreportComponent },
   { path: "permission", component: PermissionComponent },
   { path: "landing", component: LandingComponent },
