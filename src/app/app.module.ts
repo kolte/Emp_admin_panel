@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {HashLocationStrategy,LocationStrategy} from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { HashLocationStrategy, LocationStrategy, CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +12,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { FullsortComponent } from './layouts/fullsort/fullsort.component';
 import { AuthComponent } from './layouts/auth/auth.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+
 // Admin views
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { MapsComponent } from './views/admin/maps/maps.component';
@@ -66,15 +72,10 @@ import { TaskDropdownComponent } from './components/dropdowns/task-dropdown/task
 import { NotificationDropdownComponent } from './components/dropdowns/notification-dropdown/notification-dropdown.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDropdownComponent } from './components/dropdowns/user-dropdown/user-dropdown.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {ReactiveFormsModule} from '@angular/forms'; 
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { ToastrModule } from 'ngx-toastr';
-import { DecimalFormatPipe } from './decimal-format.pipe'; 
-import { MatDialogModule } from '@angular/material/dialog';
-import { DatePipe } from '@angular/common';
+import { DecimalFormatPipe } from './decimal-format.pipe';
 import { TimeAgoPipe } from './customePipe/time-ago.pipe';
-
+import { AttendanceComponent } from './views/attendance/attendance.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -131,14 +132,29 @@ import { TimeAgoPipe } from './customePipe/time-ago.pipe';
     SidebarComponent,
     UserDropdownComponent,
     DecimalFormatPipe,
-    TimeAgoPipe
+    TimeAgoPipe,
+    AttendanceComponent
   ],
-  imports: [BrowserModule, FormsModule, MatDialogModule, AppRoutingModule, RouterModule,FullCalendarModule,BrowserAnimationsModule,ReactiveFormsModule,MatTabsModule,  ToastrModule.forRoot() ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatDialogModule,
+    AppRoutingModule,
+    RouterModule,
+    FullCalendarModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    ToastrModule.forRoot()
+  ],
   providers: [
-    {provide:LocationStrategy,useClass:HashLocationStrategy},
-    DatePipe ,
-    provideAnimationsAsync(),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    DatePipe,
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
