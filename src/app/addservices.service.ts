@@ -251,6 +251,16 @@ export class AddServicesService {
     };
     return axios.post(`${this.endpoint}monthlyReport`, data,options);
   }
+
+  getAttendanceReport(data){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}monthlyReport/attendance-data`, data,options);
+  }
   
   
 }

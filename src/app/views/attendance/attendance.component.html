@@ -1,0 +1,70 @@
+<main class="profile-page">
+  <section class="relative block h-500-px">
+    <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
+        background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');
+      ">
+      <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black">ATTENDANCE REPORT</span>
+    </div>
+    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+      style="transform: translateZ(0)">
+      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+        <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+      </svg>    
+    </div> 
+  </section>
+
+  <div class="relative md:pt-32 pb-32 pt-12">
+    <div class="px-4 md:px-10 mx-auto w-full">
+      <button class="flex items-center bg-blue-500 text-black font-bold py-2 px-4 rounded" (click)="router.navigate(['/admin/employee'])">
+        <i class="fas fa-arrow-left mr-2 text-lg"></i>
+        <b>Back</b>
+      </button>
+      <div class="flex justify-center items-center mb-4">
+        <label for="monthFilter" class="mr-2">Select Month:</label>
+        <select id="monthFilter" class="border border-gray-300 rounded px-2 py-1" (change)="onMonthChange($event.target.value, id)">
+          <option *ngFor="let month of months" [value]="month.value" [selected]="isCurrentMonth(month.value)">{{ month.label }}</option>
+        </select>
+      </div>
+
+      <div class="flex flex-wrap justify-center mt-8">
+        <div class="w-full overflow-x-auto">
+          <mat-paginator [pageSize]="15"></mat-paginator>
+          <table mat-table [dataSource]="dataSource" class="min-w-full bg-white rounded-lg shadow-md">
+            <ng-container matColumnDef="attendance_date">
+              <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Attendance Date</th>
+              <td mat-cell *matCellDef="let data" class="border-t py-2 px-4">{{ data.attendance_date }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="punch_in">
+              <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Punch In</th>
+              <td mat-cell *matCellDef="let data" class="border-t py-2 px-4">{{ data.punch_in | date: 'dd/MM/yy h:mm:ss a' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="punch_out">
+              <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Punch Out</th>
+              <td mat-cell *matCellDef="let data" class="border-t py-2 px-4">{{ data.punch_out | date: 'dd/MM/yy h:mm:ss a'  }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total_hours">
+              <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Total Hours</th>
+              <td mat-cell *matCellDef="let data" class="border-t py-2 px-4">{{ data.total_hours }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="is_leave">
+              <th mat-header-cell *matHeaderCellDef class="py-2 px-4 text-left">Is Leave</th>
+              <td mat-cell *matCellDef="let data" class="border-t py-2 px-4">{{ data.total_leave_approved != 0 ? 'Yes' : 'No' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSize]="15"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="grid-flow-row relative py-16 bg-blueGray-200">
+  </section>
+</main>

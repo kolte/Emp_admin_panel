@@ -12,6 +12,7 @@ import { MapsComponent } from "./views/admin/maps/maps.component";
 import { SettingsComponent } from "./views/admin/settings/settings.component";
 import { EmployeeComponent } from "./views/admin/employee/employee.component";
 import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/employeeDetails.component';
+import { AttendanceComponent } from './views/attendance/attendance.component';
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -52,6 +53,13 @@ const routes: Routes = [
     component: FullsortComponent,
     children: [// No children here
       { path: "employeeDetails/:id", component: EmployeeDetailsComponent }, 
+    ]
+  },
+  {
+    path: "attendanceReport",
+    component: FullsortComponent,
+    children: [// No children here
+      { path: "attendanceDetails/:id", component: AttendanceComponent }, 
     ]
   },
   // auth views
