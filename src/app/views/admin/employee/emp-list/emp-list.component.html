@@ -44,12 +44,30 @@
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
             [ngClass]="
+            color === 'light'
+              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+              : 'bg-red-800 text-red-300 border-red-700'
+          ">
+            Email
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+          color === 'light'
+            ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+            : 'bg-red-800 text-red-300 border-red-700'
+        ">
+            Phone
+          </th>
+          <!-- <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
               color === 'light'
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
             Latest Screen Image
-          </th>
+          </th> -->
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
             [ngClass]="
@@ -72,7 +90,8 @@
         <tr *ngFor="let emp of Employeelist">
           <th
             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-            <img [src]="emp.profile_picture ? getImageUrl(emp.profile_picture) : 'assets/img/team-2-800x800.jpg'" class="h-12 w-12 bg-white rounded-full border" alt="..." />
+            <img [src]="emp.profile_picture ? getImageUrl(emp.profile_picture) : 'assets/img/team-2-800x800.jpg'"
+              class="h-12 w-12 bg-white rounded-full border" alt="..." />
             <span class="ml-3 font-bold" [ngClass]="color === 'light' ? 'text-blueGray-600' : 'text-white'">
               {{emp.first_name}} {{emp.last_name}}
             </span>
@@ -80,7 +99,7 @@
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{DepartmentName(emp.department_id)}}
           </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          <!-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <div class="flex">
               <img *ngIf="emp.screenshot_a && emp.screenshot_a.trim() !== ''" [src]="emp.screenshot_a" alt="..."
                 class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
@@ -91,6 +110,12 @@
               <img *ngIf="emp.screenshot_d && emp.screenshot_d.trim() !== ''" [src]="emp.screenshot_d" alt="..."
                 class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
             </div>
+          </td> -->
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{emp.email}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{emp.phone}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <i class="fas fa-circle text-orange-500 mr-2"></i> pending
