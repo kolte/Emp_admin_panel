@@ -63,10 +63,20 @@
             </ng-template>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{ emp.formatted_total_sb }}
+            <ng-container *ngIf="emp.formatted_total_sb === '0 hours 0 minutes 0 seconds'; else showSb">
+              On Short break
+            </ng-container>
+            <ng-template #showSb>
+              {{ emp.formatted_total_sb }}
+            </ng-template>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{ emp.formatted_total_lb }}
+            <ng-container *ngIf="emp.formatted_total_lb === '0 hours 0 minutes 0 seconds'; else showLb">
+              On Lunch break
+            </ng-container>
+            <ng-template #showLb>
+              {{ emp.formatted_total_lb }}
+            </ng-template>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <div class="flex items-center">
