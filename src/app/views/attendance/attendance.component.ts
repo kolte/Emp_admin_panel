@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class AttendanceComponent implements OnInit, AfterViewInit {
   attendanceReportData: any = [];
   dataSource = new MatTableDataSource<any>();
-  displayedColumns: string[] = ['attendance_date', 'punch_in', 'punch_out', 'total_hours', 'is_leave'];
+  displayedColumns: string[] = ['attendance_date', 'punch_in', 'punch_out', 'total_hours','formatted_total_sb','formatted_total_lb','is_leave'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isHovered: boolean = false;
   id: string; // Variable to hold the ID value
