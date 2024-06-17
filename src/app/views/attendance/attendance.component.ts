@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class AttendanceComponent implements OnInit, AfterViewInit {
   attendanceReportData: any = [];
   dataSource = new MatTableDataSource<any>();
-  displayedColumns: string[] = ['attendance_date', 'punch_in', 'punch_out', 'total_hours','formatted_total_sb','formatted_total_lb','is_leave','total_working'];
+  displayedColumns: string[] = ['attendance_date', 'punch_in', 'punch_out','formatted_total_sb','formatted_total_lb','is_leave','total_working'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isHovered: boolean = false;
   id: string; // Variable to hold the ID value
@@ -49,7 +49,7 @@ export class AttendanceComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.paginator.pageSize = 15; // Set the page size to 15
+    this.paginator.pageSize = 31; // Set the page size to 15
     this.dataSource.paginator = this.paginator;
   }
 
