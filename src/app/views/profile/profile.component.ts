@@ -14,12 +14,13 @@ export class ProfileComponent implements OnInit {
   currentPage: number = 0; // Track the current page index
   pageSize: number = 5; // Number of items to load per page
   isLoading: boolean = false; // Prevent multiple simultaneous requests
+  exactDate: string;
 
   constructor(private service: ServicesService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get("id"); // Fetching ID from query parameters
-    const date = this.route.snapshot.queryParamMap.get("date");
+    this.exactDate = this.route.snapshot.queryParamMap.get("date"); // Fetching date from query parameters
     this.loadMore(); // Load initial data
     const closeButton = document.getElementById('closeButton');
     if (closeButton) {
@@ -35,7 +36,7 @@ export class ProfileComponent implements OnInit {
 
     const data = {
       employeeId: this.id,
-      date: this.route.snapshot.queryParamMap.get("date"),
+      date: this.exactDate,
       page: this.currentPage,
       pageSize: this.pageSize
     };
@@ -85,4 +86,24 @@ export class ProfileComponent implements OnInit {
         zoomedImageContainer.classList.add('active'); // Show the zoomed image container
     }
   }
+
+  onDateChange(event: any) {
+    const selectedDate = event.target.value;
+    this.exactDate = selectedDate;
+    this.handleRedirectClick(this.id, selectedDate);
+  }
+
+  handleRedirectClick(employeeId: string, selectedDate: string): void {
+    const url = `/profile?date=${selectedDate}&id=${employeeId}`;
+    this.router.navigateByUrl(url).then(() => {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      console.log('Redirected to URL:', url);
+      // this.router.navigate([url]);
+      this.router.navigateByUrl(url);
+    });
+  }
+  
+  
+  
 }

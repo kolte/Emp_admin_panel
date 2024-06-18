@@ -7,6 +7,9 @@
     <a [routerLink]="['/userDashboard/employeeDetails', updateId]"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
       User Report</a>
+    <a  (click)="handleRedirectClick(updateId)"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
+      View Screenshots</a>
     <a [routerLink]="['/attendanceReport/attendanceDetails', updateId]"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
       Attendance Report</a>
