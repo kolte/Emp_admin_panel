@@ -242,6 +242,17 @@ export class AddServicesService {
 
   }
 
+  getWorkingDashboardList(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}monthlyReport/dashboard-data`,data,options);
+  }
+  
+
   getMonthlyReport(data){
     let token = localStorage.getItem("token");
     const options = {

@@ -3,6 +3,11 @@ import Chart from 'chart.js/auto'; // Import Chart.js
 import { AddServicesService } from "src/app/addservices.service";
 import { Router } from "@angular/router";
 
+interface EmployeeData {
+  name: string;
+  hours: (string | number)[];
+}
+
 @Component({
   selector: "app-header-stats",
   templateUrl: "./header-stats.component.html",
@@ -14,15 +19,18 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   comparemonth: string;
   totalCompareWeekNumber: number = 0;
   compareweek: string;
+  workData: EmployeeData[] = []; // Correct type for workData
   totalEmpCnt: number = 0;
   totalPresentCnt: number = 0;
   totalAbsentCnt: number = 0;
 
   @ViewChild("pieChart", { static: false }) pieChart: ElementRef;
   @ViewChild("barChart") barChart: ElementRef;
+  @ViewChild("lineChart") lineChart: ElementRef;
 
   pieChartRef: any;
   barChartRef: any;
+  lineChartRef: any;
 
   constructor(public service: AddServicesService, public router: Router) {}
 
@@ -35,6 +43,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.createPieChart();
+    this.createLineChart();
   }
 
   getReportTodaydata() {
@@ -43,7 +52,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
       .then((response: any) => {        
         if (response && response.data.success) {
           // Handle response data here
-          this.totalWorkingHours = response.data.total_working_hours ;
+          this.totalWorkingHours = response.data.total_working_hours;
         }
       })
       .catch((error) => {
@@ -59,7 +68,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
       .then((response: any) => {        
         if (response && response.data.success) {
           // Handle response data here
-          this.totalMonthHours = response.data.totalHours ;
+          this.totalMonthHours = response.data.totalHours;
         }
       })
       .catch((error) => {
@@ -76,10 +85,10 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
         if (response && response.data.success) {
           // Handle response data here
           this.totalCompareMonthNumber = response.data.data.percentageChange;
-          if(response.data.data.changeType == 'decrease'){
-             this.comparemonth='down';
-          }else{
-             this.comparemonth='up';
+          if (response.data.data.changeType == 'decrease') {
+            this.comparemonth = 'down';
+          } else {
+            this.comparemonth = 'up';
           }
         }
       })
@@ -97,10 +106,10 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
         if (response && response.data.success) {
           // Handle response data here
           this.totalCompareWeekNumber = response.data.data.percentageChange;
-          if(response.data.data.changeType == 'decrease'){
-             this.compareweek='down';
-          }else{
-             this.compareweek='up';
+          if (response.data.data.changeType == 'decrease') {
+            this.compareweek = 'down';
+          } else {
+            this.compareweek = 'up';
           }
         }
       })
@@ -113,41 +122,103 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
 
   createPieChart(): void {
     this.service
-    .getAttendanceDashboardList()
-    .then((response: any) => {        
-      if (response && response.data.success) {
-        // Handle response data here
-        const canvas = this.pieChart.nativeElement;
-        canvas.setAttribute("width", "100"); // Set the width of the canvas
-        canvas.setAttribute("height", "100"); // Set the height of the canvas
-      
-        this.pieChartRef = new Chart(canvas, {
-          type: "pie",
-          data: {
-            labels: ["Absent", "Present","Total"],
-            datasets: [
-              {
-                label: "Attendance Sheet",
-                data: [response.data.data.absent_count, response.data.data.present_count, response.data.data.total_count],
-                backgroundColor: ["#FF6384","green","#36A2EB"],
-                hoverBackgroundColor: ["#FF6384","green","#36A2EB"],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-          },
-        });
-      }
-    })
-    .catch((error) => {
-      if (error && error.response && error.response.status === 401) {
-        this.router.navigate(["/auth/login"]);
-      }
-    });
+      .getAttendanceDashboardList()
+      .then((response: any) => {        
+        if (response && response.data.success) {
+          // Handle response data here
+          const canvas = this.pieChart.nativeElement;
+          canvas.setAttribute("width", "100"); // Set the width of the canvas
+          canvas.setAttribute("height", "100"); // Set the height of the canvas
 
+          this.pieChartRef = new Chart(canvas, {
+            type: "pie",
+            data: {
+              labels: ["Absent", "Present", "Total"],
+              datasets: [
+                {
+                  label: "Attendance Sheet",
+                  data: [response.data.data.absent_count, response.data.data.present_count, response.data.data.total_count],
+                  backgroundColor: ["#FF6384", "green", "#36A2EB"],
+                  hoverBackgroundColor: ["#FF6384", "green", "#36A2EB"],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        if (error && error.response && error.response.status === 401) {
+          this.router.navigate(["/auth/login"]);
+        }
+      });
+  }
+
+  createLineChart(): void {
+    this.service.getWorkingDashboardList([])
+      .then((response: any) => {
+        if (response.data && response.data.success) {
+          console.log(response.data.data);
+          this.workData = response.data.data as EmployeeData[];
+  
+          const canvas = this.lineChart.nativeElement;
+          canvas.setAttribute("width", "400"); // Set the width of the canvas
+          canvas.setAttribute("height", "200"); // Set the height of the canvas
+  
+          const data = this.workData;
+          const labels = Array.from({ length: 12 }, (_, i) => `${8 + i} AM`); // Adjusted to 12 as per your example
+  
+          this.lineChartRef = new Chart(canvas, {
+            type: "line",
+            data: {
+              labels: labels,
+              datasets: data.map((employee: EmployeeData, index: number) => ({
+                label: employee.name,
+                data: employee.hours,
+                fill: false,
+                borderColor: this.getRandomColor(),
+                borderWidth: 2,
+                tension: 0.1,
+                // Add different dash patterns to distinguish lines
+                borderDash: [index * 5, 5],
+              }))
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Time'
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Work Progress (hours)'
+                  }
+                }
+              }
+            }
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching dashboard data:", error);
+      });
   }
   
-  
+
+  getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 }

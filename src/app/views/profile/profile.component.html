@@ -47,15 +47,22 @@
                   <img src="{{ssdata.screenshot_url}}" class="h-full max-w-full max-h-full" alt="..." />
                 </div>
               </div>
-              <span class="text-sm tracking-wide text-blueGray-600">Mouse Clicks: <span
-                  class="text-sm font-bold">{{ssdata.mouse_click}}</span></span>
-              <span class="text-sm tracking-wide text-blueGray-600">Keyboard Clicks: <span
-                  class="text-sm font-bold">{{ssdata.keyboard_click}}</span></span>
-              <span class="text-sm tracking-wide text-blueGray-600">Active Screens:
-                <span class="text-xs font-bold">
-                  <p *ngFor="let activeData of ssdata.active_screen">{{activeData.name}}</p>
+              <div class="data-container">
+                <span class="data-item">
+                  Mouse Clicks: <span class="data-value">{{ssdata.mouse_click}}</span>
                 </span>
-              </span>
+                <span class="data-item">
+                  Keyboard Clicks: <span class="data-value">{{ssdata.keyboard_click}}</span>
+                </span>
+                <span class="data-item">
+                  Active Screens:
+                  <span class="data-value">
+                    <ul class="screen-list">
+                      <li *ngFor="let activeData of ssdata.active_screen" class="screen-name">{{activeData.name}}</li>
+                    </ul>
+                  </span>
+                </span>
+              </div>                            
             </div>
           </div>
         </div>
