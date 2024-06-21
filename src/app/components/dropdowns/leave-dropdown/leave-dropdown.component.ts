@@ -38,7 +38,7 @@ export class LeaveDropdownComponent implements AfterViewInit {
   }
 
   updateEmp(){
-    this.router.navigate(['/admin/settings'],{ 
+    this.router.navigate(['/userDashboard/settings'],{ 
       queryParams: {  
         id: this.updateId
       }
