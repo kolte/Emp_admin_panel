@@ -36,15 +36,12 @@ const routes: Routes = [
     path: "admin",
     component: AdminComponent,
     children: [
-      { path: "dashboard", component: DashboardComponent },
-      { path: "settings", component: SettingsComponent },
-      { path: "employee", component: EmployeeComponent },
+      { path: "dashboard", component: DashboardComponent },            
       { path: "project", component: ProjectComponent },
       { path: "modules", component: ModulesComponent },      
       { path: "leave", component: LeaveComponent },
       { path: "task", component: TaskComponent },
-      { path: "maps", component: MapsComponent },
-      { path: "report", component: ReportComponent },
+      { path: "maps", component: MapsComponent },      
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ]
   },
@@ -53,6 +50,9 @@ const routes: Routes = [
     component: FullsortComponent,
     children: [// No children here
       { path: "employeeDetails/:id", component: EmployeeDetailsComponent }, 
+      { path: "employee", component: EmployeeComponent },
+      { path: "report", component: ReportComponent },
+      { path: "settings", component: SettingsComponent },
     ]
   },
   {

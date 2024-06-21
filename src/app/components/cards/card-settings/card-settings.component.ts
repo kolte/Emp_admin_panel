@@ -171,7 +171,7 @@ export class CardSettingsComponent implements OnInit {
         if (response.status == 200) {
           console.log(response.data);
           // this.toastr.success(response.data.message);
-          // this.router.navigate(["/admin/employee"]);
+          // this.router.navigate(["/userDashboard/employee"]);
         }
       })
       .catch((error) => {
@@ -195,7 +195,7 @@ export class CardSettingsComponent implements OnInit {
         .then((response) => {
           if (response.status == 200) {
             this.toastr.success(response.data.message);
-            this.router.navigate(["/admin/employee"]);
+            this.router.navigate(["/userDashboard/employee"]);
           }
         })
         .catch((error) => {
@@ -209,7 +209,7 @@ export class CardSettingsComponent implements OnInit {
         .then((response) => {
           if (response.status == 200) {
             this.toastr.success("Employee detail successfully Added");
-            this.router.navigate(["/admin/employee"]);
+            this.router.navigate(["/userDashboard/employee"]);
           }
         })
         .catch((error) => {
