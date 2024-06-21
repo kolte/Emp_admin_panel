@@ -32,7 +32,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   barChartRef: any;
   lineChartRef: any;
 
-  constructor(public service: AddServicesService, public router: Router) {}
+  constructor(public service: AddServicesService, public router: Router) { }
 
   ngOnInit(): void {
     this.getReportTodaydata();
@@ -49,7 +49,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   getReportTodaydata() {
     this.service
       .getReportToday()
-      .then((response: any) => {        
+      .then((response: any) => {
         if (response && response.data.success) {
           // Handle response data here
           this.totalWorkingHours = response.data.total_working_hours;
@@ -65,7 +65,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   getReportMonthdata() {
     this.service
       .getReportMonth()
-      .then((response: any) => {        
+      .then((response: any) => {
         if (response && response.data.success) {
           // Handle response data here
           this.totalMonthHours = response.data.totalHours;
@@ -81,7 +81,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   getCompareMonthdata() {
     this.service
       .getCompareMonth()
-      .then((response: any) => {        
+      .then((response: any) => {
         if (response && response.data.success) {
           // Handle response data here
           this.totalCompareMonthNumber = response.data.data.percentageChange;
@@ -102,7 +102,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   getCompareWeeksdata() {
     this.service
       .getCompareWeeks()
-      .then((response: any) => {        
+      .then((response: any) => {
         if (response && response.data.success) {
           // Handle response data here
           this.totalCompareWeekNumber = response.data.data.percentageChange;
@@ -123,7 +123,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   createPieChart(): void {
     this.service
       .getAttendanceDashboardList()
-      .then((response: any) => {        
+      .then((response: any) => {
         if (response && response.data.success) {
           // Handle response data here
           const canvas = this.pieChart.nativeElement;
@@ -163,14 +163,17 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
         if (response.data && response.data.success) {
           console.log(response.data.data);
           this.workData = response.data.data as EmployeeData[];
-  
+
           const canvas = this.lineChart.nativeElement;
           canvas.setAttribute("width", "400"); // Set the width of the canvas
           canvas.setAttribute("height", "200"); // Set the height of the canvas
-  
+
           const data = this.workData;
-          const labels = Array.from({ length: 12 }, (_, i) => `${8 + i} AM`); // Adjusted to 12 as per your example
-  
+          const labels = Array.from({ length: 12 }, (_, i) => {
+            const hour = (8 + i) % 12 || 12;
+            const period = 8 + i < 12 ? 'AM' : 'PM';
+            return `${hour} ${period}`;
+          });
           this.lineChartRef = new Chart(canvas, {
             type: "line",
             data: {
@@ -193,13 +196,13 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
                 x: {
                   title: {
                     display: true,
-                    text: 'Time'
+                    text: 'Time (Hours)'
                   }
                 },
                 y: {
                   title: {
                     display: true,
-                    text: 'Work Progress (hours)'
+                    text: 'Total Activity (Mouse + Keyboard)'
                   }
                 }
               }
@@ -211,7 +214,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
         console.error("Error fetching dashboard data:", error);
       });
   }
-  
+
 
   getRandomColor(): string {
     const letters = '0123456789ABCDEF';
