@@ -94,7 +94,7 @@ export class ReportComponent implements OnInit {
       if (response && response.data.success) {
         response.data.data.forEach(item => {
           const dateString = item.attendance_date; // Use the attendance_date directly
-          this.dates.push({date:dateString,total:item.total_employees,present:item.total_employees_present,absent:item.total_employees_absent,leave:item.total_leave_approved});
+          this.dates.push({date:dateString,total:item.total_employees,present:item.total_employees_present,absent:item.total_employees_absent,leave:item.total_leave_approved,total_full_time:item.total,total_sb:item.total_sb,total_lb:item.total_lb});
           this.createPieChart(item.attendance_date, item.total_employees_present, item.total_employees_absent);
           this.cdRef.detectChanges();
         });
@@ -184,7 +184,7 @@ export class ReportComponent implements OnInit {
       if (response && response.data.success) {
         response.data.data.forEach(item => {
           const dateString = item.attendance_date; // Use the attendance_date directly
-          this.dates.push({date:dateString,total:item.total_employees,present:item.total_employees_present,absent:item.total_employees_absent,leave:item.total_leave_approved});
+          this.dates.push({date:dateString,total:item.total_employees,present:item.total_employees_present,absent:item.total_employees_absent,leave:item.total_leave_approved,total_full_time:item.total,total_sb:item.total_sb,total_lb:item.total_lb});
           this.createPieChart(item.attendance_date, item.total_employees_present, item.total_employees_absent);
           this.cdRef.detectChanges();
         });
@@ -195,5 +195,15 @@ export class ReportComponent implements OnInit {
         this.router.navigate(["/auth/login"]);
       }
     });
+  }
+
+  calculateTotalWorkingHours(total: number, totalSb: number, totalLb: number): string {
+    const totalWorkingMinutes = total - totalSb - totalLb;
+
+    const hours = Math.floor(totalWorkingMinutes / 60);
+    const minutes = Math.floor(totalWorkingMinutes % 60);
+    const seconds = Math.floor((totalWorkingMinutes * 60) % 60);
+
+    return `  ${hours} H ${minutes} M`;
   }
 }
