@@ -18,13 +18,15 @@
 
   <div class="relative pb-32 pt-12">
     <!-- Filter Box for Changing Month -->
- <!-- Filter Box for Changing Month -->
-<div class="flex justify-center items-center mb-4">
-  <label for="monthFilter" class="mr-2">Select Month:</label>
-  <select id="monthFilter" class="border border-gray-300 rounded px-2 py-1" (change)="onMonthChange($event.target.value)">
-    <option *ngFor="let month of months" [value]="month.value" [selected]="isCurrentMonth(month.value)">{{ month.label }}</option>
-  </select>
-</div>
+    <!-- Filter Box for Changing Month -->
+    <div class="flex justify-center items-center mb-4">
+      <label for="monthFilter" class="mr-2">Select Month:</label>
+      <select id="monthFilter" class="border border-gray-300 rounded px-2 py-1"
+        (change)="onMonthChange($event.target.value)">
+        <option *ngFor="let month of months" [value]="month.value" [selected]="isCurrentMonth(month.value)">{{
+          month.label }}</option>
+      </select>
+    </div>
 
     <div class="px-4 md:px-10  md:pt-16 mx-auto w-full">
       <div class="flex flex-wrap justify-center">
@@ -32,20 +34,49 @@
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-4" *ngFor="let data of dates">
           <div class="calendar-list rounded-lg bg-white shadow-md p-4">
             <h2 class="text-lg font-bold mb-4 text-center">{{ data.date }}</h2>
-            <ul class="grid grid-cols-7 gap-2">
+            <ul class="grid grid-cols-7 gap-2" *ngIf="data.total_full_time > 0">
               <li (click)="onDateSelect(data.date)" [class.selected]="data.date === selectedDate"
                 class="text-center py-4 rounded cursor-pointer hover:bg-gray-100 border border-gray-200">
-                <div class="text-xs text-blueGray-500 mb-2">{{ data.date }}</div>
-                <div class="flex justify-between padding-all">
-                  <div>Total Employees: <span class="font-bold">{{data.total}}</span></div>
-                  <div>Total Present: <span class="font-bold">{{data.present}}</span></div>
-                </div>
-                <div class="flex justify-between padding-all">
-                  <div>Total Absent: <span class="font-bold">{{data.absent}}</span></div>
-                  <div>Total Leave Approved: <span class="font-bold">{{data.leave}}</span></div>
-                </div>
-                <div class="text-sm">Total Working Time: <span class="font-bold">x</span></div>
-                <div class="flex justify-center">
+                <table class="w-full">
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                        <div>Employees: <span class="font-bold">{{data.total}}</span></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="justify-between">
+                        <div>Present: <span class="font-bold">{{data.present}}</span></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="justify-between">
+                        <div>Absent: <span class="font-bold">{{data.absent}}</span></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="justify-between">
+                        <div>Leave Approved: <span class="font-bold">{{data.leave}}</span></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="justify-between">
+                        <div class="text-sm">Total Working: <span class="font-bold">{{
+                            calculateTotalWorkingHours(data.total_full_time, data.total_sb, data.total_lb) }}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <div class="justify-center">
                   <div class="w-full lg:w-16/12 xl:w-12/12 px-4">
                     <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                       <canvas id="pieChart-{{ data.date }}"></canvas>
