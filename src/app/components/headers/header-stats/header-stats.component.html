@@ -18,29 +18,51 @@
           </div>
         </div>
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
-          <app-card-stats
-            statSubtitle="TOTAL WORKING (Monthly)"
-            [statTitle]="totalMonthHours | decimalFormat"
-            [statArrow]="comparemonth"
-            [statPercent]="totalCompareMonthNumber"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="far fa-chart-bar"
-            statIconColor="bg-red-500"
-          ></app-card-stats>
+          <app-card-stats statSubtitle="TOTAL WORKING (Monthly)" [statTitle]="totalMonthHours | decimalFormat"
+            [statArrow]="comparemonth" [statPercent]="totalCompareMonthNumber" statPercentColor="text-emerald-500"
+            statDescripiron="Since last month" statIconName="far fa-chart-bar"
+            statIconColor="bg-red-500"></app-card-stats>
         </div>
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
-          <app-card-stats
-            statSubtitle="TOTAL WORKING (Today)"
-            [statTitle]="totalWorkingHours | decimalFormat"
-            [statArrow]="compareweek"
-            [statPercent]="totalCompareWeekNumber"
-            statPercentColor="text-red-500"
-            statDescripiron="Since last week"
-            statIconName="fas fa-chart-pie"
-            statIconColor="bg-orange-500"
-          ></app-card-stats>
+          <app-card-stats statSubtitle="TOTAL WORKING (Today)" [statTitle]="totalWorkingHours | decimalFormat"
+            [statArrow]="compareweek" [statPercent]="totalCompareWeekNumber" statPercentColor="text-red-500"
+            statDescripiron="Since last week" statIconName="fas fa-chart-pie"
+            statIconColor="bg-orange-500"></app-card-stats>
         </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
+          <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+            <div class="flex-auto p-4">
+              <div class="flex flex-wrap">
+                <div class="relative w-full pr-4 max-w-full flex-grow flex-1"><span
+                    class="font-semibold text-xl text-blueGray-700"> <button (click)="onDownloadClick('downloadUrlwin32')" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex items-center">
+                      <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
+                      <span *ngIf="!isLoading">Download New EXE 32 bit (windows)</span>
+                      <div *ngIf="isLoading" class="loader"></div>
+                    </button>
+                    <button (click)="onDownloadClick('downloadUrlwin64')"
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      <i class="fas fa-download mr-2"></i>
+                      Download New EXE 64 bit (windows)
+                    </button>
+                    <button (click)="onDownloadClick('downloadUrllin32')"
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      <i class="fas fa-download mr-2"></i>
+                      Download New EXE 32 bit (Linux)
+                    </button>
+                    <button (click)="onDownloadClick('downloadUrllin64')"
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      <i class="fas fa-download mr-2"></i>
+                      Download New EXE 64 bit (Linux)
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <p class="text-sm text-red-500 mt-4"><span>Please click the button to download the
+                  application!</span></p>
+            </div>
+          </div>
+        </div>
+
         <!-- <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
           <app-card-stats
             statSubtitle="Task Completed (Today)"
