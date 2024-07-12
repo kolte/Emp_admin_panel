@@ -24,7 +24,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   totalPresentCnt: number = 0;
   totalAbsentCnt: number = 0;
   isLoading = false;
-  downloadUrlwin32 = '/assets/download/emtrackerWin32.zip';
+  downloadUrlwin32 = '/assets/download/Emtracker_Setup1.0.0.exe';
   downloadUrlwin64 = '/assets/download/emtrackerWin64.zip';
   downloadUrllin32 = '/assets/download/emtrackerLin32.zip';
   downloadUrllin64 = '/assets/download/emtrackerLin64.zip';
@@ -234,7 +234,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
-      if (downloadUrl === 'downloadUrlwin32') {
+      if (downloadUrl === 'downloadUrlwin') {
         window.open(this.downloadUrlwin32, '_blank');
       } else if (downloadUrl === 'downloadUrlwin64') {
         window.open(this.downloadUrlwin64, '_blank');

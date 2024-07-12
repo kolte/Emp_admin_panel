@@ -34,24 +34,24 @@
             <div class="flex-auto p-4">
               <div class="flex flex-wrap">
                 <div class="relative w-full pr-4 max-w-full flex-grow flex-1"><span
-                    class="font-semibold text-xl text-blueGray-700"> <button (click)="onDownloadClick ('downloadUrlwin32')" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex items-center" *ngIf="!isLoading">
+                    class="font-semibold text-xl text-blueGray-700"> <button (click)="onDownloadClick ('downloadUrlwin')" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex items-center" style="padding:10px;" *ngIf="!isLoading">
                       <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
-                      <span *ngIf="!isLoading">Download New EXE 32 bit (windows)</span>                      
+                      <span *ngIf="!isLoading">Download Window(EXE)</span>                      
                     </button>
-                    <button (click)="onDownloadClick('downloadUrlwin64')" *ngIf="!isLoading"
+                    <!-- <button (click)="onDownloadClick('downloadUrlwin64')" *ngIf="!isLoading"
                       class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                       <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
                       <span *ngIf="!isLoading">Download New EXE 64 bit (windows)</span>
-                    </button>
+                    </button> -->
                     <button (click)="onDownloadClick('downloadUrllin32')" *ngIf="!isLoading"
-                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="padding:10px;">
                       <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
-                      <span *ngIf="!isLoading">Download New EXE 32 bit (Linux)</span>
+                      <span *ngIf="!isLoading">Download 32 bit  (Linux)</span>
                     </button>
                     <button (click)="onDownloadClick('downloadUrllin64')" *ngIf="!isLoading"
-                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="padding:10px;">
                       <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
-                      <span *ngIf="!isLoading">Download New EXE 64 bit (Linux)</span>
+                      <span *ngIf="!isLoading">Download 64 bit  (Linux)</span>
                     </button>
                     <button *ngIf="isLoading"
                       class="bg-indigo-500 text-red active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
