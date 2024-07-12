@@ -18,13 +18,13 @@
           </div>
         </div>
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
-          <app-card-stats statSubtitle="TOTAL WORKING (Monthly)" [statTitle]="totalMonthHours | decimalFormat"
+          <app-card-stats statSubtitle="TOTAL EM WORKING HRS (Monthly)" [statTitle]="totalMonthHours | decimalFormat"
             [statArrow]="comparemonth" [statPercent]="totalCompareMonthNumber" statPercentColor="text-emerald-500"
             statDescripiron="Since last month" statIconName="far fa-chart-bar"
             statIconColor="bg-red-500"></app-card-stats>
         </div>
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
-          <app-card-stats statSubtitle="TOTAL WORKING (Today)" [statTitle]="totalWorkingHours | decimalFormat"
+          <app-card-stats statSubtitle="TOTAL EM WORKING HRS (Today)" [statTitle]="totalWorkingHours | decimalFormat"
             [statArrow]="compareweek" [statPercent]="totalCompareWeekNumber" statPercentColor="text-red-500"
             statDescripiron="Since last week" statIconName="fas fa-chart-pie"
             statIconColor="bg-orange-500"></app-card-stats>
