@@ -166,33 +166,37 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
     this.service.getWorkingDashboardList([])
       .then((response: any) => {
         if (response.data && response.data.success) {
-          console.log(response.data.data);
+          console.log("Response data:", response.data.data);
           this.workData = response.data.data as EmployeeData[];
-
+  
           const canvas = this.lineChart.nativeElement;
           canvas.setAttribute("width", "400"); // Set the width of the canvas
           canvas.setAttribute("height", "200"); // Set the height of the canvas
-
+  
           const data = this.workData;
           const labels = Array.from({ length: 12 }, (_, i) => {
             const hour = (8 + i) % 12 || 12;
             const period = 8 + i < 12 ? 'AM' : 'PM';
             return `${hour} ${period}`;
           });
+  
+          console.log("Employee data:", data);
           this.lineChartRef = new Chart(canvas, {
             type: "line",
             data: {
               labels: labels,
-              datasets: data.map((employee: EmployeeData, index: number) => ({
-                label: employee.name,
-                data: employee.hours,
-                fill: false,
-                borderColor: this.getRandomColor(),
-                borderWidth: 2,
-                tension: 0.1,
-                // Add different dash patterns to distinguish lines
-                borderDash: [index * 5, 5],
-              }))
+              datasets: data.map((employee: EmployeeData, index: number) => {
+                console.log(`Processing employee ${index + 1}:`, employee);
+                return {
+                  label: employee.name,
+                  data: employee.hours,
+                  fill: false,
+                  borderColor: this.getRandomColor(),
+                  borderWidth: 2,
+                  tension: 0.1,
+                  borderDash: [(index+1) * 5, 5], // Add different dash patterns to distinguish lines
+                };
+              })
             },
             options: {
               responsive: true,
@@ -219,6 +223,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
         console.error("Error fetching dashboard data:", error);
       });
   }
+  
 
 
   getRandomColor(): string {
