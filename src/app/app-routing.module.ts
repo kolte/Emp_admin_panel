@@ -12,6 +12,7 @@ import { MapsComponent } from "./views/admin/maps/maps.component";
 import { SettingsComponent } from "./views/admin/settings/settings.component";
 import { EmployeeComponent } from "./views/admin/employee/employee.component";
 import { EmployeeDetailsComponent } from './views/fullsort/employeeDetails/employeeDetails.component';
+import { AttendanceComponent } from './views/attendance/attendance.component';
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -21,6 +22,7 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { ReportComponent } from './views/report/report.component';
 import { TaskreportComponent } from "./views/taskreport/taskreport.component";
 import { ProjectComponent } from "./views/admin/project/project.component";
 import { TaskComponent } from "./views/admin/task/task.component";
@@ -34,14 +36,12 @@ const routes: Routes = [
     path: "admin",
     component: AdminComponent,
     children: [
-      { path: "dashboard", component: DashboardComponent },
-      { path: "settings", component: SettingsComponent },
-      { path: "employee", component: EmployeeComponent },
+      { path: "dashboard", component: DashboardComponent },            
       { path: "project", component: ProjectComponent },
       { path: "modules", component: ModulesComponent },      
       { path: "leave", component: LeaveComponent },
       { path: "task", component: TaskComponent },
-      { path: "maps", component: MapsComponent },
+      { path: "maps", component: MapsComponent },      
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ]
   },
@@ -50,6 +50,16 @@ const routes: Routes = [
     component: FullsortComponent,
     children: [// No children here
       { path: "employeeDetails/:id", component: EmployeeDetailsComponent }, 
+      { path: "employee", component: EmployeeComponent },
+      { path: "report", component: ReportComponent },
+      { path: "settings", component: SettingsComponent },
+    ]
+  },
+  {
+    path: "attendanceReport",
+    component: FullsortComponent,
+    children: [// No children here
+      { path: "attendanceDetails/:id", component: AttendanceComponent }, 
     ]
   },
   // auth views
@@ -63,7 +73,7 @@ const routes: Routes = [
     ],
   },
   // no layout views
-  { path: "profile", component: ProfileComponent },
+  { path: "profile", component: ProfileComponent },  
   { path: "taskreport", component: TaskreportComponent },
   { path: "permission", component: PermissionComponent },
   { path: "landing", component: LandingComponent },

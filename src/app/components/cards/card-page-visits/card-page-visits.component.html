@@ -2,14 +2,14 @@
   <div class="rounded-t mb-0 px-4 py-3 border-0">
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-        <h3 class="font-semibold text-base text-blueGray-700">Top performer</h3>
+        <h3 class="font-semibold text-base text-blueGray-700">Attendance List</h3>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-        <button
+        <!-- <button
           class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button">
           See all
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -24,92 +24,82 @@
           </th>
           <th
             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            Total Actions
+            Status
           </th>
           <th
             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            Total Task Completed
+            Total HRS Completed
           </th>
           <th
             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            Rate
+            Short Break
+          </th>
+          <th
+            class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Lunch Break
+          </th>
+          <th
+            class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            Progress
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let emp of Employeelist">
           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            Employee 1
+            <i
+              class="{{ emp.attendance_status === 'Absent' ? 'fas fa-arrow-down text-red-500' : 'fas fa-arrow-up text-emerald-500' }} mr-4"></i>
+            {{emp.first_name}} {{emp.last_name}}
           </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            4,569
+            <i
+              class="{{ emp.attendance_status === 'Absent' ? 'fas fa-circle text-orange-500' : 'fas fa-circle text-emerald-500' }} mr-4"></i>
+            {{ emp.attendance_status }} 
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            340
+            <ng-container *ngIf="emp.formatted_totaltime; else showUpTime">
+              {{ emp.formatted_totaltime }}
+            </ng-container>
+            <ng-template #showUpTime>
+              {{ emp.formatted_total_up_time }}
+            </ng-template>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-            46,53%
-          </td>
-        </tr>
-        <tr>
-          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            Employee 2
-          </th>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            3,985
+            <ng-container *ngIf="emp.formatted_total_sb === '0 hours 0 minutes 0 seconds'; else showSb">
+              On Short break
+            </ng-container>
+            <ng-template #showSb>
+              {{ emp.formatted_total_sb }}
+            </ng-template>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            319
+            <ng-container *ngIf="emp.formatted_total_lb === '0 hours 0 minutes 0 seconds'; else showLb">
+              On Lunch break
+            </ng-container>
+            <ng-template #showLb>
+              {{ emp.formatted_total_lb }}
+            </ng-template>
           </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-            46,53%
-          </td>
-        </tr>
-        <tr>
-          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            Employee 3
-          </th>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            3,513
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            294
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-            36,49%
-          </td>
-        </tr>
-        <tr>
-          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            Employee 4
-          </th>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            2,050
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            147
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-            50,87%
-          </td>
-        </tr>
-        <tr>
-          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            Employee 5
-          </th>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            1,795
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            190
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-arrow-down text-red-500 mr-4"></i>
-            46,53%
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" style="min-width:150px;">
+            <div class="flex items-center">
+              <span class="mr-2">{{ calculatePercentage(emp.formatted_total_up_time).toFixed(2) }}%</span>
+              <div class="relative w-full">
+                <div [ngClass]="{
+                      'overflow-hidden h-2 text-xs flex rounded': true,
+                      'bg-red-200': calculatePercentage(emp.formatted_total_up_time) <= 0,
+                      'bg-orange-200': calculatePercentage(emp.formatted_total_up_time) > 0 && calculatePercentage(emp.formatted_total_up_time) <= 70,
+                      'bg-emerald-200': calculatePercentage(emp.formatted_total_up_time) > 70
+                    }">
+                  <div [style.width]="calculatePercentage(emp.formatted_total_up_time).toFixed(2) + '%'" [ngClass]="{
+                      'shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center': true,
+                      'bg-red-500': calculatePercentage(emp.formatted_total_up_time) <= 0,
+                      'bg-yellow-500': calculatePercentage(emp.formatted_total_up_time) > 0 && calculatePercentage(emp.formatted_total_up_time) <= 70,
+                      'bg-emerald-500': calculatePercentage(emp.formatted_total_up_time) > 70
+                    }">
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>

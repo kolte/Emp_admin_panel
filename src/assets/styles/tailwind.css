@@ -4272,7 +4272,7 @@ select {
 .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab {
   flex-grow: 1;
   background: #fff;
-  border:0.5px solid #000;
+  border: 0.5px solid #000;
 }
 
 .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab .mdc-tab__text-label {
@@ -4298,6 +4298,26 @@ select {
   text-align: justify;
   padding: 15px !important;
 }
+
 form.container.pt-12.ng-untouched.ng-pristine.ng-valid {
   text-align: center;
+}
+
+.relative.block.h-300-px {
+  height: 200px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 2s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -230,5 +230,48 @@ export class AddServicesService {
     };
     return axios.delete(`${this.endpoint}module/${id}`,options);
   }
+
+  getAttendanceDashboardList() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}employeeList/attendance/count`,options);
+
+  }
+
+  getWorkingDashboardList(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}monthlyReport/dashboard-data`,data,options);
+  }
+  
+
+  getMonthlyReport(data){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}monthlyReport`, data,options);
+  }
+
+  getAttendanceReport(data){
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.post(`${this.endpoint}monthlyReport/attendance-data`, data,options);
+  }
+  
   
 }

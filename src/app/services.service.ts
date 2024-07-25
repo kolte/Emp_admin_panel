@@ -82,6 +82,16 @@ export class ServicesService {
     return axios.get(`${this.endpoint}datafetch/users`, options);
   }
 
+  getEmployeeDts() {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(`${this.endpoint}datafetch/employee-details`, options);
+  }
+
   getEmpAttendanceReport(data) {
     let token = localStorage.getItem("token");
     const options = {
@@ -118,8 +128,12 @@ export class ServicesService {
         Authorization: `Bearer ${token}`,
       },
     };
-    return axios.get(`${this.endpoint}report/screenshots?employeeId=${data.employeeId}&date=${data.date}`, options);
+    return axios.get(
+      `${this.endpoint}report/screenshots?employeeId=${data.employeeId}&date=${data.date}&page=${data.page}&pageSize=${data.pageSize}`,
+      options
+    );
   }
+  
 
   getProjectList() {
     let token = localStorage.getItem("token");

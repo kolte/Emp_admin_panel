@@ -1,3 +1,18 @@
+<section class="relative block h-300-px">
+  <!-- Background Image -->
+  <div class="absolute top-0 w-full h-full bg-center bg-cover"
+    style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');">
+    <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black">Employee List</span>
+  </div>
+  <!-- Overlay -->
+  <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+    style="transform: translateZ(0)">
+    <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+      version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+      <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</section>
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
   [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
   <div class="rounded-t mb-0 px-4 py-3 border-0">
@@ -8,7 +23,7 @@
         </h3>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right" *ngIf="role=='admin'">
-        <a [routerLink]="['/admin/settings']" class="">
+        <a [routerLink]="['/userDashboard/settings']" class="">
           <button
             class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button">
@@ -44,11 +59,29 @@
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
             [ngClass]="
-              color === 'light'
-                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                : 'bg-red-800 text-red-300 border-red-700'
-            ">
-            Latest Screen Image
+            color === 'light'
+              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+              : 'bg-red-800 text-red-300 border-red-700'
+          ">
+            Email
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+          color === 'light'
+            ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+            : 'bg-red-800 text-red-300 border-red-700'
+        ">
+            Phone
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+            color === 'light'
+              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+              : 'bg-red-800 text-red-300 border-red-700'
+          ">
+            Status
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -72,7 +105,8 @@
         <tr *ngFor="let emp of Employeelist">
           <th
             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-            <img [src]="emp.profile_picture ? getImageUrl(emp.profile_picture) : 'assets/img/team-2-800x800.jpg'" class="h-12 w-12 bg-white rounded-full border" alt="..." />
+            <img [src]="emp.profile_picture ? getImageUrl(emp.profile_picture) : 'assets/img/team-2-800x800.jpg'"
+              class="h-12 w-12 bg-white rounded-full border" alt="..." />
             <span class="ml-3 font-bold" [ngClass]="color === 'light' ? 'text-blueGray-600' : 'text-white'">
               {{emp.first_name}} {{emp.last_name}}
             </span>
@@ -81,37 +115,42 @@
             {{DepartmentName(emp.department_id)}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <div class="flex">
-              <img *ngIf="emp.screenshot_a && emp.screenshot_a.trim() !== ''" [src]="emp.screenshot_a" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
-              <img *ngIf="emp.screenshot_b && emp.screenshot_b.trim() !== ''" [src]="emp.screenshot_b" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-              <img *ngIf="emp.screenshot_c && emp.screenshot_c.trim() !== ''" [src]="emp.screenshot_c" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-              <img *ngIf="emp.screenshot_d && emp.screenshot_d.trim() !== ''" [src]="emp.screenshot_d" alt="..."
-                class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4" />
-            </div>
+            {{emp.email}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <i class="fas fa-circle text-orange-500 mr-2"></i> pending
+            {{emp.phone}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            <i
+              class="{{ emp.attendance_status === 'Absent' ? 'fas fa-circle text-orange-500' : 'fas fa-circle text-emerald-500' }} mr-4"></i>
+            {{ emp.attendance_status }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <div class="flex items-center">
-              <span class="mr-2">60%</span>
+              <span class="mr-2">{{ calculatePercentage(emp.formatted_total_up_time).toFixed(2) }}%</span>
               <div class="relative w-full">
-                <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                  <div style="width: 60%"
-                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                <div [ngClass]="{
+                      'overflow-hidden h-2 text-xs flex rounded': true,
+                      'bg-red-200': calculatePercentage(emp.formatted_total_up_time) <= 0,
+                      'bg-orange-200': calculatePercentage(emp.formatted_total_up_time) > 0 && calculatePercentage(emp.formatted_total_up_time) <= 70,
+                      'bg-emerald-200': calculatePercentage(emp.formatted_total_up_time) > 70
+                    }">
+                  <div [style.width]="calculatePercentage(emp.formatted_total_up_time).toFixed(2) + '%'"
+                    [ngClass]="{
+                      'shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center': true,
+                      'bg-red-500': calculatePercentage(emp.formatted_total_up_time) <= 0,
+                      'bg-yellow-500': calculatePercentage(emp.formatted_total_up_time) > 0 && calculatePercentage(emp.formatted_total_up_time) <= 70,
+                      'bg-emerald-500': calculatePercentage(emp.formatted_total_up_time) > 70
+                    }">
                   </div>
                 </div>
               </div>
             </div>
-          </td>
+          </td>          
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
             <app-table-dropdown [updateId]="emp.id"></app-table-dropdown>
           </td>
         </tr>
-
       </tbody>
     </table>
   </div>

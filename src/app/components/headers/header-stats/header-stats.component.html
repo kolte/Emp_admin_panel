@@ -4,31 +4,71 @@
     <div>
       <!-- Card stats -->
       <div class="flex flex-wrap">
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="TOTAL WORKING (Monthly)"
-            [statTitle]="totalMonthHours | decimalFormat"
-            [statArrow]="comparemonth"
-            [statPercent]="totalCompareMonthNumber"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="far fa-chart-bar"
-            statIconColor="bg-red-500"
-          ></app-card-stats>
+        <!--line chart-->
+        <!--line chart-->
+        <div class="w-full lg:w-10/12 xl:w-12/12 px-4">
+          <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+            <canvas #lineChart></canvas>
+          </div>
+        </div><br>
+        <!--line-chart-end-->
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
+          <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+            <canvas #pieChart></canvas>
+          </div>
         </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="TOTAL WORKING (Today)"
-            [statTitle]="totalWorkingHours | decimalFormat"
-            [statArrow]="compareweek"
-            [statPercent]="totalCompareWeekNumber"
-            statPercentColor="text-red-500"
-            statDescripiron="Since last week"
-            statIconName="fas fa-chart-pie"
-            statIconColor="bg-orange-500"
-          ></app-card-stats>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
+          <app-card-stats statSubtitle="TOTAL EM WORKING HRS (Monthly)" [statTitle]="totalMonthHours | decimalFormat"
+            [statArrow]="comparemonth" [statPercent]="totalCompareMonthNumber" statPercentColor="text-emerald-500"
+            statDescripiron="Since last month" statIconName="far fa-chart-bar"
+            statIconColor="bg-red-500"></app-card-stats>
         </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
+          <app-card-stats statSubtitle="TOTAL EM WORKING HRS (Today)" [statTitle]="totalWorkingHours | decimalFormat"
+            [statArrow]="compareweek" [statPercent]="totalCompareWeekNumber" statPercentColor="text-red-500"
+            statDescripiron="Since last week" statIconName="fas fa-chart-pie"
+            statIconColor="bg-orange-500"></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
+          <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+            <div class="flex-auto p-4">
+              <div class="flex flex-wrap">
+                <div class="relative w-full pr-4 max-w-full flex-grow flex-1"><span
+                    class="font-semibold text-xl text-blueGray-700"> <button (click)="onDownloadClick ('downloadUrlwin')" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex items-center" style="padding:10px;" *ngIf="!isLoading">
+                      <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
+                      <span *ngIf="!isLoading">Download Window(EXE)</span>                      
+                    </button>
+                    <!-- <button (click)="onDownloadClick('downloadUrlwin64')" *ngIf="!isLoading"
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
+                      <span *ngIf="!isLoading">Download New EXE 64 bit (windows)</span>
+                    </button> -->
+                    <button (click)="onDownloadClick('downloadUrllin32')" *ngIf="!isLoading"
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="padding:10px;">
+                      <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
+                      <span *ngIf="!isLoading">Download 32 bit  (Linux)</span>
+                    </button>
+                    <button (click)="onDownloadClick('downloadUrllin64')" *ngIf="!isLoading"
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style="padding:10px;">
+                      <i class="fas fa-download mr-2" *ngIf="!isLoading"></i>
+                      <span *ngIf="!isLoading">Download 64 bit  (Linux)</span>
+                    </button>
+                    <button *ngIf="isLoading"
+                      class="bg-indigo-500 text-red active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      <i class="fas fa-download mr-2" *ngIf="isLoading"></i>
+                      <span *ngIf="isLoading">App Downloading .....</span>
+                    </button>
+                    <div *ngIf="isLoading" class="loader"></div>
+                  </span>
+                </div>
+              </div>
+              <p class="text-sm text-red-500 mt-4"><span>Please click the button to download the
+                  application!</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="w-full lg:w-6/12 xl:w-3/12 px-4" style="margin-top: 10px;">
           <app-card-stats
             statSubtitle="Task Completed (Today)"
             statTitle="924"
@@ -39,19 +79,7 @@
             statIconName="fas fa-users"
             statIconColor="bg-pink-500"
           ></app-card-stats>
-        </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="PERFORMANCE"
-            statTitle="49,65%"
-            statArrow="up"
-            statPercent="12"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="fas fa-percent"
-            statIconColor="bg-emerald-500"
-          ></app-card-stats>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

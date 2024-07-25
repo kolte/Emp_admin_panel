@@ -37,7 +37,7 @@ export class TableDropdownComponent implements AfterViewInit {
   }
 
   updateEmp(){
-    this.router.navigate(['/admin/settings'],{ 
+    this.router.navigate(['/userDashboard/settings'],{ 
       queryParams: {  
         id: this.updateId
       }
@@ -79,5 +79,11 @@ export class TableDropdownComponent implements AfterViewInit {
     }, 2000);
   }
   
+  handleRedirectClick(employeeId: number): void {
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in 'YYYY-MM-DD' format
+    const url = `/profile?date=${currentDate}&id=${employeeId}`;
+    this.router.navigateByUrl(url);
+    console.log('123');
+  }
   
 }
