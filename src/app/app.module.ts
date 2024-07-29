@@ -44,6 +44,7 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { IndexComponent } from './views/index/index.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { OfflineactivityComponent } from './views/offlineactivity/offlineactivity.component';
 import { ReportComponent } from './views/report/report.component';
 import { TaskreportComponent } from './views/taskreport/taskreport.component';
 
@@ -108,6 +109,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    OfflineactivityComponent,
     ReportComponent,
     AdminNavbarComponent,
     AuthNavbarComponent,

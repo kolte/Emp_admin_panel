@@ -133,6 +133,18 @@ export class ServicesService {
       options
     );
   }
+  getOfflineEmpScreenshoteReport(data) {
+    let token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return axios.get(
+      `${this.endpoint}datafetch/activitylog?employeeId=${data.employeeId}&date=${data.date}&page=${data.page}&pageSize=${data.pageSize}`,
+      options
+    );
+  }
   
 
   getProjectList() {
@@ -263,7 +275,4 @@ export class ServicesService {
     };
     return axios.delete(`${this.endpoint}comment/${taskId}`,options);
   }
-
-
-
 }

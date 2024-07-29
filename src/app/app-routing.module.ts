@@ -29,6 +29,7 @@ import { TaskComponent } from "./views/admin/task/task.component";
 import { LeaveComponent } from './views/admin/leave/leave.component';
 import { ModulesComponent } from './views/admin/modules/modules.component';
 import { PermissionComponent } from './views/admin/permission/permission.component';
+import { OfflineactivityComponent } from "./views/offlineactivity/offlineactivity.component";
 
 const routes: Routes = [
   // admin views
@@ -74,6 +75,7 @@ const routes: Routes = [
   },
   // no layout views
   { path: "profile", component: ProfileComponent },  
+  { path: "offlineactivity", component: OfflineactivityComponent },  
   { path: "taskreport", component: TaskreportComponent },
   { path: "permission", component: PermissionComponent },
   { path: "landing", component: LandingComponent },
