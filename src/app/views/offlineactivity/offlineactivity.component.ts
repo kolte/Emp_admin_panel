@@ -44,13 +44,20 @@ export class OfflineactivityComponent implements OnInit {
     this.service.getOfflineEmpScreenshoteReport(data)
       .then((response) => {
         if (response.status === 200) {
-          const screenShote = response.data.data;
+          let arrayData=[];
 
-          for (let i = 0; i < screenShote.length; i++) {
-            screenShote[i].active_screen = this.activeScreen(screenShote[i].active_screen);
+          let screenShote = response.data.data;
+          if(typeof(screenShote) == "object"){
+            arrayData.push(response.data.data);
           }
-
-          this.screenShoteData = [...this.screenShoteData, ...screenShote];
+          else{
+            arrayData = screenShote;
+          }
+          for (let i = 0; i < arrayData.length ; i++) {
+            arrayData[i]=JSON.parse(arrayData[i].request_payload);
+            arrayData[i].active_screen = this.activeScreen(arrayData[i].active_screen);
+          }
+          this.screenShoteData = [...this.screenShoteData, ...arrayData];
           this.currentPage++; // Increment page index for next load
         }
         this.isLoading = false;
@@ -76,14 +83,12 @@ export class OfflineactivityComponent implements OnInit {
 
   zoomImage(imageSrc: string) {
     const zoomedImageContainer = document.getElementById('zoomedImageContainer');
-
     if (zoomedImageContainer) {
         const zoomedImage = zoomedImageContainer.querySelector('img');
         if (zoomedImage) {
             zoomedImage.src = imageSrc;
         }
-
-        zoomedImageContainer.classList.add('active'); // Show the zoomed image container
+      zoomedImageContainer.classList.add('active'); // Show the zoomed image container
     }
   }
 
@@ -103,7 +108,4 @@ export class OfflineactivityComponent implements OnInit {
       this.router.navigateByUrl(url);
     });
   }
-  
-  
-  
 }

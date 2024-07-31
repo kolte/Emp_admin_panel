@@ -39,8 +39,8 @@
           <div class="relative">
             <div class="card-container">
               <div class="relative group">
-                <span>{{ssdata.screenshot_time | date:'short'}}</span>
-                <img (click)="zoomImage(ssdata.screenshot_url)" src="{{ssdata.screenshot_url}}"
+                <!-- <span>{{ssdata.screenshot_time | date:'short'}}</span> -->
+                <img (click)="zoomImage(ssdata.screenshot_url)" src="{{ssdata.image}}"
                   class="h-48 w-full bg-white border rounded-t-lg transition-transform duration-300 transform-gpu scale-100 group-hover:scale-110"
                   alt="...">
                 <div *ngIf="isHovered"
