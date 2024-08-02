@@ -29,6 +29,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   downloadUrllin32 = '/assets/download/emtrackerLin32.zip';
   downloadUrllin64 = '/assets/download/emtrackerLin64.zip';
 
+
   @ViewChild("pieChart", { static: false }) pieChart: ElementRef;
   @ViewChild("barChart") barChart: ElementRef;
   @ViewChild("lineChart") lineChart: ElementRef;
@@ -44,6 +45,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
     this.getReportMonthdata();
     this.getCompareMonthdata();
     this.getCompareWeeksdata();
+    // this.embedSample();
   }
 
   ngAfterViewInit(): void {
@@ -68,8 +70,7 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
   }
 
   getReportMonthdata() {
-    this.service
-      .getReportMonth()
+    this.service.getReportMonth()
       .then((response: any) => {
         if (response && response.data.success) {
           // Handle response data here
@@ -136,15 +137,15 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
           canvas.setAttribute("height", "100"); // Set the height of the canvas
 
           this.pieChartRef = new Chart(canvas, {
-            type: "pie",
+            type: "doughnut",
             data: {
               labels: ["Absent", "Present", "Total"],
               datasets: [
                 {
                   label: "Attendance Sheet",
                   data: [response.data.data.absent_count, response.data.data.present_count, response.data.data.total_count],
-                  backgroundColor: ["#FF6384", "green", "#36A2EB"],
-                  hoverBackgroundColor: ["#FF6384", "green", "#36A2EB"],
+                  backgroundColor: ["#F79647", "green", "#9896F0"],
+                  hoverBackgroundColor: ["#F79647", "green", "#9896F0"],
                 },
               ],
             },
@@ -252,4 +253,21 @@ export class HeaderStatsComponent implements OnInit, AfterViewInit {
       }
     }, 2000); // Simulate a delay for loader, adjust as needed
   }
+
+  // embedSample() {
+  //   this.boldbiEmbedInstance = (window as any).BoldBI.create({
+  //       serverUrl: "http://localhost:51777/bi/site/site1",
+  //       dashboardPath: "/Sales/Sales Analysis Dashboard",
+  //       embedContainerId: "dashboard_container",// This should be the container id where you want to embed the dashboard
+  //       embedType: (window as any).BoldBI.EmbedType.Component,
+  //       mode: (window as any).BoldBI.Mode.View,
+  //       height: "800px",
+  //       width: "1200px",
+  //       authorizationServer: {
+  //           url: "http://example.com/embeddetail/get"
+  //       },
+  //       expirationTime: "100000",
+  //   });
+  //   this.boldbiEmbedInstance.loadDashboard();
+  // }
 }
